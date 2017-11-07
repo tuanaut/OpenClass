@@ -9,14 +9,15 @@
 /* Begin PBXBuildFile section */
 		52D02E4820E301DC7E908157 /* Pods_OpenClass.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38AF9A1061F8D2640A806982 /* Pods_OpenClass.framework */; };
 		5507697A1FA677EB00C8AE78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550769791FA677EB00C8AE78 /* AppDelegate.swift */; };
-		5507697C1FA677EB00C8AE78 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5507697B1FA677EB00C8AE78 /* ViewController.swift */; };
+		5507697C1FA677EB00C8AE78 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5507697B1FA677EB00C8AE78 /* LoginViewController.swift */; };
 		5507697F1FA677EB00C8AE78 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5507697D1FA677EB00C8AE78 /* Main.storyboard */; };
 		550769811FA677EB00C8AE78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 550769801FA677EB00C8AE78 /* Assets.xcassets */; };
 		550769841FA677EB00C8AE78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 550769821FA677EB00C8AE78 /* LaunchScreen.storyboard */; };
 		5507698F1FA677EB00C8AE78 /* OpenClassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5507698E1FA677EB00C8AE78 /* OpenClassTests.swift */; };
 		5507699A1FA677EC00C8AE78 /* OpenClassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550769991FA677EC00C8AE78 /* OpenClassUITests.swift */; };
-		550769A81FA67A5100C8AE78 /* CreateLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550769A71FA67A5100C8AE78 /* CreateLoginViewController.swift */; };
+		550769A81FA67A5100C8AE78 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550769A71FA67A5100C8AE78 /* RegisterViewController.swift */; };
 		555C2A4B1FB1290900E79CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 555C2A4A1FB1290900E79CF8 /* GoogleService-Info.plist */; };
+		555FF48E1FB188CD002E362D /* CourseFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */; };
 		785775592CF1563505921EC0 /* Pods_OpenClassUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256232FA9B71169D3B13D6AC /* Pods_OpenClassUITests.framework */; };
 		E55846E9D2AC00F8875590F2 /* Pods_OpenClassTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 230334D3D43B62F2CCEAB3B6 /* Pods_OpenClassTests.framework */; };
 /* End PBXBuildFile section */
@@ -47,7 +48,7 @@
 		409BDC7D0162282D8F061603 /* Pods-OpenClassUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenClassUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenClassUITests/Pods-OpenClassUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		550769761FA677EB00C8AE78 /* OpenClass.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenClass.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		550769791FA677EB00C8AE78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5507697B1FA677EB00C8AE78 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		5507697B1FA677EB00C8AE78 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5507697E1FA677EB00C8AE78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		550769801FA677EB00C8AE78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		550769831FA677EB00C8AE78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -58,8 +59,9 @@
 		550769951FA677EC00C8AE78 /* OpenClassUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenClassUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		550769991FA677EC00C8AE78 /* OpenClassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenClassUITests.swift; sourceTree = "<group>"; };
 		5507699B1FA677EC00C8AE78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		550769A71FA67A5100C8AE78 /* CreateLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLoginViewController.swift; sourceTree = "<group>"; };
+		550769A71FA67A5100C8AE78 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		555C2A4A1FB1290900E79CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseFeedViewController.swift; sourceTree = "<group>"; };
 		5D82D573B907585B8C7222F1 /* Pods-OpenClassTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenClassTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenClassTests/Pods-OpenClassTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B94E53EE1DA56A3EAB0DC212 /* Pods-OpenClassUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenClassUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenClassUITests/Pods-OpenClassUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D93FFBAC3618BB9CF18CD28A /* Pods-OpenClassTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenClassTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenClassTests/Pods-OpenClassTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -128,10 +130,9 @@
 		550769781FA677EB00C8AE78 /* OpenClass */ = {
 			isa = PBXGroup;
 			children = (
+				555FF48C1FB14F81002E362D /* Controllers */,
 				550769791FA677EB00C8AE78 /* AppDelegate.swift */,
-				5507697B1FA677EB00C8AE78 /* ViewController.swift */,
 				5507697D1FA677EB00C8AE78 /* Main.storyboard */,
-				550769A71FA67A5100C8AE78 /* CreateLoginViewController.swift */,
 				550769801FA677EB00C8AE78 /* Assets.xcassets */,
 				550769821FA677EB00C8AE78 /* LaunchScreen.storyboard */,
 				550769851FA677EB00C8AE78 /* Info.plist */,
@@ -156,6 +157,16 @@
 				5507699B1FA677EC00C8AE78 /* Info.plist */,
 			);
 			path = OpenClassUITests;
+			sourceTree = "<group>";
+		};
+		555FF48C1FB14F81002E362D /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				5507697B1FA677EB00C8AE78 /* LoginViewController.swift */,
+				550769A71FA67A5100C8AE78 /* RegisterViewController.swift */,
+				555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		F2AABB19A4A5A9E8C78D8B33 /* Pods */ = {
@@ -471,8 +482,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5507697C1FA677EB00C8AE78 /* ViewController.swift in Sources */,
-				550769A81FA67A5100C8AE78 /* CreateLoginViewController.swift in Sources */,
+				5507697C1FA677EB00C8AE78 /* LoginViewController.swift in Sources */,
+				555FF48E1FB188CD002E362D /* CourseFeedViewController.swift in Sources */,
+				550769A81FA67A5100C8AE78 /* RegisterViewController.swift in Sources */,
 				5507697A1FA677EB00C8AE78 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
