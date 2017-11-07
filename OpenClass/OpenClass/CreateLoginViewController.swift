@@ -7,13 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class CreateLoginViewController: UIViewController {
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var lastnameTextField: UITextField!
-    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
+    @IBOutlet weak var accountTypeSegmentControl: UISegmentedControl!
     
     @IBAction func cancelCreateLogin(_ sender: Any) {
       //  self.removeAnimate()
@@ -22,14 +24,20 @@ class CreateLoginViewController: UIViewController {
     
     @IBAction func submitCreateLogin(_ sender: Any) {
      //   self.removeAnimate()
-        let userFirst = firstnameTextField.text;
-        let userLast = lastnameTextField.text;
-        let userName = usernameTextField.text;
-        let userPassword = passwordTextField.text;
-        let userConfirmPass = confirmPasswordTextField.text;
+        let userAccountType = String(accountTypeSegmentControl.selectedSegmentIndex)
+        guard let userFirst = firstnameTextField.text,
+              let userLast = lastnameTextField.text,
+              let userEmail = emailTextField.text,
+              let userPassword = passwordTextField.text,
+              let userConfirmPass = confirmPasswordTextField.text
+            else {
+                displayMyAlertMessage(userMessage: "Form is not valid!")
+                
+                return;
+            }
         
         // Check for empty fields
-        if ((userFirst?.isEmpty)! || (userLast?.isEmpty)! || (userName?.isEmpty)! || (userPassword?.isEmpty)! || (userConfirmPass?.isEmpty)!) {
+        if ((userFirst.isEmpty) || (userLast.isEmpty) || (userEmail.isEmpty) || (userPassword.isEmpty) || (userConfirmPass.isEmpty)) {
             
             // Display alert message
             displayMyAlertMessage(userMessage: "All fields are required");
@@ -42,7 +50,40 @@ class CreateLoginViewController: UIViewController {
             return;
         }
         
-        // Store data
+        // Authenticate and Store data
+        Auth.auth().createUser(withEmail: userEmail, password: userPassword, completion: {(user, error) in
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            guard let uid = user?.uid else { return}
+            
+            // Successfully authenticated user
+            let ref = Database.database().reference(fromURL: "https://openclass-d7aa6.firebaseio.com/")
+            let studentsReference = ref.child("students").child(uid)
+            let professorsReference = ref.child("professors").child(uid)
+            let values = ["firstname": userFirst, "lastname": userLast, "email": userEmail, "accounttype": userAccountType]
+            // Store in students table
+            if (self.accountTypeSegmentControl.selectedSegmentIndex == 0) {
+                studentsReference.updateChildValues(values, withCompletionBlock: {(err, ref) in
+                    if err != nil {
+                        print(err!)
+                        return
+                    }
+                    print("Saved user successfully into Firebase database")
+                })
+            // Store in professors table
+            } else if (self.accountTypeSegmentControl.selectedSegmentIndex == 1) {
+                professorsReference.updateChildValues(values, withCompletionBlock: {(err, ref) in
+                    if err != nil {
+                        print(err!)
+                        return
+                    }
+                    print("Saved user successfully into Firebase database")
+                })
+            }
+        })
         
         // Display alert with confirmation.
         let myAlert = UIAlertController(title:"Alert", message: "Registration is successful!", preferredStyle: UIAlertControllerStyle.alert);
@@ -65,6 +106,9 @@ class CreateLoginViewController: UIViewController {
         //self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
 //        self.showAnimate()
         // Do any additional setup after loading the view.
+       
+//        let ref = Database.database().reference(fromURL: "https://openclass-d7aa6.firebaseio.com/")
+//        ref.updateChildValues([])
     }
 
     override func viewWillDisappear(_ animated: Bool) {

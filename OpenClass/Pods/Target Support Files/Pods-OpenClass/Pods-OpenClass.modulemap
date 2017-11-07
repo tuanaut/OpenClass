@@ -1,0 +1,6 @@
+framework module Pods_OpenClass {
+  umbrella header "Pods-OpenClass-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,8 +1,0 @@
-C:/JT Cloud/Documents/CS 472-1001/fall2017-resaleapp/src/EBM/EBM/bin/Debug/EBM.exe.config
-C:/JT Cloud/Documents/CS 472-1001/fall2017-resaleapp/src/EBM/bin/Debug/EBM.exe.config
-/Users/jerrychiu/School/CS472/fall2017-resaleapp/src/EBM/bin/Debug/EBM.exe.config
-/Users/jerrychiu/School/CS472/fall2017-resaleapp/src/EBM/bin/Debug/EBM.exe
-/Users/jerrychiu/School/CS472/fall2017-resaleapp/src/EBM/bin/Debug/EBM.pdb
-/Users/jerrychiu/School/CS472/fall2017-resaleapp/src/EBM/obj/Debug/EBM.csproj.CoreCompileInputs.cache
-/Users/jerrychiu/School/CS472/fall2017-resaleapp/src/EBM/obj/Debug/EBM.exe
-/Users/jerrychiu/School/CS472/fall2017-resaleapp/src/EBM/obj/Debug/EBM.pdb

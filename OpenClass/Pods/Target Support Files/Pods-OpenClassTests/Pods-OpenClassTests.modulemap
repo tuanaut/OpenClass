@@ -1,0 +1,6 @@
+framework module Pods_OpenClassTests {
+  umbrella header "Pods-OpenClassTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
