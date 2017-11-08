@@ -1,7 +1,7 @@
 #######################################################################
 
 
-			      EBM (C) 2017
+			    OpenClass (C) 2017
 		Anthony Handzel, Jacob Mann, Jerry Chiu,
 		   Oscar Santiago-Sanchez, Tuan Chau
 
@@ -18,7 +18,7 @@ CONTENTS:
 			    1. Release Cycle
 -----------------------------------------------------------------------
 
-The Release Cycle for EBM follows the following pattern,
+The Release Cycle for OpenClass follows the following pattern,
 according to the release dates (due dates) determined by the CS 472
 class schedule:
 	1. Either Clone the repository or pull changes since your
