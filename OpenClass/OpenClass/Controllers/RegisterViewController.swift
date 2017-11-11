@@ -175,16 +175,9 @@ class RegisterViewController: UIViewController {
         myAlert.addAction(okAction);
         
         self.present(myAlert, animated: true, completion: nil);
-    }
-
-}
-
-// Convienience; instead of doing UIColor(red: CGFloat, green: CGFloat, blue: CGFloat) every time
-extension UIColor
-{
+    }    
     
-    convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
-        self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
-    }
 }
+
+
 
