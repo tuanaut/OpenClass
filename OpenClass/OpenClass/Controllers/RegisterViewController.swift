@@ -24,21 +24,24 @@ class RegisterViewController: UIViewController {
     
     @IBAction func submitCreateLogin(_ sender: Any)
     {
-        let userAccountType = String(accountTypeSegmentControl.selectedSegmentIndex)
-        guard let userFirst = firstnameTextField.text,
-              let userLast = lastnameTextField.text,
-              let userEmail = emailTextField.text,
-              let userPassword = passwordTextField.text,
-              let userConfirmPass = confirmPasswordTextField.text
-            else
-            {
-                displayMyAlertMessage(userMessage: "Form is not valid!")
-                
-                return;
-            }
-                
+//        let userAccountType = String(accountTypeSegmentControl.selectedSegmentIndex)
+//        guard let userFirst = firstnameTextField.text,
+//              let userLast = lastnameTextField.text,
+//              let userEmail = emailTextField.text,
+//              let userPassword = passwordTextField.text,
+//              let userConfirmPass = confirmPasswordTextField.text
+//            else
+//            {
+//                displayMyAlertMessage(userMessage: "Form is not valid!")
+//
+//                return;
+//            }
+        
+        // Store user data into an object
+        let thisUser = User(firstName: firstnameTextField.text!, lastName: lastnameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!, confirmPassword: confirmPasswordTextField.text!, accountType: String(accountTypeSegmentControl.selectedSegmentIndex))
+        
         // Check for empty fields
-        if ((userFirst.isEmpty) || (userLast.isEmpty) || (userEmail.isEmpty) || (userPassword.isEmpty) || (userConfirmPass.isEmpty))
+        if ((thisUser.firstname.isEmpty) || (thisUser.lastname.isEmpty) || (thisUser.email.isEmpty) || (thisUser.password.isEmpty) || (thisUser.confirmPassword.isEmpty))
         {
             
             // Display alert message
@@ -47,14 +50,14 @@ class RegisterViewController: UIViewController {
         }
         
         // Check if passwords match
-        if (userPassword != userConfirmPass)
+        if (thisUser.password != thisUser.confirmPassword)
         {
             displayMyAlertMessage(userMessage: "Passwords do not match");
             return;
         }
         
         // Authenticate and Store data
-        Auth.auth().createUser(withEmail: userEmail, password: userPassword, completion: {(user, error) in
+        Auth.auth().createUser(withEmail: thisUser.email, password: thisUser.password, completion: {(user, error) in
             if (error != nil)
             {
                 self.displayMyAlertMessage(userMessage: (error?.localizedDescription)! )
@@ -67,7 +70,7 @@ class RegisterViewController: UIViewController {
             let ref = Database.database().reference(fromURL: "https://openclass-d7aa6.firebaseio.com/")
             let studentsReference = ref.child("users").child("students").child(uid)
             let professorsReference = ref.child("users").child("professors").child(uid)
-            let values = ["firstname": userFirst, "lastname": userLast, "email": userEmail, "accounttype": userAccountType]
+            let values = ["firstname": thisUser.firstname, "lastname": thisUser.lastname, "email": thisUser.email, "accounttype": thisUser.accountType]
             
             // Store in students table
             if (self.accountTypeSegmentControl.selectedSegmentIndex == 0)
