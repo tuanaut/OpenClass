@@ -18,6 +18,7 @@
 		550769A81FA67A5100C8AE78 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550769A71FA67A5100C8AE78 /* RegisterViewController.swift */; };
 		555C2A4B1FB1290900E79CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 555C2A4A1FB1290900E79CF8 /* GoogleService-Info.plist */; };
 		555FF48E1FB188CD002E362D /* CourseFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */; };
+		55604AA51FBAE9640087584F /* AnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55604AA41FBAE9640087584F /* AnswersViewController.swift */; };
 		785775592CF1563505921EC0 /* Pods_OpenClassUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256232FA9B71169D3B13D6AC /* Pods_OpenClassUITests.framework */; };
 		E55846E9D2AC00F8875590F2 /* Pods_OpenClassTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 230334D3D43B62F2CCEAB3B6 /* Pods_OpenClassTests.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,7 @@
 		550769A71FA67A5100C8AE78 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		555C2A4A1FB1290900E79CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseFeedViewController.swift; sourceTree = "<group>"; };
+		55604AA41FBAE9640087584F /* AnswersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersViewController.swift; sourceTree = "<group>"; };
 		5D82D573B907585B8C7222F1 /* Pods-OpenClassTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenClassTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenClassTests/Pods-OpenClassTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B94E53EE1DA56A3EAB0DC212 /* Pods-OpenClassUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenClassUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenClassUITests/Pods-OpenClassUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D93FFBAC3618BB9CF18CD28A /* Pods-OpenClassTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenClassTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenClassTests/Pods-OpenClassTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 				5507697B1FA677EB00C8AE78 /* LoginViewController.swift */,
 				550769A71FA67A5100C8AE78 /* RegisterViewController.swift */,
 				555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */,
+				55604AA41FBAE9640087584F /* AnswersViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -486,6 +489,7 @@
 				555FF48E1FB188CD002E362D /* CourseFeedViewController.swift in Sources */,
 				550769A81FA67A5100C8AE78 /* RegisterViewController.swift in Sources */,
 				5507697A1FA677EB00C8AE78 /* AppDelegate.swift in Sources */,
+				55604AA51FBAE9640087584F /* AnswersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
