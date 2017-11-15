@@ -16,6 +16,7 @@
 		5507698F1FA677EB00C8AE78 /* OpenClassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5507698E1FA677EB00C8AE78 /* OpenClassTests.swift */; };
 		5507699A1FA677EC00C8AE78 /* OpenClassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550769991FA677EC00C8AE78 /* OpenClassUITests.swift */; };
 		550769A81FA67A5100C8AE78 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550769A71FA67A5100C8AE78 /* RegisterViewController.swift */; };
+		55458F9F1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55458F9E1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift */; };
 		555C2A4B1FB1290900E79CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 555C2A4A1FB1290900E79CF8 /* GoogleService-Info.plist */; };
 		555FF48E1FB188CD002E362D /* CourseFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */; };
 		55604AA51FBAE9640087584F /* AnswersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55604AA41FBAE9640087584F /* AnswersViewController.swift */; };
@@ -61,6 +62,7 @@
 		550769991FA677EC00C8AE78 /* OpenClassUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenClassUITests.swift; sourceTree = "<group>"; };
 		5507699B1FA677EC00C8AE78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		550769A71FA67A5100C8AE78 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		55458F9E1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersViewControllerTableViewCell.swift; sourceTree = "<group>"; };
 		555C2A4A1FB1290900E79CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseFeedViewController.swift; sourceTree = "<group>"; };
 		55604AA41FBAE9640087584F /* AnswersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersViewController.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 				550769A71FA67A5100C8AE78 /* RegisterViewController.swift */,
 				555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */,
 				55604AA41FBAE9640087584F /* AnswersViewController.swift */,
+				55458F9E1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -489,6 +492,7 @@
 				555FF48E1FB188CD002E362D /* CourseFeedViewController.swift in Sources */,
 				550769A81FA67A5100C8AE78 /* RegisterViewController.swift in Sources */,
 				5507697A1FA677EB00C8AE78 /* AppDelegate.swift in Sources */,
+				55458F9F1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift in Sources */,
 				55604AA51FBAE9640087584F /* AnswersViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
