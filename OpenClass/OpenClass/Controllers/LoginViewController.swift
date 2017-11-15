@@ -27,7 +27,7 @@ class LoginViewController: UIViewController {
         
         // Initial UI setup
         navigationController?.isNavigationBarHidden = true
-        self.view.backgroundColor = UIColor(r: 205, g: 35, b: 35)
+        //self.view.backgroundColor = UIColor(r: 205, g: 35, b: 35)
         inputContainer.backgroundColor = UIColor(r: 220, g: 220, b: 220)
         inputContainer.translatesAutoresizingMaskIntoConstraints = false
         inputContainer.layer.cornerRadius = 5
