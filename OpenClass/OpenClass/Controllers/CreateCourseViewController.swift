@@ -12,20 +12,15 @@ import Firebase
 class CreateCourseViewController: UIViewController {
 
     @IBOutlet weak var CreateCourseLabel: UILabel!
-    
-    
     @IBOutlet weak var CourseNameText: UITextField!
     @IBOutlet weak var CourseNameLabel: UILabel!
-    
     @IBOutlet weak var CourseDescriptionText: UITextField!
     @IBOutlet weak var CourseDescriptionLabel: UILabel!
-    
     @IBOutlet weak var CancelButton: UIButton!
     @IBOutlet weak var CreateButton: UIButton!
-    
     @IBOutlet weak var ProfessorLabel: UILabel!
     @IBOutlet weak var ProfessorText: UITextField!
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -36,6 +31,11 @@ class CreateCourseViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+      
     }
     
     
@@ -97,4 +97,6 @@ class CreateCourseViewController: UIViewController {
         
         return randomString
     }
+    
+
 }

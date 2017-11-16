@@ -426,7 +426,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CourseFeedTableViewCell" rowHeight="80" id="JBe-Y0-F0B" customClass="CourseFeedTableViewCell" customModule="OpenClass" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CourseCell" rowHeight="80" id="JBe-Y0-F0B" customClass="CourseFeedTableViewCell" customModule="OpenClass" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JBe-Y0-F0B" id="1Qt-fl-oLO">
@@ -748,6 +748,7 @@
         <image name="OpenClassLogo" width="406" height="392"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="uB5-r1-GGg"/>
         <segue reference="vtB-9a-sxU"/>
     </inferredMetricsTieBreakers>
 </document>

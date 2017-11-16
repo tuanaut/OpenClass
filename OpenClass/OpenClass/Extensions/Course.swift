@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import FirebaseDatabase
 
 class Course {
     
@@ -22,5 +22,13 @@ class Course {
         self.CourseDescription = CourseDescription
         self.ProfessorLastName = ProfessorLastName
         self.CourseKey = CourseKey
+    }
+    
+    init(snapshot: DataSnapshot){
+        let snapshotvalue = snapshot.value as? NSDictionary
+        self.CourseName = snapshotvalue!["CourseName"] as! String
+        self.CourseDescription = snapshotvalue!["CourseDescription"] as! String
+        self.ProfessorLastName = snapshotvalue!["Professor"] as! String
+        self.CourseKey = snapshotvalue!["CourseKey"] as! String
     }
 }
