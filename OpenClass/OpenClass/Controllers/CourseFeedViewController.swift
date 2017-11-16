@@ -11,12 +11,18 @@ import Firebase
 
 class CourseFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
+
+    
     @IBOutlet weak var tableView: UITableView!
+    
     
     var courseList: [Courses] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
 
         tableView.delegate = self
         tableView.dataSource = self
@@ -34,7 +40,31 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         // Set navigation bar
         navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Enroll", style: .plain, target: self, action: #selector(enrollCourse))
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Enroll", style: .plain, target: self, action: #selector(enrollCourse))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(AddCourse))
+        checkIfUserIsLoggedIn()
+    }
+    
+    @objc func AddCourse() {
+        //let newMessageController = AddCourseViewController()
+        //present(newMessageController, animated: true, completion: nil)
+        
+        let uid = Auth.auth().currentUser?.uid
+       //var test = Auth.auth().currentUser?.value(forKeyPath: "accounttype")
+        //print (test!)
+    Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: {(DataSnapshot) in
+            
+            let dictionary = DataSnapshot.value as? [String: AnyObject]
+            let acctType: String = (dictionary!["accounttype"] as? String)!
+            if ( acctType == "0"){
+                self.performSegue(withIdentifier: "GoToAddCourse", sender: self)
+            
+            }
+            else{
+                    self.performSegue(withIdentifier: "GoToCreateCourse", sender: self)
+            }
+        
+        })
         
     }
     
@@ -42,6 +72,20 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         super.viewWillAppear(animated)
         
         navigationController?.isNavigationBarHidden = false
+    }
+    
+    func checkIfUserIsLoggedIn(){
+        if Auth.auth().currentUser?.uid == nil{
+            handleLogout()
+        }
+        else{
+            //let uid = Auth.auth().currentUser?.uid
+            
+            print("HII");
+            
+            
+        }
+        
     }
     
     @objc func handleLogout()
@@ -58,22 +102,8 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         // Successfully logged out
         _ = navigationController?.popToRootViewController(animated: true)
     }
+
     
-    @objc func enrollCourse() {
-        
-        //var tempCourseList: [Courses] = []
-        
-        let tempCourse = Courses(courseNumber: "CS " + String(courseList.count + 1), courseName: "Compilers")
-        
-        courseList.append(tempCourse)
-        
-        let indexPath = IndexPath(row: courseList.count - 1, section: 0)
-        
-        tableView.beginUpdates()
-        tableView.insertRows(at: [indexPath], with: .automatic)
-        tableView.endUpdates()
-        
-    }
 
     // TableView cell functions
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

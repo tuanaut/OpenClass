@@ -489,6 +489,8 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="FyE-Ca-KXE" id="GUq-2y-Wzq"/>
+                        <segue destination="LHp-JH-a0B" kind="show" identifier="GoToAddCourse" id="v7x-nQ-fVp"/>
+                        <segue destination="ZA8-ty-M36" kind="show" identifier="GoToCreateCourse" id="uB5-r1-GGg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IFE-tI-LDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -498,7 +500,7 @@
         <!--Create Course Page View Controller-->
         <scene sceneID="HwI-hX-vL3">
             <objects>
-                <viewController title="Create Course Page View Controller" id="ZA8-ty-M36" sceneMemberID="viewController">
+                <viewController title="Create Course Page View Controller" id="ZA8-ty-M36" customClass="CreateCourseViewController" customModule="OpenClass" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="piJ-Bq-caf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -515,25 +517,25 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amQ-ef-Gsd">
-                                <rect key="frame" x="16" y="190" width="168.5" height="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amQ-ef-Gsd">
+                                <rect key="frame" x="16" y="190" width="145" height="26"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHk-yU-C6X">
-                                <rect key="frame" x="16" y="315" width="145" height="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHk-yU-C6X">
+                                <rect key="frame" x="16" y="276" width="206.5" height="26"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Course Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eit-Mp-XaT">
-                                <rect key="frame" x="16" y="349" width="343" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Course Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eit-Mp-XaT">
+                                <rect key="frame" x="16" y="310" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Course Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4B0-sF-CDc">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Course Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4B0-sF-CDc">
                                 <rect key="frame" x="16" y="224" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -556,40 +558,72 @@
                                 <state key="normal" title="Create">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="CreateTheCourse:" destination="ZA8-ty-M36" eventType="touchUpInside" id="jlL-3I-2t5"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Professor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofq-AB-fET">
+                                <rect key="frame" x="16" y="361" width="104" height="26"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Professor's Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IS6-PH-FHR">
+                                <rect key="frame" x="16" y="395" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.80392156859999997" green="0.14698566399999999" blue="0.15634806700000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="eit-Mp-XaT" secondAttribute="trailing" constant="16" id="2P1-hu-t7o"/>
-                            <constraint firstItem="HHk-yU-C6X" firstAttribute="top" secondItem="4B0-sF-CDc" secondAttribute="bottom" constant="61" id="4G0-tO-csU"/>
-                            <constraint firstItem="4B0-sF-CDc" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="4h7-dR-eQu"/>
                             <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="dyW-b5-3xG" secondAttribute="trailing" constant="16" id="5Oo-xD-Fgt"/>
-                            <constraint firstItem="eit-Mp-XaT" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="Am9-v3-8gy"/>
+                            <constraint firstItem="4B0-sF-CDc" firstAttribute="top" secondItem="amQ-ef-Gsd" secondAttribute="bottom" constant="8" id="8PW-EX-HY3"/>
                             <constraint firstItem="dyW-b5-3xG" firstAttribute="width" secondItem="8VD-Hu-rQ4" secondAttribute="width" id="B0h-IK-Xy6"/>
+                            <constraint firstItem="HHk-yU-C6X" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="DYk-wJ-CsM"/>
                             <constraint firstItem="MAX-mS-lu1" firstAttribute="bottom" secondItem="dyW-b5-3xG" secondAttribute="bottom" constant="50" id="Hwv-in-QiE"/>
+                            <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="IS6-PH-FHR" secondAttribute="trailing" constant="16" id="Job-iP-eEp"/>
+                            <constraint firstItem="Ofq-AB-fET" firstAttribute="top" secondItem="eit-Mp-XaT" secondAttribute="bottom" constant="21" id="LWG-OB-8GG"/>
                             <constraint firstItem="amQ-ef-Gsd" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="P6t-sH-IEl"/>
+                            <constraint firstItem="4B0-sF-CDc" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="Qvx-3g-jE3"/>
                             <constraint firstItem="Cbd-pM-JaS" firstAttribute="centerX" secondItem="piJ-Bq-caf" secondAttribute="centerX" id="RDR-zp-Ufm"/>
-                            <constraint firstItem="4B0-sF-CDc" firstAttribute="top" secondItem="amQ-ef-Gsd" secondAttribute="bottom" constant="8" id="U6t-IE-Ah2"/>
+                            <constraint firstItem="Ofq-AB-fET" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="SlT-dC-37a"/>
+                            <constraint firstItem="IS6-PH-FHR" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="VN4-WD-v83"/>
+                            <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="4B0-sF-CDc" secondAttribute="trailing" constant="16" id="VPq-YP-5rK"/>
+                            <constraint firstItem="HHk-yU-C6X" firstAttribute="top" secondItem="4B0-sF-CDc" secondAttribute="bottom" constant="22" id="Wd7-We-91R"/>
                             <constraint firstItem="amQ-ef-Gsd" firstAttribute="top" secondItem="Cbd-pM-JaS" secondAttribute="bottom" constant="82" id="Wfe-Dl-fvP"/>
+                            <constraint firstItem="IS6-PH-FHR" firstAttribute="top" secondItem="Ofq-AB-fET" secondAttribute="bottom" constant="8" id="aWx-Xa-iKv"/>
                             <constraint firstItem="8VD-Hu-rQ4" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="18" id="aep-Wx-hgh"/>
                             <constraint firstItem="Cbd-pM-JaS" firstAttribute="top" secondItem="MAX-mS-lu1" secondAttribute="top" constant="53" id="bSN-cz-p2m"/>
-                            <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="4B0-sF-CDc" secondAttribute="trailing" constant="16" id="d15-I7-OXD"/>
                             <constraint firstItem="dyW-b5-3xG" firstAttribute="leading" secondItem="8VD-Hu-rQ4" secondAttribute="trailing" constant="41" id="fBc-OP-hhl"/>
                             <constraint firstItem="MAX-mS-lu1" firstAttribute="bottom" secondItem="8VD-Hu-rQ4" secondAttribute="bottom" constant="50" id="hqV-L5-cqb"/>
-                            <constraint firstItem="HHk-yU-C6X" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="hy5-5F-tGM"/>
-                            <constraint firstItem="eit-Mp-XaT" firstAttribute="top" secondItem="HHk-yU-C6X" secondAttribute="bottom" constant="8" id="jzS-Bt-0my"/>
+                            <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="eit-Mp-XaT" secondAttribute="trailing" constant="16" id="wZ6-S1-yGi"/>
+                            <constraint firstItem="eit-Mp-XaT" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="zgu-HK-bcv"/>
+                            <constraint firstItem="eit-Mp-XaT" firstAttribute="top" secondItem="HHk-yU-C6X" secondAttribute="bottom" constant="8" id="zlO-K2-dRA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MAX-mS-lu1"/>
                     </view>
+                    <connections>
+                        <outlet property="CancelButton" destination="8VD-Hu-rQ4" id="Zi3-WH-0Dm"/>
+                        <outlet property="CourseDescriptionLabel" destination="HHk-yU-C6X" id="HI4-Vt-qOm"/>
+                        <outlet property="CourseDescriptionText" destination="eit-Mp-XaT" id="pql-DV-xrq"/>
+                        <outlet property="CourseNameLabel" destination="amQ-ef-Gsd" id="CQg-iR-zjv"/>
+                        <outlet property="CourseNameText" destination="4B0-sF-CDc" id="A59-Pg-KIh"/>
+                        <outlet property="CreateButton" destination="dyW-b5-3xG" id="aKa-Zc-4v1"/>
+                        <outlet property="CreateCourseLabel" destination="Cbd-pM-JaS" id="923-9u-zBD"/>
+                        <outlet property="ProfessorLabel" destination="Ofq-AB-fET" id="hgC-UO-pgY"/>
+                        <outlet property="ProfessorText" destination="IS6-PH-FHR" id="Kdy-zg-CEZ"/>
+                        <segue destination="Nxd-Ma-fXu" kind="show" identifier="GoToCourseFeed" id="vtB-9a-sxU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eto-Di-yCb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1564" y="-548.27586206896558"/>
+            <point key="canvasLocation" x="1432.8" y="-525.78710644677665"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Course View Controller-->
         <scene sceneID="zOM-sl-xA8">
             <objects>
-                <viewController id="LHp-JH-a0B" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="addcourse" id="LHp-JH-a0B" customClass="AddCourseViewController" customModule="OpenClass" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VQF-ZY-Fv1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -693,13 +727,27 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b8O-fy-Y0X"/>
                     </view>
+                    <connections>
+                        <outlet property="AddButton" destination="8m9-ro-yJG" id="efX-0F-glS"/>
+                        <outlet property="AddCourseLabel" destination="Hf1-Qx-Z6B" id="3as-nB-6cV"/>
+                        <outlet property="CancelButton" destination="C0i-JE-x7A" id="AAk-yz-4X2"/>
+                        <outlet property="CourseKeyLabel" destination="5rW-b4-dxw" id="SJ1-rG-nHx"/>
+                        <outlet property="CourseKeyTextField" destination="cT4-w0-EPp" id="WQQ-Ax-LDn"/>
+                        <outlet property="CourseNumLabel" destination="zep-Gg-4r8" id="pWQ-i0-8bR"/>
+                        <outlet property="CourseNumTextField" destination="fwp-Qk-LNk" id="jz7-Ve-Rfk"/>
+                        <outlet property="ProfessorLabel" destination="T4w-KJ-dww" id="PWq-BK-HGu"/>
+                        <outlet property="ProfessorNameTextField" destination="hI6-g8-WlI" id="PI7-7P-8jI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L0y-DI-3Ig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2412" y="-539"/>
+            <point key="canvasLocation" x="2329" y="-607"/>
         </scene>
     </scenes>
     <resources>
         <image name="OpenClassLogo" width="406" height="392"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="vtB-9a-sxU"/>
+    </inferredMetricsTieBreakers>
 </document>
