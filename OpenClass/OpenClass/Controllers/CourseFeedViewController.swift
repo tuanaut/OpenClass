@@ -21,6 +21,8 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkIfUserIsLoggedIn()
+        
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -38,8 +40,8 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(AddCourse))
-        //checkIfUserIsLoggedIn()
-        fetchCourses()
+
+        tableView.reloadData()
     }
     
     @objc func AddCourse() {
@@ -65,6 +67,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        //fetchCourses()
         navigationController?.isNavigationBarHidden = false
     }
     
@@ -74,14 +77,14 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         }
         else{
             fetchCourses()
+            tableView.reloadData()
         }
         
     }
     
     @objc func handleLogout()
     {
-        fetchCourses()
-        /*
+
         do
         {
             try Auth.auth().signOut()
@@ -92,7 +95,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         }
         
         // Successfully logged out
-        _ = navigationController?.popToRootViewController(animated: true)*/
+        _ = navigationController?.popToRootViewController(animated: true)
     }
 
     
@@ -145,29 +148,51 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
             in
             
             for childSnapshot in snapshot.children {
-                let temp = childSnapshot as! DataSnapshot
-                let tempCourse = temp.value as! NSDictionary
-                self.userCourses.append(tempCourse["CourseKey"]! as! String)
+                let tempSnapshot = childSnapshot as! DataSnapshot
+                let tempDictionary = tempSnapshot.value as! NSDictionary
+                let tempCourse = tempDictionary["CourseKey"]! as! String
+                //self.userCourses.append(tempCourse["CourseKey"]! as! String)
+                //print(childSnapshot)
+                
+                let query = ref.child("courses").queryOrdered(byChild: "CourseKey").queryEqual(toValue: tempCourse)
+                
+                query.observeSingleEvent(of: .value, with: {(courses)
+                    in
+                    
+                    //var newCoursesArray = [Course]()
+                    for course in courses.children {
+                        let newCourse = Course(snapshot: course as! DataSnapshot)
+                        //newCoursesArray.append(newCourse)
+                        //newCoursesArray.insert(newCourse, at: 0)
+                        self.coursesArray.append(newCourse)
+                        //print(course)
+                    }
+                    //self.coursesArray = newCoursesArray
+                    self.tableView.reloadData()
+                })
+                
+                
             }
         })
         
         
-        for coursekey in userCourses {
+       /* for coursekey in userCourses {
             let query = ref.child("courses").queryOrdered(byChild: "CourseKey").queryEqual(toValue: coursekey)
-        
+            
             query.observeSingleEvent(of: .value, with: {(courses)
                 in
                 
                 var newCoursesArray = [Course]()
                 for course in courses.children {
                     let newCourse = Course(snapshot: course as! DataSnapshot)
-                    newCoursesArray.insert(newCourse, at: 0)
+                    newCoursesArray.append(newCourse)//.insert(newCourse, at: 0)
                 }
                 self.coursesArray = newCoursesArray
-                //self.tableView.reloadData()
+                self.tableView.reloadData()
             })
-        }
-        tableView.reloadData()
+            //self.coursesArray = newCoursesArray
+            //self.tableView.reloadData()
+        }*/
     }
     
     
