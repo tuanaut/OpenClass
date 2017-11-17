@@ -40,11 +40,13 @@ class CreateCourseViewController: UIViewController {
     
     
     @IBAction func CreateTheCourse(_ sender: UIButton) {
-        var uid = Auth.auth().currentUser?.uid
+        let uid = Auth.auth().currentUser?.uid
         
         
         let rootref = Database.database().reference(fromURL: "https://openclass-d7aa6.firebaseio.com/")
         let courseref = rootref.child("courses").childByAutoId()
+        
+        
        // let newcourse = courseref.child("courses").childByAutoId()
         
         

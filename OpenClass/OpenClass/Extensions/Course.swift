@@ -9,12 +9,14 @@
 import Foundation
 import FirebaseDatabase
 
+
 class Course {
     
     let CourseName: String
     let CourseDescription: String
     let ProfessorLastName: String
     let CourseKey: String
+ 
     
     init(CourseName: String, CourseDescription: String, ProfessorLastName: String, CourseKey: String) {
         
@@ -30,5 +32,6 @@ class Course {
         self.CourseDescription = snapshotvalue!["CourseDescription"] as! String
         self.ProfessorLastName = snapshotvalue!["Professor"] as! String
         self.CourseKey = snapshotvalue!["CourseKey"] as! String
+        
     }
 }
