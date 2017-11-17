@@ -15,15 +15,12 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
     
     @IBOutlet weak var tableView: UITableView!
     
-    
+    var userCourses: [String] = []
     var coursesArray = [Course]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
-
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -42,6 +39,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(AddCourse))
         //checkIfUserIsLoggedIn()
+        fetchCourses()
     }
     
     @objc func AddCourse() {
@@ -68,7 +66,6 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         super.viewWillAppear(true)
         
         navigationController?.isNavigationBarHidden = false
-        //fetchCourses()
     }
     
     func checkIfUserIsLoggedIn(){
@@ -76,17 +73,15 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
             handleLogout()
         }
         else{
-            //let uid = Auth.auth().currentUser?.uid
-            
-            print("HII");
-            
-            
+            fetchCourses()
         }
         
     }
     
     @objc func handleLogout()
     {
+        fetchCourses()
+        /*
         do
         {
             try Auth.auth().signOut()
@@ -97,7 +92,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         }
         
         // Successfully logged out
-        _ = navigationController?.popToRootViewController(animated: true)
+        _ = navigationController?.popToRootViewController(animated: true)*/
     }
 
     
@@ -107,19 +102,19 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         return coursesArray.count
     }
     
- /*   func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
  
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-   */
+   
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Drop Crouse"
     }
     
-    /*func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete)
         {
             coursesArray.remove(at: indexPath.row)
@@ -128,7 +123,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
         }
-    }*/
+    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -138,19 +133,42 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         return cell
     }
  
+    // Get the user's enrolled courses
     private func fetchCourses(){
         
+        let uid = Auth.auth().currentUser?.uid
         let ref = Database.database().reference()
-        ref.child("courses").observeSingleEvent(of: .value, with: {(courses) in
+        
+        let userRef = ref.child("users").child(uid!).child("enrolled").queryOrdered(byChild: "CourseKey")
+        
+        userRef.observeSingleEvent(of: .value, with: {(snapshot)
+            in
             
-            var newCoursesArray = [Course]()
-            for course in courses.children{
-                let newCourse = Course(snapshot: course as! DataSnapshot)
-                newCoursesArray.insert(newCourse, at: 0)
+            for childSnapshot in snapshot.children {
+                let temp = childSnapshot as! DataSnapshot
+                let tempCourse = temp.value as! NSDictionary
+                self.userCourses.append(tempCourse["CourseKey"]! as! String)
             }
-            self.coursesArray = newCoursesArray
-            self.tableView.reloadData()
-            
         })
+        
+        
+        for coursekey in userCourses {
+            let query = ref.child("courses").queryOrdered(byChild: "CourseKey").queryEqual(toValue: coursekey)
+        
+            query.observeSingleEvent(of: .value, with: {(courses)
+                in
+                
+                var newCoursesArray = [Course]()
+                for course in courses.children {
+                    let newCourse = Course(snapshot: course as! DataSnapshot)
+                    newCoursesArray.insert(newCourse, at: 0)
+                }
+                self.coursesArray = newCoursesArray
+                //self.tableView.reloadData()
+            })
+        }
+        tableView.reloadData()
     }
+    
+    
 }

@@ -49,7 +49,8 @@ class AddCourseViewController: UIViewController {
     let rootref = Database.database().reference().child("courses").queryOrdered(byChild: "CourseKey").queryEqual(toValue: CourseKeyTextField.text)
         rootref.observeSingleEvent(of: .value, with: {(DataSnapshot)
             in
-            databaseRef.child("users").child(uid!).child("enrolled").childByAutoId().setValue(self.CourseKeyTextField.text)
+            
+            databaseRef.child("users").child(uid!).child("enrolled").childByAutoId().setValue(["CourseKey": self.CourseKeyTextField.text])
                 print("OK")
         })
     
