@@ -20,7 +20,6 @@ class User {
     var accountType: String
     
     
-    
     init(firstName: String, lastName: String, email: String, password: String, confirmPassword: String, accountType: String) {
         
         self.firstname = firstName

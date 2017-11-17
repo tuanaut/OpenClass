@@ -34,4 +34,5 @@ class Course {
         self.CourseKey = snapshotvalue!["CourseKey"] as! String
         
     }
+    
 }
