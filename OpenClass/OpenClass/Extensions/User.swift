@@ -16,6 +16,7 @@ class User {
     let password: String
     let confirmPassword: String
     let accountType: String
+    var coursesArray = [Course]()
     
     init(firstName: String, lastName: String, email: String, password: String, confirmPassword: String, accountType: String) {
         

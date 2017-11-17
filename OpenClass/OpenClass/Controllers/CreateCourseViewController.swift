@@ -40,15 +40,28 @@ class CreateCourseViewController: UIViewController {
     
     
     @IBAction func CreateTheCourse(_ sender: UIButton) {
+        var uid = Auth.auth().currentUser?.uid
+        
         
         let rootref = Database.database().reference(fromURL: "https://openclass-d7aa6.firebaseio.com/")
         let courseref = rootref.child("courses").childByAutoId()
        // let newcourse = courseref.child("courses").childByAutoId()
         
         
+        
+        
         let thisCourse = Course(CourseName: CourseNameText.text!, CourseDescription: CourseDescriptionText.text!, ProfessorLastName: ProfessorText.text!, CourseKey: randomString(length: 5))
         
+        
+        
         let values = ["CourseName": thisCourse.CourseName, "CourseDescription": thisCourse.CourseDescription, "Professor": thisCourse.ProfessorLastName, "CourseKey": thisCourse.CourseKey]
+     
+        
+        
+        let databaseRef = Database.database().reference()
+        let values2 = ["CourseKey": thisCourse.CourseKey]
+        databaseRef.child("users").child(uid!).child("enrolled").childByAutoId().setValue(values2)
+        
         courseref.updateChildValues(values, withCompletionBlock: {(err, ref) in
             if (err != nil)
             {
@@ -67,6 +80,8 @@ class CreateCourseViewController: UIViewController {
                 
             }
         })
+        
+       
         
     }
     

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class RegisterViewController: UIViewController {
     @IBOutlet weak var firstnameTextField: UITextField!
@@ -69,6 +70,7 @@ class RegisterViewController: UIViewController {
             // Successfully authenticated user
             let ref = Database.database().reference(fromURL: "https://openclass-d7aa6.firebaseio.com/")
             let userref = ref.child("users").child(uid)
+            
             //let studentsReference = ref.child("users").child("students").child(uid)
             //let professorsReference = ref.child("users").child("professors").child(uid)
             let values = ["firstname": thisUser.firstname, "lastname": thisUser.lastname, "email": thisUser.email, "accounttype": thisUser.accountType]
