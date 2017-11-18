@@ -11,8 +11,6 @@ import Firebase
 
 class CourseFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-
-    
     @IBOutlet weak var tableView: UITableView!
     
     var userCourses: [String] = []
@@ -20,9 +18,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        checkIfUserIsLoggedIn()
-        
+
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -39,49 +35,39 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         // Set navigation bar
         navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "+", style: .plain, target: self, action: #selector(AddCourse))
+        getRightNavigationButton()
 
-        tableView.reloadData()
-    }
-    
-    @objc func AddCourse() {
-        
-        let uid = Auth.auth().currentUser?.uid
-    Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: {(DataSnapshot) in
-        
-        print("Hello")
-        print(DataSnapshot)
-        let dictionary = DataSnapshot.value as? [String: AnyObject]
-        let acctType: String = (dictionary!["accounttype"] as? String)!
-        if ( acctType == "0"){
-            self.performSegue(withIdentifier: "GoToAddCourse", sender: self)
-        
-        }
-        else{
-                self.performSegue(withIdentifier: "GoToCreateCourse", sender: self)
-        }
-        
-        })
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        //fetchCourses()
+        // Reset course array to empty every you go back to this view controller and reload table view
+        coursesArray.removeAll()
+        tableView.reloadData()
+        checkIfUserIsLoggedIn()
+        
         navigationController?.isNavigationBarHidden = false
     }
     
-    func checkIfUserIsLoggedIn(){
-        if Auth.auth().currentUser?.uid == nil{
-            handleLogout()
-        }
-        else{
-            fetchCourses()
-            tableView.reloadData()
-        }
-        
+    @objc func AddCourse() {
+    
+        let uid = Auth.auth().currentUser?.uid
+        Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: {(DataSnapshot)
+            in
+            
+            let dictionary = DataSnapshot.value as? [String: AnyObject]
+            let acctType: String = (dictionary!["accounttype"] as? String)!
+            if ( acctType == "0")
+            {
+                self.performSegue(withIdentifier: "GoToAddCourse", sender: self)
+            }
+            else
+            {
+                self.performSegue(withIdentifier: "GoToCreateCourse", sender: self)
+            }
+        })
+       
     }
     
     @objc func handleLogout()
@@ -100,9 +86,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         _ = navigationController?.popToRootViewController(animated: true)
     }
 
-    
-
-    // TableView cell functions
+//================== TableView cell functions ==================
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return coursesArray.count
     }
@@ -137,10 +121,12 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         cell.CourseNameLabel.text = coursesArray[indexPath.row].CourseDescription
         return cell
     }
- 
+//======================================================
+
     // Get the user's enrolled courses
     private func fetchCourses(){
         
+        userCourses = []
         let uid = Auth.auth().currentUser?.uid
         let ref = Database.database().reference()
         
@@ -153,49 +139,55 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
                 let tempSnapshot = childSnapshot as! DataSnapshot
                 let tempDictionary = tempSnapshot.value as! NSDictionary
                 let tempCourse = tempDictionary["CourseKey"]! as! String
-                //self.userCourses.append(tempCourse["CourseKey"]! as! String)
-                //print(childSnapshot)
                 
                 let query = ref.child("courses").queryOrdered(byChild: "CourseKey").queryEqual(toValue: tempCourse)
                 
                 query.observeSingleEvent(of: .value, with: {(courses)
                     in
                     
-                    //var newCoursesArray = [Course]()
                     for course in courses.children {
                         let newCourse = Course(snapshot: course as! DataSnapshot)
-                        //newCoursesArray.append(newCourse)
-                        //newCoursesArray.insert(newCourse, at: 0)
                         self.coursesArray.append(newCourse)
-                        //print(course)
                     }
-                    //self.coursesArray = newCoursesArray
                     self.tableView.reloadData()
                 })
-                
-                
             }
         })
-        
-        
-       /* for coursekey in userCourses {
-            let query = ref.child("courses").queryOrdered(byChild: "CourseKey").queryEqual(toValue: coursekey)
-            
-            query.observeSingleEvent(of: .value, with: {(courses)
-                in
-                
-                var newCoursesArray = [Course]()
-                for course in courses.children {
-                    let newCourse = Course(snapshot: course as! DataSnapshot)
-                    newCoursesArray.append(newCourse)//.insert(newCourse, at: 0)
-                }
-                self.coursesArray = newCoursesArray
-                self.tableView.reloadData()
-            })
-            //self.coursesArray = newCoursesArray
-            //self.tableView.reloadData()
-        }*/
+
     }
     
+    // Checks if user is logged in, to determine to logout or get user data
+    func checkIfUserIsLoggedIn(){
+        if Auth.auth().currentUser?.uid == nil
+        {
+            handleLogout()
+        }
+        else
+        {
+            fetchCourses()
+            tableView.reloadData()
+        }
+    }
+    
+    // Checks if it is student or professor and adjusts the right navigation button accordingly
+    func getRightNavigationButton() {
+        let uid = Auth.auth().currentUser?.uid
+        Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: {(DataSnapshot)
+        in
+        
+            let dictionary = DataSnapshot.value as? [String: AnyObject]
+            let acctType: String = (dictionary!["accounttype"] as? String)!
+            if ( acctType == "0")
+            {
+                self.title = "Enrolled Courses"
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Enroll", style: .plain, target: self, action: #selector(self.AddCourse))
+            }
+            else
+            {
+                self.title = "Created Courses"
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(self.AddCourse))
+            }
+        })
+    }
     
 }
