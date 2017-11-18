@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseDatabase
 import FirebaseStorage
+import FirebaseAuth
 
 class NewClassNotesViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     @IBOutlet weak var NotesSubjectText: UITextField!
@@ -34,16 +35,15 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //pickerController.sourceType = UIImagePickerControllerSourceType.camera
-        //pickerController.delegate = self
-        // Do any additional setup after loading the view.
+        navigationController?.isNavigationBarHidden = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(PostNotes))
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     @IBAction func selectImage(_ sender: Any) {
       
@@ -76,6 +76,42 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func PostNotes(){
+        
+        let imageData = UIImageJPEGRepresentation(NotesImage.image!, 0.8)
+        let metaData = StorageMetadata()
+        metaData.contentType = "image/jpeg"
+        //let uid = Auth.auth().currentUser?.uid
+        
+        let imagePath = "notesImage\(Auth.auth().currentUser!.uid)/notesPic.jpg"
+        
+        let imageRef = storageRef.reference().child(imagePath)
+        imageRef.putData(imageData!, metadata: metaData, completion: {(newMetaData, error) in
+            if (error == nil){
+                print("OK1")
+                let newNotes = Notes(notesSubject: self.NotesSubjectText.text!, notesDescription: self.NotesDescriptionText.text!, notesImageURL: String(describing: newMetaData!.downloadURL()!))
+                print("OK3")
+                
+                let notesRef = Database.database().reference().child("notes").childByAutoId()
+                print("OK5")
+               let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL]
+                notesRef.setValue(values, withCompletionBlock: {(error, ref) in
+                    if(error == nil) {
+                        print("OK2")
+                        //self.navigationController?.popToRootViewController(animated: true)
+                    }
+                
+                })
+                
+            }
+            else{
+                print("OK4")
+                print(error!.localizedDescription)
+            }
+            
+        })
     }
     
 }

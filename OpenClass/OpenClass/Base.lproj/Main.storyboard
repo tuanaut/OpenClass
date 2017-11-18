@@ -377,9 +377,6 @@
                                 <state key="normal" title="Forgot Password?">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="Sat-hV-w0C" kind="show" id="0Xq-CX-5eX"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ajd-Yq-HWX">
                                 <rect key="frame" x="16" y="470" width="344" height="54"/>
@@ -519,7 +516,7 @@
                         <outlet property="ErrorLabel" destination="G2E-Ic-RL5" id="evr-o3-lbz"/>
                         <outlet property="PasswordEdit" destination="q2p-HS-fk6" id="Nox-VZ-0oV"/>
                         <outlet property="inputContainer" destination="2km-Vm-8Ma" id="aiY-i5-HJt"/>
-                        <segue destination="Nxd-Ma-fXu" kind="show" identifier="LoggedIn" id="LIY-4c-haO"/>
+                        <segue destination="Sat-hV-w0C" kind="show" identifier="LoggedIn" id="UKI-Ik-X5r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -688,7 +685,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="selectImage:" destination="Sat-hV-w0C" eventType="touchUpInside" id="vsW-QV-cSe"/>
+                                    <action selector="selectImage:" destination="Sat-hV-w0C" eventType="touchUpInside" id="NeI-h1-9L6"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -711,17 +708,13 @@
                         <viewLayoutGuide key="safeArea" id="azm-6d-Uqm"/>
                     </view>
                     <connections>
-                        <outlet property="NotesDescriptionText" destination="Ibp-dj-ZIk" id="0Ee-yf-YST"/>
-                        <outlet property="NotesImage" destination="Suz-Uz-Txd" id="hHz-iy-kfw"/>
-                        <outlet property="NotesSubjectText" destination="keg-wN-2Ad" id="JqU-lr-Dtz"/>
+                        <outlet property="NotesDescriptionText" destination="Ibp-dj-ZIk" id="OKd-qe-Zzk"/>
+                        <outlet property="NotesImage" destination="Suz-Uz-Txd" id="aBG-44-dKr"/>
+                        <outlet property="NotesSubjectText" destination="keg-wN-2Ad" id="cdH-60-q7l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aT7-XL-xkm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Bzt-Al-xgk">
-                    <connections>
-                        <action selector="choosePictureAction" destination="Sat-hV-w0C" id="G1W-pC-CmJ"/>
-                    </connections>
-                </tapGestureRecognizer>
+                <tapGestureRecognizer id="Bzt-Al-xgk"/>
             </objects>
             <point key="canvasLocation" x="1969" y="-2046"/>
         </scene>
