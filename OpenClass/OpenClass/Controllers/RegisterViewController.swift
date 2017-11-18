@@ -126,7 +126,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
 
         // Initial UI setup
-        view.backgroundColor = UIColor(r: 205, g: 35, b: 35)
+        //view.backgroundColor = UIColor(r: 205, g: 35, b: 35)
         navigationController?.isNavigationBarHidden = true
     }
 
