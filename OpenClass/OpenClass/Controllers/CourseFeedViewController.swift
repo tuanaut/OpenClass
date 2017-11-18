@@ -48,7 +48,9 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         
         let uid = Auth.auth().currentUser?.uid
     Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: {(DataSnapshot) in
-            
+        
+        print("Hello")
+        print(DataSnapshot)
         let dictionary = DataSnapshot.value as? [String: AnyObject]
         let acctType: String = (dictionary!["accounttype"] as? String)!
         if ( acctType == "0"){

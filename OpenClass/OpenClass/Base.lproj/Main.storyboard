@@ -740,6 +740,7 @@
                         <outlet property="CourseNumTextField" destination="fwp-Qk-LNk" id="jz7-Ve-Rfk"/>
                         <outlet property="ProfessorLabel" destination="T4w-KJ-dww" id="PWq-BK-HGu"/>
                         <outlet property="ProfessorNameTextField" destination="hI6-g8-WlI" id="PI7-7P-8jI"/>
+                        <segue destination="Nxd-Ma-fXu" kind="show" identifier="GoToCourseFeed" id="N36-YP-dkm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L0y-DI-3Ig" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -751,6 +752,6 @@
         <image name="OpenClassLogo" width="406" height="392"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vtB-9a-sxU"/>
+        <segue reference="N36-YP-dkm"/>
     </inferredMetricsTieBreakers>
 </document>

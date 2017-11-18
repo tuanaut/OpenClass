@@ -2,7 +2,7 @@
 //  CreateCourseViewController.swift
 //  OpenClass
 //
-//  Created by Vivian Chau on 11/15/17.
+//  Created by Tuan Chau on 11/15/17.
 //  Copyright © 2017 CS472. All rights reserved.
 //
 
@@ -38,7 +38,7 @@ class CreateCourseViewController: UIViewController {
       
     }
     
-    
+    // Create Button Functionality in Create Course Page
     @IBAction func CreateTheCourse(_ sender: UIButton) {
         let uid = Auth.auth().currentUser?.uid
         
@@ -46,24 +46,18 @@ class CreateCourseViewController: UIViewController {
         let rootref = Database.database().reference(fromURL: "https://openclass-d7aa6.firebaseio.com/")
         let courseref = rootref.child("courses").childByAutoId()
         
-        
-       // let newcourse = courseref.child("courses").childByAutoId()
-        
-        
-        
-        
+        // Create a Course class object
         let thisCourse = Course(CourseName: CourseNameText.text!, CourseDescription: CourseDescriptionText.text!, ProfessorLastName: ProfessorText.text!, CourseKey: randomString(length: 5))
         
         
-        
+        // Make dictionary to be used to insert into database. Will be inserted into Courses Table
         let values = ["CourseName": thisCourse.CourseName, "CourseDescription": thisCourse.CourseDescription, "Professor": thisCourse.ProfessorLastName, "CourseKey": thisCourse.CourseKey]
      
         
         
         let databaseRef = Database.database().reference()
-        let values2 = ["CourseKey": thisCourse.CourseKey]
-        databaseRef.child("users").child(uid!).child("enrolled").childByAutoId().setValue(values2)
         
+        // insert into Courses Table
         courseref.updateChildValues(values, withCompletionBlock: {(err, ref) in
             if (err != nil)
             {
@@ -83,8 +77,10 @@ class CreateCourseViewController: UIViewController {
             }
         })
         
-       
-        
+        // This is another dictionary but will be inserted into enrolled list under current user
+        let values2 = ["CourseKey": thisCourse.CourseKey]
+        databaseRef.child("users").child(uid!).child("enrolled").childByAutoId().setValue(values2)
+        //inserted into enrolled list under current user
     }
     
     
@@ -99,6 +95,8 @@ class CreateCourseViewController: UIViewController {
         self.present(myAlert, animated: true, completion: nil);
     }
 
+    
+    // function to generate random string for the course key
     func randomString(length: Int) -> String {
         
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
