@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import FirebaseStorage
 
 class NewClassNotesViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     @IBOutlet weak var NotesSubjectText: UITextField!
@@ -14,7 +16,21 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
     @IBOutlet weak var NotesDescriptionText: UITextField!
     //let pickerController = UIImagePickerController()
     
-    @IBOutlet weak var NotesImage: UIImageView!
+    @IBOutlet weak var NotesImage: UIImageView!{
+        didSet{
+            NotesImage.layer.cornerRadius = 5
+        }
+    }
+    
+    var databaseRef: DatabaseReference! {
+        return Database.database().reference()
+    }
+    
+    var storageRef: Storage!{
+        return Storage.storage()
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,46 +45,37 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func choosePictureAction() {
-        let pickerController = UIImagePickerController()
-        pickerController.delegate = self
-        pickerController.allowsEditing = true
+    @IBAction func selectImage(_ sender: Any) {
+      
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
         
-        let alertController = UIAlertController(title: "Add a Picture", message: "Choose From", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: "Choose Photo", message: "From Source", preferredStyle: .actionSheet)
         
-        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
-            pickerController.sourceType = .camera
-            self.present(pickerController, animated: true, completion: nil)
-            
+        actionSheet.addAction(UIAlertAction(title: "Camera", style: .default, handler: {(action:UIAlertAction) in
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion:nil)            }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(action:UIAlertAction) in
+                imagePickerController.sourceType = .photoLibrary
+                self.present(imagePickerController, animated: true, completion:nil)
+            }))
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(actionSheet, animated: true, completion: nil)
         }
-        let photosLibraryAction = UIAlertAction(title: "Photos Library", style: .default) { (action) in
-            pickerController.sourceType = .photoLibrary
-            self.present(pickerController, animated: true, completion: nil)
-            
-        }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let image = info[UIImagePickerControllerOriginalImage] as! UIImage
         
-        let savedPhotosAction = UIAlertAction(title: "Saved Photos Album", style: .default) { (action) in
-            pickerController.sourceType = .savedPhotosAlbum
-            self.present(pickerController, animated: true, completion: nil)
-            
-        }
+        NotesImage.image = image
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
-        
-        alertController.addAction(cameraAction)
-        alertController.addAction(photosLibraryAction)
-        alertController.addAction(savedPhotosAction)
-        alertController.addAction(cancelAction)
-        
-        
-        present(alertController, animated: true, completion: nil)
+        picker.dismiss(animated: true, completion: nil)
         
     }
     
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage, editingInfo: [String : AnyObject]?) {
-        self.dismiss(animated: true, completion: nil)
-        self.NotesImage.image = image
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
     
 }

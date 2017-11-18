@@ -668,17 +668,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6IG-XN-JIe">
-                                <rect key="frame" x="258" y="594" width="101" height="42"/>
-                                <color key="backgroundColor" red="0.92156862750000001" green="0.31372549020000001" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="TtB-rE-9Yy"/>
-                                    <constraint firstAttribute="width" constant="101" id="nuF-xN-0Ik"/>
-                                </constraints>
-                                <state key="normal" title="Camera">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Notes Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ibp-dj-ZIk">
                                 <rect key="frame" x="16" y="260" width="343" height="30"/>
                                 <nil key="textColor"/>
@@ -690,20 +679,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Bzt-Al-xgk" appends="YES" id="21w-1R-wEC"/>
-                                </connections>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgL-vb-y0S">
-                                <rect key="frame" x="16" y="594" width="101" height="42"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zgL-vb-y0S">
+                                <rect key="frame" x="137" y="605" width="101" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.31372549020000001" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="101" id="HbV-Kj-cN1"/>
-                                    <constraint firstAttribute="height" constant="42" id="gDv-sd-elC"/>
-                                </constraints>
-                                <state key="normal" title="Photo Library">
+                                <state key="normal" title="Select Photo">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="selectImage:" destination="Sat-hV-w0C" eventType="touchUpInside" id="vsW-QV-cSe"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.80392156859999997" green="0.14698566399999999" blue="0.15634806700000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -713,17 +699,13 @@
                             <constraint firstItem="SRb-OB-Nl9" firstAttribute="top" secondItem="aOO-YH-J80" secondAttribute="bottom" constant="18" id="Nbf-A5-AkV"/>
                             <constraint firstItem="IVP-aj-Rks" firstAttribute="top" secondItem="keg-wN-2Ad" secondAttribute="bottom" constant="18" id="NvZ-RJ-CnA"/>
                             <constraint firstItem="SRb-OB-Nl9" firstAttribute="leading" secondItem="azm-6d-Uqm" secondAttribute="leading" constant="16" id="QUG-sG-ni7"/>
-                            <constraint firstItem="azm-6d-Uqm" firstAttribute="bottom" secondItem="6IG-XN-JIe" secondAttribute="bottom" constant="31" id="SAP-Yq-b4Y"/>
                             <constraint firstItem="IVP-aj-Rks" firstAttribute="leading" secondItem="azm-6d-Uqm" secondAttribute="leading" constant="16" id="VZj-ne-E4p"/>
                             <constraint firstItem="azm-6d-Uqm" firstAttribute="trailing" secondItem="keg-wN-2Ad" secondAttribute="trailing" constant="16" id="Xk0-Q2-ZsW"/>
                             <constraint firstItem="azm-6d-Uqm" firstAttribute="trailing" secondItem="Ibp-dj-ZIk" secondAttribute="trailing" constant="16" id="bnq-MA-ThI"/>
                             <constraint firstItem="Ibp-dj-ZIk" firstAttribute="top" secondItem="IVP-aj-Rks" secondAttribute="bottom" constant="8" id="fOk-Uh-kvx"/>
-                            <constraint firstItem="azm-6d-Uqm" firstAttribute="trailing" secondItem="6IG-XN-JIe" secondAttribute="trailing" constant="16" id="lBS-px-UyN"/>
                             <constraint firstItem="azm-6d-Uqm" firstAttribute="trailing" secondItem="aOO-YH-J80" secondAttribute="trailing" constant="108.5" id="lOt-BT-U5a"/>
-                            <constraint firstItem="azm-6d-Uqm" firstAttribute="bottom" secondItem="zgL-vb-y0S" secondAttribute="bottom" constant="31" id="lzl-Jo-VA0"/>
                             <constraint firstItem="aOO-YH-J80" firstAttribute="leading" secondItem="azm-6d-Uqm" secondAttribute="leading" constant="108.5" id="mZ7-nr-SqQ"/>
                             <constraint firstItem="Ibp-dj-ZIk" firstAttribute="leading" secondItem="azm-6d-Uqm" secondAttribute="leading" constant="16" id="sQd-3i-qic"/>
-                            <constraint firstItem="zgL-vb-y0S" firstAttribute="leading" secondItem="azm-6d-Uqm" secondAttribute="leading" constant="16" id="uFX-uf-7vO"/>
                             <constraint firstItem="keg-wN-2Ad" firstAttribute="top" secondItem="SRb-OB-Nl9" secondAttribute="bottom" constant="7.5" id="uxH-lf-QU2"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="azm-6d-Uqm"/>
