@@ -209,7 +209,7 @@
                                 <color key="tintColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="name"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" textContentType="name"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="259" verticalCompressionResistancePriority="751" text="Last Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Bg-io-y8V">
                                 <rect key="frame" x="16" y="181" width="115" height="24"/>
@@ -222,7 +222,7 @@
                                 <color key="tintColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="name"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" textContentType="name"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ese-Hw-bQt">
                                 <rect key="frame" x="16" y="255" width="106" height="24"/>
@@ -235,7 +235,7 @@
                                 <color key="tintColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" textContentType="email"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gDS-L8-kTc">
                                 <rect key="frame" x="16" y="325" width="97" height="24"/>
@@ -248,7 +248,7 @@
                                 <color key="tintColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="next" secureTextEntry="YES" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Confirm Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qXq-ns-mOC">
                                 <rect key="frame" x="16" y="404" width="179" height="24"/>
@@ -267,7 +267,7 @@
                                 <color key="tintColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="qd3-Ly-dZe">
                                 <rect key="frame" x="16" y="504" width="341" height="29"/>
@@ -512,7 +512,7 @@
                                                 </constraints>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -586,10 +586,10 @@
             </objects>
             <point key="canvasLocation" x="669.60000000000002" y="-1311.0944527736133"/>
         </scene>
-        <!--Enrolled Courses-->
+        <!--Courses-->
         <scene sceneID="W0T-BP-EDr">
             <objects>
-                <viewController title="Enrolled Courses" id="Nxd-Ma-fXu" customClass="CourseFeedViewController" customModule="OpenClass" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Courses" id="Nxd-Ma-fXu" customClass="CourseFeedViewController" customModule="OpenClass" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x1Y-z9-fLW" customClass="GradientView" customModule="OpenClass" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -599,7 +599,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CourseFeedTableViewCell" rowHeight="80" id="JBe-Y0-F0B" customClass="CourseFeedTableViewCell" customModule="OpenClass" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CourseCell" rowHeight="80" id="JBe-Y0-F0B" customClass="CourseFeedTableViewCell" customModule="OpenClass" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JBe-Y0-F0B" id="1Qt-fl-oLO">
@@ -662,6 +662,8 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="FyE-Ca-KXE" id="GUq-2y-Wzq"/>
+                        <segue destination="ZA8-ty-M36" kind="presentation" identifier="GoToCreateCourse" id="RRa-hQ-LOU"/>
+                        <segue destination="LHp-JH-a0B" kind="presentation" identifier="GoToAddCourse" id="dWU-KC-fRL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IFE-tI-LDP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -671,8 +673,8 @@
         <!--Create Course Page View Controller-->
         <scene sceneID="HwI-hX-vL3">
             <objects>
-                <viewController title="Create Course Page View Controller" id="ZA8-ty-M36" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="piJ-Bq-caf">
+                <viewController title="Create Course Page View Controller" id="ZA8-ty-M36" customClass="CreateCourseViewController" customModule="OpenClass" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="piJ-Bq-caf" customClass="GradientView" customModule="OpenClass" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -687,30 +689,33 @@
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="cancelButton:" destination="ZA8-ty-M36" eventType="touchUpInside" id="BUf-YU-PWB"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amQ-ef-Gsd">
-                                <rect key="frame" x="16" y="190" width="168.5" height="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amQ-ef-Gsd">
+                                <rect key="frame" x="16" y="190" width="145" height="26"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHk-yU-C6X">
-                                <rect key="frame" x="16" y="315" width="145" height="26"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHk-yU-C6X">
+                                <rect key="frame" x="16" y="276" width="206.5" height="26"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Course Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eit-Mp-XaT">
-                                <rect key="frame" x="16" y="349" width="343" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Course Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eit-Mp-XaT">
+                                <rect key="frame" x="16" y="310" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="yes"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Course Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4B0-sF-CDc">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Course Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4B0-sF-CDc">
                                 <rect key="frame" x="16" y="224" width="343" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create Course" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cbd-pM-JaS">
                                 <rect key="frame" x="82" y="73" width="210.5" height="35"/>
@@ -729,41 +734,74 @@
                                 <state key="normal" title="Create">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="CreateTheCourse:" destination="ZA8-ty-M36" eventType="touchUpInside" id="jlL-3I-2t5"/>
+                                </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Professor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofq-AB-fET">
+                                <rect key="frame" x="16" y="361" width="104" height="26"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Professor's Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IS6-PH-FHR">
+                                <rect key="frame" x="16" y="395" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.80392156859999997" green="0.14698566399999999" blue="0.15634806700000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="eit-Mp-XaT" secondAttribute="trailing" constant="16" id="2P1-hu-t7o"/>
-                            <constraint firstItem="HHk-yU-C6X" firstAttribute="top" secondItem="4B0-sF-CDc" secondAttribute="bottom" constant="61" id="4G0-tO-csU"/>
-                            <constraint firstItem="4B0-sF-CDc" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="4h7-dR-eQu"/>
                             <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="dyW-b5-3xG" secondAttribute="trailing" constant="16" id="5Oo-xD-Fgt"/>
-                            <constraint firstItem="eit-Mp-XaT" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="Am9-v3-8gy"/>
+                            <constraint firstItem="4B0-sF-CDc" firstAttribute="top" secondItem="amQ-ef-Gsd" secondAttribute="bottom" constant="8" id="8PW-EX-HY3"/>
                             <constraint firstItem="dyW-b5-3xG" firstAttribute="width" secondItem="8VD-Hu-rQ4" secondAttribute="width" id="B0h-IK-Xy6"/>
+                            <constraint firstItem="HHk-yU-C6X" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="DYk-wJ-CsM"/>
                             <constraint firstItem="MAX-mS-lu1" firstAttribute="bottom" secondItem="dyW-b5-3xG" secondAttribute="bottom" constant="50" id="Hwv-in-QiE"/>
+                            <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="IS6-PH-FHR" secondAttribute="trailing" constant="16" id="Job-iP-eEp"/>
+                            <constraint firstItem="Ofq-AB-fET" firstAttribute="top" secondItem="eit-Mp-XaT" secondAttribute="bottom" constant="21" id="LWG-OB-8GG"/>
                             <constraint firstItem="amQ-ef-Gsd" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="P6t-sH-IEl"/>
+                            <constraint firstItem="4B0-sF-CDc" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="Qvx-3g-jE3"/>
                             <constraint firstItem="Cbd-pM-JaS" firstAttribute="centerX" secondItem="piJ-Bq-caf" secondAttribute="centerX" id="RDR-zp-Ufm"/>
-                            <constraint firstItem="4B0-sF-CDc" firstAttribute="top" secondItem="amQ-ef-Gsd" secondAttribute="bottom" constant="8" id="U6t-IE-Ah2"/>
+                            <constraint firstItem="Ofq-AB-fET" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="SlT-dC-37a"/>
+                            <constraint firstItem="IS6-PH-FHR" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="VN4-WD-v83"/>
+                            <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="4B0-sF-CDc" secondAttribute="trailing" constant="16" id="VPq-YP-5rK"/>
+                            <constraint firstItem="HHk-yU-C6X" firstAttribute="top" secondItem="4B0-sF-CDc" secondAttribute="bottom" constant="22" id="Wd7-We-91R"/>
                             <constraint firstItem="amQ-ef-Gsd" firstAttribute="top" secondItem="Cbd-pM-JaS" secondAttribute="bottom" constant="82" id="Wfe-Dl-fvP"/>
+                            <constraint firstItem="IS6-PH-FHR" firstAttribute="top" secondItem="Ofq-AB-fET" secondAttribute="bottom" constant="8" id="aWx-Xa-iKv"/>
                             <constraint firstItem="8VD-Hu-rQ4" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="18" id="aep-Wx-hgh"/>
                             <constraint firstItem="Cbd-pM-JaS" firstAttribute="top" secondItem="MAX-mS-lu1" secondAttribute="top" constant="53" id="bSN-cz-p2m"/>
-                            <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="4B0-sF-CDc" secondAttribute="trailing" constant="16" id="d15-I7-OXD"/>
                             <constraint firstItem="dyW-b5-3xG" firstAttribute="leading" secondItem="8VD-Hu-rQ4" secondAttribute="trailing" constant="41" id="fBc-OP-hhl"/>
                             <constraint firstItem="MAX-mS-lu1" firstAttribute="bottom" secondItem="8VD-Hu-rQ4" secondAttribute="bottom" constant="50" id="hqV-L5-cqb"/>
-                            <constraint firstItem="HHk-yU-C6X" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="hy5-5F-tGM"/>
-                            <constraint firstItem="eit-Mp-XaT" firstAttribute="top" secondItem="HHk-yU-C6X" secondAttribute="bottom" constant="8" id="jzS-Bt-0my"/>
+                            <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="eit-Mp-XaT" secondAttribute="trailing" constant="16" id="wZ6-S1-yGi"/>
+                            <constraint firstItem="eit-Mp-XaT" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="zgu-HK-bcv"/>
+                            <constraint firstItem="eit-Mp-XaT" firstAttribute="top" secondItem="HHk-yU-C6X" secondAttribute="bottom" constant="8" id="zlO-K2-dRA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MAX-mS-lu1"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="FirstColor">
+                                <color key="value" red="0.80392156859999997" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="SecondColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
+                    <connections>
+                        <outlet property="CourseDescriptionText" destination="eit-Mp-XaT" id="pql-DV-xrq"/>
+                        <outlet property="CourseNameText" destination="4B0-sF-CDc" id="A59-Pg-KIh"/>
+                        <outlet property="ProfessorText" destination="IS6-PH-FHR" id="Kdy-zg-CEZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eto-Di-yCb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1564" y="-548.27586206896558"/>
+            <point key="canvasLocation" x="1494" y="-563"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Course View Controller-->
         <scene sceneID="zOM-sl-xA8">
             <objects>
-                <viewController id="LHp-JH-a0B" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="VQF-ZY-Fv1">
+                <viewController storyboardIdentifier="addcourse" id="LHp-JH-a0B" customClass="AddCourseViewController" customModule="OpenClass" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="VQF-ZY-Fv1" customClass="GradientView" customModule="OpenClass" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -777,13 +815,13 @@
                                 <rect key="frame" x="16" y="161" width="348" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Professor's Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hI6-g8-WlI">
                                 <rect key="frame" x="16" y="255" width="348" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Professor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4w-KJ-dww">
                                 <rect key="frame" x="16" y="221" width="104" height="25.5"/>
@@ -808,6 +846,9 @@
                                 <state key="normal" title="Cancel">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="cancelButton:" destination="LHp-JH-a0B" eventType="touchUpInside" id="Owi-Jx-k27"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8m9-ro-yJG">
                                 <rect key="frame" x="209" y="556" width="150" height="54"/>
@@ -820,6 +861,9 @@
                                 <state key="normal" title="Add">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="addtheCourse:" destination="LHp-JH-a0B" eventType="touchUpInside" id="vC4-lw-TXD"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Course" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hf1-Qx-Z6B">
                                 <rect key="frame" x="101.5" y="47" width="172" height="49"/>
@@ -835,7 +879,7 @@
                                 <rect key="frame" x="16" y="345" width="348" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.80392156859999997" green="0.14698566399999999" blue="0.15634806700000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -865,11 +909,24 @@
                             <constraint firstItem="C0i-JE-x7A" firstAttribute="leading" secondItem="b8O-fy-Y0X" secondAttribute="leading" constant="16" id="yiN-Hr-EAH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b8O-fy-Y0X"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="FirstColor">
+                                <color key="value" red="0.80392156859999997" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="SecondColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </view>
+                    <connections>
+                        <outlet property="CourseKeyTextField" destination="cT4-w0-EPp" id="WQQ-Ax-LDn"/>
+                        <outlet property="CourseNumTextField" destination="fwp-Qk-LNk" id="jz7-Ve-Rfk"/>
+                        <outlet property="ProfessorNameTextField" destination="hI6-g8-WlI" id="PI7-7P-8jI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L0y-DI-3Ig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2412" y="-539"/>
+            <point key="canvasLocation" x="2300" y="-563"/>
         </scene>
     </scenes>
     <resources>

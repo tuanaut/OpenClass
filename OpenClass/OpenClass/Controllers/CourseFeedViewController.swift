@@ -13,7 +13,8 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
 
     @IBOutlet weak var tableView: UITableView!
     
-    var courseList: [Courses] = []
+    var userCourses: [String] = []
+    var coursesArray = [Course]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,18 +35,44 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         // Set navigation bar
         navigationController?.isNavigationBarHidden = false
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Enroll", style: .plain, target: self, action: #selector(enrollCourse))
-        
+        getRightNavigationButton()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        super.viewWillAppear(true)
+        
+        // Reset course array to empty every you go back to this view controller and reload table view
+        coursesArray.removeAll()
+        tableView.reloadData()
+        checkIfUserIsLoggedIn()
         
         navigationController?.isNavigationBarHidden = false
     }
     
+    @objc func AddCourse() {
+    
+        let uid = Auth.auth().currentUser?.uid
+        Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: {(DataSnapshot)
+            in
+            
+            let dictionary = DataSnapshot.value as? [String: AnyObject]
+            let acctType: String = (dictionary!["accounttype"] as? String)!
+            if ( acctType == "0")
+            {
+                self.performSegue(withIdentifier: "GoToAddCourse", sender: self)
+            }
+            else
+            {
+                self.performSegue(withIdentifier: "GoToCreateCourse", sender: self)
+            }
+        })
+       
+    }
+    
     @objc func handleLogout()
     {
+
         do
         {
             try Auth.auth().signOut()
@@ -58,36 +85,20 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         // Successfully logged out
         _ = navigationController?.popToRootViewController(animated: true)
     }
-    
-    @objc func enrollCourse() {
-        
-        //var tempCourseList: [Courses] = []
-        
-        let tempCourse = Courses(courseNumber: "CS " + String(courseList.count + 1), courseName: "Compilers")
-        
-        courseList.append(tempCourse)
-        
-        let indexPath = IndexPath(row: courseList.count - 1, section: 0)
-        
-        tableView.beginUpdates()
-        tableView.insertRows(at: [indexPath], with: .automatic)
-        tableView.endUpdates()
-        
-    }
 
-    // TableView cell functions
+//================== TableView cell functions ==================
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return courseList.count
+        return coursesArray.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+ 
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
+   
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Drop Crouse"
     }
@@ -95,7 +106,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete)
         {
-            courseList.remove(at: indexPath.row)
+            coursesArray.remove(at: indexPath.row)
             
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -105,21 +116,78 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let course = courseList[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseFeedTableViewCell") as! CourseFeedTableViewCell
-        
-//        if (cell == nil)
-//        {
-//            cell = UITableViewCell(style: .default, reuseIdentifier: "CourseFeedTableViewCell")
-//        }
-        
-//        course!.textLabel?.text = courseList[indexPath.row]
-//        course?.textLabel?.textAlignment = .center
-//        course?.textLabel?.numberOfLines = 0
-        
-        cell.setCourse(course: course)
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CourseCell", for: indexPath) as! CourseFeedTableViewCell
+        cell.CourseNumberLabel.text = coursesArray[indexPath.row].CourseName
+        cell.CourseNameLabel.text = coursesArray[indexPath.row].CourseDescription
         return cell
+    }
+//======================================================
+
+    // Get the user's enrolled courses
+    private func fetchCourses(){
+        
+        userCourses = []
+        let uid = Auth.auth().currentUser?.uid
+        let ref = Database.database().reference()
+        
+        let userRef = ref.child("users").child(uid!).child("enrolled").queryOrdered(byChild: "CourseKey")
+        
+        userRef.observeSingleEvent(of: .value, with: {(snapshot)
+            in
+            
+            for childSnapshot in snapshot.children {
+                let tempSnapshot = childSnapshot as! DataSnapshot
+                let tempDictionary = tempSnapshot.value as! NSDictionary
+                let tempCourse = tempDictionary["CourseKey"]! as! String
+                
+                let query = ref.child("courses").queryOrdered(byChild: "CourseKey").queryEqual(toValue: tempCourse)
+                
+                query.observeSingleEvent(of: .value, with: {(courses)
+                    in
+                    
+                    for course in courses.children {
+                        let newCourse = Course(snapshot: course as! DataSnapshot)
+                        self.coursesArray.append(newCourse)
+                    }
+                    self.tableView.reloadData()
+                })
+            }
+        })
+
+    }
+    
+    // Checks if user is logged in, to determine to logout or get user data
+    func checkIfUserIsLoggedIn(){
+        if Auth.auth().currentUser?.uid == nil
+        {
+            handleLogout()
+        }
+        else
+        {
+            fetchCourses()
+            tableView.reloadData()
+        }
+    }
+    
+    // Checks if it is student or professor and adjusts the right navigation button accordingly
+    func getRightNavigationButton() {
+        let uid = Auth.auth().currentUser?.uid
+        Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: {(DataSnapshot)
+        in
+        
+            let dictionary = DataSnapshot.value as? [String: AnyObject]
+            let acctType: String = (dictionary!["accounttype"] as? String)!
+            if ( acctType == "0")
+            {
+                self.title = "Enrolled Courses"
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Enroll", style: .plain, target: self, action: #selector(self.AddCourse))
+            }
+            else
+            {
+                self.title = "Created Courses"
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(self.AddCourse))
+            }
+        })
     }
     
 }
