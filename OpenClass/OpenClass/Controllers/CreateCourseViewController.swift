@@ -9,18 +9,20 @@
 import UIKit
 import Firebase
 
-class CreateCourseViewController: UIViewController {
-
+class CreateCourseViewController: UIViewController
+{
     @IBOutlet weak var CourseNameText: UITextField!
     @IBOutlet weak var CourseDescriptionText: UITextField!
     @IBOutlet weak var ProfessorText: UITextField!
     
     // Dismiss current view controller
-    @IBAction func cancelButton(_ sender: Any) {
+    @IBAction func cancelButton(_ sender: Any)
+    {
         self.dismiss(animated: true, completion: nil)
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         CourseNameText.text?.removeAll()
@@ -29,8 +31,8 @@ class CreateCourseViewController: UIViewController {
     }
     
     // Create Button Functionality in Create Course Page
-    @IBAction func CreateTheCourse(_ sender: UIButton) {
-        
+    @IBAction func CreateTheCourse(_ sender: UIButton)
+    {
         let uid = Auth.auth().currentUser?.uid
         
         let rootref = Database.database().reference(fromURL: "https://openclass-d7aa6.firebaseio.com/")
@@ -61,7 +63,6 @@ class CreateCourseViewController: UIViewController {
                 
                 myAlert.addAction(okAction);
                 self.present(myAlert, animated: true, completion: nil);
-                
             }
         })
         
@@ -84,20 +85,19 @@ class CreateCourseViewController: UIViewController {
     }
 
     // function to generate random string for the course key
-    func randomString(length: Int) -> String {
-        
+    func randomString(length: Int) -> String
+    {
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         let len = UInt32(letters.length)
         
         var randomString = ""
         
-        for _ in 0 ..< length {
+        for _ in 0 ..< length
+        {
             let rand = arc4random_uniform(len)
             var nextChar = letters.character(at: Int(rand))
             randomString += NSString(characters: &nextChar, length: 1) as String
         }
-        
         return randomString
     }
-
 }
