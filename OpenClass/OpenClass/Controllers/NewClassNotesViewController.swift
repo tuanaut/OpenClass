@@ -80,12 +80,13 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
     
     @objc func PostNotes(){
         
+        let imageName = NSUUID().uuidString
         let imageData = UIImageJPEGRepresentation(NotesImage.image!, 0.8)
         let metaData = StorageMetadata()
         metaData.contentType = "image/jpeg"
         //let uid = Auth.auth().currentUser?.uid
         
-        let imagePath = "notesImage\(Auth.auth().currentUser!.uid)/notesPic.jpg"
+        let imagePath = "notesImage\(imageName)/notesPic.jpg"
         
         let imageRef = storageRef.reference().child(imagePath)
         imageRef.putData(imageData!, metadata: metaData, completion: {(newMetaData, error) in
