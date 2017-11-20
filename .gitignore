@@ -30,5 +30,5 @@
 *.so
 *.com
 *.class
-
+*.xcuserstate
 
