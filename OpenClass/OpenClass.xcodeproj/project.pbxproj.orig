@@ -17,11 +17,8 @@
 		5507699A1FA677EC00C8AE78 /* OpenClassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550769991FA677EC00C8AE78 /* OpenClassUITests.swift */; };
 		550769A81FA67A5100C8AE78 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550769A71FA67A5100C8AE78 /* RegisterViewController.swift */; };
 		550D9B371FBA83CB00C0B131 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D9B361FBA83CB00C0B131 /* User.swift */; };
-<<<<<<< HEAD
 		55458F9F1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55458F9E1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift */; };
-=======
 		5525DE351FBF73AA00A72367 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5525DE341FBF73AA00A72367 /* ForgotPasswordViewController.swift */; };
->>>>>>> 6f7ef814af792638a7108e6a880b4b8557e192e2
 		554EDC581FB56B37003370AD /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EDC571FB56B37003370AD /* GradientView.swift */; };
 		555C2A4B1FB1290900E79CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 555C2A4A1FB1290900E79CF8 /* GoogleService-Info.plist */; };
 		555FF48E1FB188CD002E362D /* CourseFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */; };
@@ -74,11 +71,8 @@
 		5507699B1FA677EC00C8AE78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		550769A71FA67A5100C8AE78 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		550D9B361FBA83CB00C0B131 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
 		55458F9E1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersViewControllerTableViewCell.swift; sourceTree = "<group>"; };
-=======
 		5525DE341FBF73AA00A72367 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
->>>>>>> 6f7ef814af792638a7108e6a880b4b8557e192e2
 		554EDC571FB56B37003370AD /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		555C2A4A1FB1290900E79CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseFeedViewController.swift; sourceTree = "<group>"; };
@@ -192,13 +186,10 @@
 				5507697B1FA677EB00C8AE78 /* LoginViewController.swift */,
 				550769A71FA67A5100C8AE78 /* RegisterViewController.swift */,
 				555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */,
-<<<<<<< HEAD
 				55604AA41FBAE9640087584F /* AnswersViewController.swift */,
-=======
 				64662E581FBC44350035C68C /* AddCourseViewController.swift */,
 				6404DB921FBCFFE800A1E9D2 /* CreateCourseViewController.swift */,
 				5525DE341FBF73AA00A72367 /* ForgotPasswordViewController.swift */,
->>>>>>> 6f7ef814af792638a7108e6a880b4b8557e192e2
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -210,11 +201,8 @@
 				55B0DFE11FB68FDB009EC707 /* CourseFeedTableViewCell.swift */,
 				55B0DFE31FB6972A009EC707 /* Courses.swift */,
 				550D9B361FBA83CB00C0B131 /* User.swift */,
-<<<<<<< HEAD
 				55458F9E1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift */,
-=======
 				6404DB941FBD13B300A1E9D2 /* Course.swift */,
->>>>>>> 6f7ef814af792638a7108e6a880b4b8557e192e2
 			);
 			path = Extensions;
 			sourceTree = "<group>";
