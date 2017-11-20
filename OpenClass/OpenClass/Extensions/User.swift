@@ -7,15 +7,18 @@
 //
 
 import Foundation
+import Firebase
 
 class User {
     
-    let firstname: String
-    let lastname: String
-    let email: String
-    let password: String
-    let confirmPassword: String
-    let accountType: String
+  
+    var firstname: String
+    var lastname: String
+    var email: String
+    var password: String
+    var confirmPassword: String
+    var accountType: String
+    
     
     init(firstName: String, lastName: String, email: String, password: String, confirmPassword: String, accountType: String) {
         
@@ -26,4 +29,19 @@ class User {
         self.confirmPassword = confirmPassword
         self.accountType = accountType
     }
+    
+    init(snapshot: DataSnapshot){
+        let snapshotvalue = snapshot.value as? NSDictionary
+        self.firstname = snapshotvalue!["firstname"] as! String
+        self.lastname = snapshotvalue!["lastname"] as! String
+        self.email = snapshotvalue!["email"] as! String
+        self.password = snapshotvalue!["password"] as! String
+        self.accountType = snapshotvalue!["accounttype"] as! String
+        self.confirmPassword = ""
+    }
+    
+    
 }
+
+
+

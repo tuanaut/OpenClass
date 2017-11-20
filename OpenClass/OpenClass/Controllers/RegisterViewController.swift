@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseDatabase
 
 class RegisterViewController: UIViewController {
     @IBOutlet weak var firstnameTextField: UITextField!
@@ -68,12 +69,14 @@ class RegisterViewController: UIViewController {
             
             // Successfully authenticated user
             let ref = Database.database().reference(fromURL: "https://openclass-d7aa6.firebaseio.com/")
-            let studentsReference = ref.child("users").child("students").child(uid)
-            let professorsReference = ref.child("users").child("professors").child(uid)
+            let userref = ref.child("users").child(uid)
+            
+            //let studentsReference = ref.child("users").child("students").child(uid)
+            //let professorsReference = ref.child("users").child("professors").child(uid)
             let values = ["firstname": thisUser.firstname, "lastname": thisUser.lastname, "email": thisUser.email, "accounttype": thisUser.accountType]
             
             // Store in students table
-            if (self.accountTypeSegmentControl.selectedSegmentIndex == 0)
+            /*if (self.accountTypeSegmentControl.selectedSegmentIndex == 0)
             {
                 studentsReference.updateChildValues(values, withCompletionBlock: {(err, ref) in
                     if (err != nil)
@@ -117,8 +120,30 @@ class RegisterViewController: UIViewController {
                         print("Saved user successfully into Firebase database")
                     }
                 })
-            }
+            }*/
+            
+            // Store user data in database
+            userref.updateChildValues(values, withCompletionBlock: {(err, ref) in
+                if (err != nil)
+                {
+                    self.displayMyAlertMessage(userMessage: (err?.localizedDescription)! )
+                    return
+                }
+                else
+                {
+                    // Display alert with confirmation.
+                    let myAlert = UIAlertController(title:"Alert", message: "Registration is successful!", preferredStyle: UIAlertControllerStyle.alert);
+                    
+                    let okAction = UIAlertAction(title:"Ok", style: UIAlertActionStyle.default, handler: {action in self.dismiss(animated: true, completion: nil)});
+                    
+                    myAlert.addAction(okAction);
+                    self.present(myAlert, animated: true, completion: nil);
+                    
+                    print("Saved user successfully into Firebase database")
+                }
+            })
        })
+        
         
     }
     
@@ -126,7 +151,7 @@ class RegisterViewController: UIViewController {
         super.viewDidLoad()
 
         // Initial UI setup
-        view.backgroundColor = UIColor(r: 205, g: 35, b: 35)
+        //view.backgroundColor = UIColor(r: 205, g: 35, b: 35)
         navigationController?.isNavigationBarHidden = true
     }
 
