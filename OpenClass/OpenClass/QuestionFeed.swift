@@ -15,7 +15,11 @@ class QuestionFeed: UIView {
     var question: String
     
     @IBOutlet weak var questiontext: UITextField!
+    // text entered into the "ask a question"
+    
     @IBOutlet weak var questiontable: UITableView!
+    // table view
+    
     @IBOutlet weak var questioncell: UITableViewCell!
     
     
