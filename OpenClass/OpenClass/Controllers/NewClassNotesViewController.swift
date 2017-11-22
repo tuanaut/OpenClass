@@ -23,6 +23,8 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
         }
     }
     
+    var passedkey: String!
+    
     var databaseRef: DatabaseReference! {
         return Database.database().reference()
     }
@@ -59,6 +61,7 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
         actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(action:UIAlertAction) in
                 imagePickerController.sourceType = .photoLibrary
                 self.present(imagePickerController, animated: true, completion:nil)
+            imagePickerController.allowsEditing = true
             }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -80,6 +83,7 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
     
     @objc func PostNotes(){
         
+        let notesID = NSUUID().uuidString
         let imageName = NSUUID().uuidString
         let imageData = UIImageJPEGRepresentation(NotesImage.image!, 0.8)
         let metaData = StorageMetadata()
@@ -91,28 +95,52 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
         let imageRef = storageRef.reference().child(imagePath)
         imageRef.putData(imageData!, metadata: metaData, completion: {(newMetaData, error) in
             if (error == nil){
-                print("OK1")
-                let newNotes = Notes(notesSubject: self.NotesSubjectText.text!, notesDescription: self.NotesDescriptionText.text!, notesImageURL: String(describing: newMetaData!.downloadURL()!))
-                print("OK3")
+                let uid = Auth.auth().currentUser?.uid
+                Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: {(DataSnapshot)
+                    in
+                    
+                    let dictionary = DataSnapshot.value as? [String: AnyObject]
+                    let firstname: String = (dictionary!["firstname"] as? String)!
+                    let lastname: String = (dictionary!["lastname"] as? String)!
                 
-                let notesRef = Database.database().reference().child("notes").childByAutoId()
-                print("OK5")
-               let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL]
-                notesRef.setValue(values, withCompletionBlock: {(error, ref) in
-                    if(error == nil) {
-                        print("OK2")
-                        //self.navigationController?.popToRootViewController(animated: true)
-                    }
-                
+                    let newNotes = Notes(notesSubject: self.NotesSubjectText.text!, notesDescription: self.NotesDescriptionText.text!, notesImageURL: String(describing: newMetaData!.downloadURL()!), firstName: firstname, lastName: lastname, notesID: notesID, key: self.passedkey)
+                    
+                    
+                    let notesRef = Database.database().reference().child("notes").childByAutoId()
+                    
+                    let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL, "Username": newNotes.username, "NotesID": newNotes.notesID, "CourseKey": newNotes.key]
+                    notesRef.setValue(values, withCompletionBlock: {(error, ref) in
+                        if(error == nil) {
+                            self.displayMyAlertMessage(userMessage: "Notes have been posted!")
+                            //self.navigationController?.popToRootViewController(animated: true)
+                        }
+                        else{
+                            self.displayMyAlertMessage(userMessage: "Error: Notes not posted.")
+                        }
+                        
+                    })
                 })
-                
             }
             else{
-                print("OK4")
+                print("There was an error")
                 print(error!.localizedDescription)
             }
             
         })
+    }
+    
+    func displayMyAlertMessage(userMessage: String)
+    {
+        let myAlert = UIAlertController(title:"Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert);
+        
+       
+        
+            let okAction = UIAlertAction(title:"Ok", style: UIAlertActionStyle.default, handler: {action in self.dismiss(animated: true, completion: nil)});
+            myAlert.addAction(okAction)
+        
+    
+        
+        self.present(myAlert, animated: true, completion: nil);
     }
     
 }

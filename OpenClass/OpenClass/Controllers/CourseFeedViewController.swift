@@ -13,6 +13,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
 
     @IBOutlet weak var tableView: UITableView!
     
+    var valueToPass: String!
     var userCourses: [String] = []
     var coursesArray = [Course]()
     
@@ -126,7 +127,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
     // Get the user's enrolled courses
     private func fetchCourses(){
         
-        userCourses = []
+        //userCourses = []
         let uid = Auth.auth().currentUser?.uid
         let ref = Database.database().reference()
         
@@ -142,18 +143,22 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
                 
                 let query = ref.child("courses").queryOrdered(byChild: "CourseKey").queryEqual(toValue: tempCourse)
                 
+                
                 query.observeSingleEvent(of: .value, with: {(courses)
                     in
-                    
+                    print("Look here")
+                    print(courses)
                     for course in courses.children {
                         let newCourse = Course(snapshot: course as! DataSnapshot)
                         self.coursesArray.append(newCourse)
                     }
+                    print("Courses Array count:")
+                    print(self.coursesArray.count)
                     self.tableView.reloadData()
                 })
             }
         })
-
+       
     }
     
     // Checks if user is logged in, to determine to logout or get user data
@@ -188,6 +193,24 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
                 self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(self.AddCourse))
             }
         })
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let indexPath = tableView.indexPathForSelectedRow!
+        let row:Course = coursesArray[indexPath.row]
+       
+        valueToPass = row.CourseKey
+    
+        performSegue(withIdentifier: "GoToNotesFeed", sender: self)
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "GoToNotesFeed"){
+            let viewController = segue.destination as! NotesFeedViewController
+            viewController.passedCourseKey = valueToPass
+            
+        }
     }
     
 }
