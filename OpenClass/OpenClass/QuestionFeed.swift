@@ -28,7 +28,7 @@ class QuestionFeed: UIView {
     
     @IBAction func post(_ sender: Any) {
         
-        self.question = questiontext
+        self.question = String?(questiontext.text!)!
         
         // store the text of the question into a string
         // variable, then send to firebase somehow to
