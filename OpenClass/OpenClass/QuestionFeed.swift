@@ -33,7 +33,7 @@ class QuestionFeed: UIView {
         // store the text of the question into a string
         // variable, then send to firebase somehow to
         // be able to display at the top of the question feed?
-        
+        //
         
     }
     
