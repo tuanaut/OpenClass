@@ -14,8 +14,12 @@ import FirebaseAuth
 class NewClassNotesViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
     @IBOutlet weak var NotesSubjectText: UITextField!
     
-    @IBOutlet weak var NotesDescriptionText: UITextField!
+   // @IBOutlet weak var NotesDescriptionText: UITextField!
     //let pickerController = UIImagePickerController()
+    
+    
+    @IBOutlet weak var NotesDescriptionText: UITextField!
+  
     
     @IBOutlet weak var NotesImage: UIImageView!{
         didSet{
@@ -143,4 +147,5 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
         self.present(myAlert, animated: true, completion: nil);
     }
     
+
 }

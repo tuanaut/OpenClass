@@ -200,14 +200,16 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         let row:Course = coursesArray[indexPath.row]
        
         valueToPass = row.CourseKey
-    
-        performSegue(withIdentifier: "GoToNotesFeed", sender: self)
+        print("valueToPass")
+        print(valueToPass)
+        performSegue(withIdentifier: "GoToSelectFeed", sender: self)
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "GoToNotesFeed"){
-            let viewController = segue.destination as! NotesFeedViewController
+        if(segue.identifier == "GoToSelectFeed"){
+            
+            let viewController = segue.destination as! SelectFeedTableViewController
             viewController.passedCourseKey = valueToPass
             
         }

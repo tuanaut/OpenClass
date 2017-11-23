@@ -11,10 +11,12 @@ import UIKit
 class NoteTableViewCell: UITableViewCell {
 
    
-    @IBOutlet weak var subjectTextField: UITextField!
-    @IBOutlet weak var descripitonTextField: UITextField!
-    @IBOutlet weak var postedbyTextField: UITextField!
+    // @IBOutlet weak var subjectTextField: UITextField!
+    //@IBOutlet weak var descripitonTextField: UITextField!
+    //@IBOutlet weak var postedbyTextField: UITextField!
     
+    @IBOutlet weak var subjectLabel: UILabel!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     
     override func awakeFromNib() {

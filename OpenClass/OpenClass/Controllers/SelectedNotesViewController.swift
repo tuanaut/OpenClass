@@ -16,8 +16,11 @@ class SelectedNotesViewController: UIViewController {
 
     var passedNotesID: String!
     
-    @IBOutlet weak var notesDescriptionText: UITextField!
-    @IBOutlet weak var notesSubjectText: UITextField!
+   // @IBOutlet weak var notesDescriptionText: UITextView!
+    // @IBOutlet weak var notesDescriptionText: UITextField!
+    //@IBOutlet weak var notesSubjectText: UITextField!
+    @IBOutlet weak var notesSubjectText: UILabel!
+    @IBOutlet weak var notesDescriptionText: UILabel!
     
     @IBOutlet weak var notesImage: UIImageView!
     
@@ -34,7 +37,9 @@ class SelectedNotesViewController: UIViewController {
         super.viewDidLoad()
         print("this is passed notes id")
         print(passedNotesID)
+        self.automaticallyAdjustsScrollViewInsets = true
         // Do any additional setup after loading the view.
+     
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -95,5 +100,8 @@ class SelectedNotesViewController: UIViewController {
         self.tabBarController?.tabBar.isHidden = false
         sender.view?.removeFromSuperview()
     }
-
+    
+    override func viewWillLayoutSubviews() {
+        notesDescriptionText.sizeToFit()
+    }
 }

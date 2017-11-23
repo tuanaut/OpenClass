@@ -26,8 +26,8 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
        tableView.delegate = self 
         tableView.dataSource = self
         navigationController?.isNavigationBarHidden = false
-        tableView.estimatedRowHeight = 223
-        tableView.rowHeight = 223
+        tableView.estimatedRowHeight = 117
+        tableView.rowHeight = 117
         automaticallyAdjustsScrollViewInsets = true
         
     }
@@ -89,11 +89,8 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotesCell", for: indexPath) as! NoteTableViewCell
-        cell.subjectTextField.text = NotesArray[indexPath.row].notesSubject
-        cell.descripitonTextField.text = NotesArray[indexPath.row].notesDescription
-        cell.postedbyTextField.text = NotesArray[indexPath.row].username
-        print("Notes subject here")
-        print(NotesArray[indexPath.row].notesSubject)
+        cell.subjectLabel.text = NotesArray[indexPath.row].notesSubject
+        cell.usernameLabel.text = NotesArray[indexPath.row].username
        
         return cell
     }
