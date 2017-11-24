@@ -15,7 +15,7 @@ import FirebaseDatabase
 class SelectedNotesViewController: UIViewController {
 
     var passedNotesID: String!
-    
+    var passedUsername: String!
    // @IBOutlet weak var notesDescriptionText: UITextView!
     // @IBOutlet weak var notesDescriptionText: UITextField!
     //@IBOutlet weak var notesSubjectText: UITextField!
@@ -37,7 +37,7 @@ class SelectedNotesViewController: UIViewController {
         super.viewDidLoad()
         print("this is passed notes id")
         print(passedNotesID)
-        self.automaticallyAdjustsScrollViewInsets = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Comments", style: .plain, target: self, action: #selector(self.gotoCommentsSection))
         // Do any additional setup after loading the view.
      
     }
@@ -62,7 +62,7 @@ class SelectedNotesViewController: UIViewController {
             print(notes)
             for note in notes.children {
                  currentNotes = Notes(snapshot: note as! DataSnapshot)
-                
+                self.passedUsername = currentNotes.username
                 self.notesSubjectText.text = currentNotes.notesSubject
                 self.notesDescriptionText.text = currentNotes.notesDescription
                 self.storageRef.reference(forURL: currentNotes.notesImageURL).getData(maxSize: 10 * 1024 * 1024, completion: { (data, error) in
@@ -101,7 +101,21 @@ class SelectedNotesViewController: UIViewController {
         sender.view?.removeFromSuperview()
     }
     
-    override func viewWillLayoutSubviews() {
-        notesDescriptionText.sizeToFit()
+  
+    
+    @objc func gotoCommentsSection(){
+        
+        performSegue(withIdentifier: "GoToComments", sender: self)
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "GoToComments"){
+            
+            let viewController = segue.destination as! CommentsViewController
+            viewController.passedNotesID = passedNotesID
+            viewController.passedUsername = passedUsername
+            
+        }
+    }
+    
 }

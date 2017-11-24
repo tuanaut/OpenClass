@@ -110,19 +110,24 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
                     let newNotes = Notes(notesSubject: self.NotesSubjectText.text!, notesDescription: self.NotesDescriptionText.text!, notesImageURL: String(describing: newMetaData!.downloadURL()!), firstName: firstname, lastName: lastname, notesID: notesID, key: self.passedkey)
                     
                     
-                    let notesRef = Database.database().reference().child("notes").childByAutoId()
+                    if(newNotes.notesSubject.isEmpty || newNotes.notesID.isEmpty || newNotes.notesDescription.isEmpty || newNotes.notesImageURL.isEmpty || newNotes.username.isEmpty || newNotes.key.isEmpty){
+                        self.displayMyAlertMessage(userMessage: "All fields are required")
+                    }
+                    else{
+                        let notesRef = Database.database().reference().child("notes").childByAutoId()
                     
-                    let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL, "Username": newNotes.username, "NotesID": newNotes.notesID, "CourseKey": newNotes.key]
-                    notesRef.setValue(values, withCompletionBlock: {(error, ref) in
-                        if(error == nil) {
-                            self.displayMyAlertMessage(userMessage: "Notes have been posted!")
-                            //self.navigationController?.popToRootViewController(animated: true)
-                        }
-                        else{
-                            self.displayMyAlertMessage(userMessage: "Error: Notes not posted.")
-                        }
+                        let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL, "Username": newNotes.username, "NotesID": newNotes.notesID, "CourseKey": newNotes.key]
+                        notesRef.setValue(values, withCompletionBlock: {(error, ref) in
+                            if(error == nil) {
+                                self.displayMyAlertMessage(userMessage: "Notes have been posted!")
+                                //self.navigationController?.popToRootViewController(animated: true)
+                            }
+                            else{
+                                self.displayMyAlertMessage(userMessage: "Error: Notes not posted.")
+                            }
                         
-                    })
+                        })
+                    }
                 })
             }
             else{

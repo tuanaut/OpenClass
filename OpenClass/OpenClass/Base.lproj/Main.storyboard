@@ -1218,6 +1218,7 @@
                         <outlet property="notesDescriptionText" destination="DgM-KK-V60" id="Ae3-xf-RnM"/>
                         <outlet property="notesImage" destination="8bk-ly-SYo" id="ahC-VS-j0U"/>
                         <outlet property="notesSubjectText" destination="96u-dL-Bdv" id="s57-cN-WGz"/>
+                        <segue destination="Oyp-6a-DQD" kind="show" identifier="GoToComments" id="9jL-Lt-vsI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xD3-j1-hCQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1229,20 +1230,19 @@
             </objects>
             <point key="canvasLocation" x="4942" y="-769"/>
         </scene>
-        <!--View Controller-->
+        <!--Comments View Controller-->
         <scene sceneID="S5M-KO-cWz">
             <objects>
-                <viewController id="Oyp-6a-DQD" sceneMemberID="viewController">
+                <viewController id="Oyp-6a-DQD" customClass="CommentsViewController" customModule="OpenClass" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cIV-GX-0dp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1VF-tJ-kkd">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="541"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1VF-tJ-kkd">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="462"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Comment Cell" rowHeight="124" id="F4Z-q6-zWi" customClass="CommentTableViewCell" customModule="OpenClass" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="124" id="F4Z-q6-zWi" customClass="CommentTableViewCell" customModule="OpenClass" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="124"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F4Z-q6-zWi" id="vGA-nE-iXR">
@@ -1273,31 +1273,53 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.80392156859999997" green="0.14698566399999999" blue="0.15634806700000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="commentLabel" destination="Y08-qN-myR" id="Ted-yD-Gcw"/>
+                                            <outlet property="usernameLabel" destination="eEa-yn-NLe" id="s8r-Gq-P3i"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Tfn-88-Uxt">
-                                <rect key="frame" x="16" y="581" width="261" height="66"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3n-ag-Clt">
-                                <rect key="frame" x="285" y="615" width="74" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3n-ag-Clt">
+                                <rect key="frame" x="16" y="564" width="343" height="30"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.3082189146" blue="0.3186581235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Comment">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="commentButton:" destination="Oyp-6a-DQD" eventType="touchUpInside" id="igT-Xw-avd"/>
+                                </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ihT-aE-dVP">
+                                <rect key="frame" x="16" y="526" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.80392156859999997" green="0.14698566399999999" blue="0.15634806700000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="nj0-Az-Uws" firstAttribute="trailing" secondItem="ihT-aE-dVP" secondAttribute="trailing" constant="16" id="1He-ax-9bA"/>
+                            <constraint firstItem="ihT-aE-dVP" firstAttribute="top" secondItem="1VF-tJ-kkd" secondAttribute="bottom" constant="64" id="To1-kx-2Qk"/>
+                            <constraint firstItem="1VF-tJ-kkd" firstAttribute="trailing" secondItem="nj0-Az-Uws" secondAttribute="trailing" id="Wne-of-yC7"/>
+                            <constraint firstItem="nj0-Az-Uws" firstAttribute="bottom" secondItem="F3n-ag-Clt" secondAttribute="bottom" constant="73" id="ddq-aU-1Q6"/>
+                            <constraint firstItem="1VF-tJ-kkd" firstAttribute="top" secondItem="cIV-GX-0dp" secondAttribute="top" id="hc6-wY-yb8"/>
+                            <constraint firstItem="F3n-ag-Clt" firstAttribute="top" secondItem="ihT-aE-dVP" secondAttribute="bottom" constant="8" id="hiv-NC-gMe"/>
+                            <constraint firstItem="ihT-aE-dVP" firstAttribute="leading" secondItem="nj0-Az-Uws" secondAttribute="leading" constant="16" id="iZM-GS-0qm"/>
+                            <constraint firstItem="F3n-ag-Clt" firstAttribute="leading" secondItem="nj0-Az-Uws" secondAttribute="leading" constant="16" id="lDn-9A-aw6"/>
+                            <constraint firstItem="1VF-tJ-kkd" firstAttribute="leading" secondItem="nj0-Az-Uws" secondAttribute="leading" id="m28-ls-LrN"/>
+                            <constraint firstItem="nj0-Az-Uws" firstAttribute="trailing" secondItem="F3n-ag-Clt" secondAttribute="trailing" constant="16" id="oV1-Qh-Dec"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="nj0-Az-Uws"/>
                     </view>
+                    <connections>
+                        <outlet property="comment" destination="ihT-aE-dVP" id="nBI-aj-nJA"/>
+                        <outlet property="tableView" destination="1VF-tJ-kkd" id="2QZ-kM-Pbq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aD1-k3-2OV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2375.1999999999998" y="-2787.2563718140932"/>
+            <point key="canvasLocation" x="6032.8000000000002" y="-770.46476761619192"/>
         </scene>
     </scenes>
     <resources>
