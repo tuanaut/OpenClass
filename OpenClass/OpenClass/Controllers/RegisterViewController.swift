@@ -10,7 +10,8 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController
+{
     @IBOutlet weak var firstnameTextField: UITextField!
     @IBOutlet weak var lastnameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -25,129 +26,30 @@ class RegisterViewController: UIViewController {
     
     @IBAction func submitCreateLogin(_ sender: Any)
     {
-//        let userAccountType = String(accountTypeSegmentControl.selectedSegmentIndex)
-//        guard let userFirst = firstnameTextField.text,
-//              let userLast = lastnameTextField.text,
-//              let userEmail = emailTextField.text,
-//              let userPassword = passwordTextField.text,
-//              let userConfirmPass = confirmPasswordTextField.text
-//            else
-//            {
-//                displayMyAlertMessage(userMessage: "Form is not valid!")
-//
-//                return;
-//            }
-        
-        // Store user data into an object
-        let thisUser = User(firstName: firstnameTextField.text!, lastName: lastnameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!, confirmPassword: confirmPasswordTextField.text!, accountType: String(accountTypeSegmentControl.selectedSegmentIndex))
-        
         // Check for empty fields
-        if ((thisUser.firstname.isEmpty) || (thisUser.lastname.isEmpty) || (thisUser.email.isEmpty) || (thisUser.password.isEmpty) || (thisUser.confirmPassword.isEmpty))
+        if ((firstnameTextField.text!.isEmpty) || (lastnameTextField.text!.isEmpty) || (emailTextField.text!.isEmpty) || (passwordTextField.text!.isEmpty) || (confirmPasswordTextField.text?.isEmpty)!)
         {
-            
             // Display alert message
-            displayMyAlertMessage(userMessage: "All fields are required");
+            displayMyAlertMessage(userMessage: "All fields must be filled out to create an account");
             return;
         }
         
         // Check if passwords match
-        if (thisUser.password != thisUser.confirmPassword)
+        if (passwordTextField.text! != confirmPasswordTextField.text!)
         {
             displayMyAlertMessage(userMessage: "Passwords do not match");
             return;
         }
         
+        // Store user data into an object
+        let loginUser = User(firstName: firstnameTextField.text!, lastName: lastnameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!, accountType: String(accountTypeSegmentControl.selectedSegmentIndex));
+        
         // Authenticate and Store data
-        Auth.auth().createUser(withEmail: thisUser.email, password: thisUser.password, completion: {(user, error) in
-            if (error != nil)
-            {
-                self.displayMyAlertMessage(userMessage: (error?.localizedDescription)! )
-                return
-            }
-            
-            guard let uid = user?.uid else { return}
-            
-            // Successfully authenticated user
-            let ref = Database.database().reference(fromURL: "https://openclass-d7aa6.firebaseio.com/")
-            let userref = ref.child("users").child(uid)
-            
-            //let studentsReference = ref.child("users").child("students").child(uid)
-            //let professorsReference = ref.child("users").child("professors").child(uid)
-            let values = ["firstname": thisUser.firstname, "lastname": thisUser.lastname, "email": thisUser.email, "accounttype": thisUser.accountType]
-            
-            // Store in students table
-            /*if (self.accountTypeSegmentControl.selectedSegmentIndex == 0)
-            {
-                studentsReference.updateChildValues(values, withCompletionBlock: {(err, ref) in
-                    if (err != nil)
-                    {
-                        self.displayMyAlertMessage(userMessage: (err?.localizedDescription)! )
-                        return
-                    }
-                    else
-                    {
-                        // Display alert with confirmation.
-                        let myAlert = UIAlertController(title:"Alert", message: "Registration is successful!", preferredStyle: UIAlertControllerStyle.alert);
-                        
-                        let okAction = UIAlertAction(title:"Ok", style: UIAlertActionStyle.default, handler: {action in self.dismiss(animated: true, completion: nil)});
-                        
-                        myAlert.addAction(okAction);
-                        self.present(myAlert, animated: true, completion: nil);
-                
-                        print("Saved user successfully into Firebase database")
-                    }
-                })
-            // Store in professors table
-            }
-            else if (self.accountTypeSegmentControl.selectedSegmentIndex == 1)
-            {
-                professorsReference.updateChildValues(values, withCompletionBlock: {(err, ref) in
-                    if (err != nil)
-                    {
-                        self.displayMyAlertMessage(userMessage: (err?.localizedDescription)! )
-                        return
-                    }
-                    else
-                    {
-                        // Display alert with confirmation.
-                        let myAlert = UIAlertController(title:"Alert", message: "Registration is successful!", preferredStyle: UIAlertControllerStyle.alert);
-                        
-                        let okAction = UIAlertAction(title:"Ok", style: UIAlertActionStyle.default, handler: {action in self.dismiss(animated: true, completion: nil)});
-                        
-                        myAlert.addAction(okAction);
-                        self.present(myAlert, animated: true, completion: nil);
-                    
-                        print("Saved user successfully into Firebase database")
-                    }
-                })
-            }*/
-            
-            // Store user data in database
-            userref.updateChildValues(values, withCompletionBlock: {(err, ref) in
-                if (err != nil)
-                {
-                    self.displayMyAlertMessage(userMessage: (err?.localizedDescription)! )
-                    return
-                }
-                else
-                {
-                    // Display alert with confirmation.
-                    let myAlert = UIAlertController(title:"Alert", message: "Registration is successful!", preferredStyle: UIAlertControllerStyle.alert);
-                    
-                    let okAction = UIAlertAction(title:"Ok", style: UIAlertActionStyle.default, handler: {action in self.dismiss(animated: true, completion: nil)});
-                    
-                    myAlert.addAction(okAction);
-                    self.present(myAlert, animated: true, completion: nil);
-                    
-                    print("Saved user successfully into Firebase database")
-                }
-            })
-       })
-        
-        
+        loginUser.WriteAccount(controller: self);
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         // Initial UI setup
@@ -158,7 +60,6 @@ class RegisterViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool)
     {
         super.viewWillDisappear(animated)
-       
     }
     
     override func didReceiveMemoryWarning()
