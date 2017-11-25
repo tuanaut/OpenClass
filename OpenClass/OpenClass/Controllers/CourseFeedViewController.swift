@@ -43,7 +43,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        // Reset course array to empty every you go back to this view controller and reload table view
+        // Reset course array to empty every time you go back to this view controller and reload table view
         coursesArray.removeAll()
         tableView.reloadData()
         checkIfUserIsLoggedIn()
@@ -202,14 +202,14 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         valueToPass = row.CourseKey
         print("valueToPass")
         print(valueToPass)
-        performSegue(withIdentifier: "GoToSelectFeed", sender: self)
+        performSegue(withIdentifier: "GoToMainFeed", sender: self)
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "GoToSelectFeed"){
+        if(segue.identifier == "GoToMainFeed"){
             
-            let viewController = segue.destination as! SelectFeedTableViewController
+            let viewController = segue.destination as! MainFeedTableViewController
             viewController.passedCourseKey = valueToPass
             
         }
