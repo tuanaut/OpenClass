@@ -8,15 +8,15 @@
 
 import UIKit
 
-class CourseFeedTableViewCell: UITableViewCell
-{
+class CourseFeedTableViewCell: UITableViewCell {
+
     @IBOutlet weak var CourseNumberLabel: UILabel!
     @IBOutlet weak var CourseNameLabel: UILabel!
     
-    func setCourse(course: Course)
-    {
-        CourseNumberLabel.text = course.GetKey();
-        CourseNameLabel.text = course.GetName();
+    func setCourse(course: Courses) {
+        
+        CourseNumberLabel.text = course.courseNumber
+        CourseNameLabel.text = course.courseName
         
         CourseNumberLabel.textAlignment = .center
         CourseNameLabel.textAlignment = .center
