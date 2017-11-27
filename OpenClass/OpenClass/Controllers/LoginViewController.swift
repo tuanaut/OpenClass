@@ -33,6 +33,9 @@ class LoginViewController: UIViewController {
         inputContainer.layer.cornerRadius = 5
         inputContainer.layer.masksToBounds = true
         
+        // Hide keyboard when tapped within the view
+        self.hideKeyboardWhenTappedAround()
+        
         // User is already logged in
         if (Auth.auth().currentUser?.uid != nil)
         {

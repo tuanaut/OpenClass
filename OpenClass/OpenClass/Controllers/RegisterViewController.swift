@@ -17,7 +17,10 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     @IBOutlet weak var accountTypeSegmentControl: UISegmentedControl!
+    @IBOutlet weak var ScrollView: UIScrollView!
     
+    var ScrollViewConstraint: NSLayoutConstraint?
+
     @IBAction func cancelCreateLogin(_ sender: Any)
     {
         self.dismiss(animated: true, completion: nil);
@@ -153,6 +156,15 @@ class RegisterViewController: UIViewController {
         // Initial UI setup
         //view.backgroundColor = UIColor(r: 205, g: 35, b: 35)
         navigationController?.isNavigationBarHidden = true
+        
+        // Dismiss keyboard when touching anywhere within the view
+        self.hideKeyboardWhenTappedAround()
+        
+        // Set up keyboard showing listener
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        
+        // Set up keyboard dismissing listener
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillHide, object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool)
@@ -193,6 +205,31 @@ class RegisterViewController: UIViewController {
         });
     }
  */
+    
+    // Handles how the textfields should appear when keyboard is showing
+    @objc func handleKeyboardNotification(notification: NSNotification)
+    {
+        if let userInfo = notification.userInfo
+        {
+            // Get the x, y, width, height of keyboard
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            
+            // Determine if keyboard is showing or not
+            let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
+            
+            // Adjust the constraints if keyboard is showing or dismissing
+            var contentInset:UIEdgeInsets = self.ScrollView.contentInset
+            contentInset.bottom = keyboardFrame.height
+            ScrollView.contentInset = isKeyboardShowing ? contentInset : UIEdgeInsets.zero
+                        
+            // Smooth transition of textfield going up and down
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
+                
+                self.view.layoutIfNeeded()
+            }, completion: {(completed) in
+            })
+        }
+    }
     
     func displayMyAlertMessage(userMessage: String)
     {
