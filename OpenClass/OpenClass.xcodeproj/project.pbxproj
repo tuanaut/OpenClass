@@ -21,8 +21,11 @@
 		552D85111FCA077700469DCE /* MainFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552D85101FCA077700469DCE /* MainFeedTableViewController.swift */; };
 		554EDC581FB56B37003370AD /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EDC571FB56B37003370AD /* GradientView.swift */; };
 		555C2A4B1FB1290900E79CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 555C2A4A1FB1290900E79CF8 /* GoogleService-Info.plist */; };
+		555CED791FCB62EB00DDEFC5 /* QuestionFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555CED781FCB62EB00DDEFC5 /* QuestionFeedTableViewController.swift */; };
 		555FF48E1FB188CD002E362D /* CourseFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */; };
 		55B0DFE21FB68FDB009EC707 /* CourseFeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B0DFE11FB68FDB009EC707 /* CourseFeedTableViewCell.swift */; };
+		55BD5C051FCB6B4000915A58 /* QuestionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BD5C041FCB6B4000915A58 /* QuestionTableViewCell.swift */; };
+		55BD5C071FCB70D500915A58 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BD5C061FCB70D500915A58 /* Question.swift */; };
 		6404DB931FBCFFE800A1E9D2 /* CreateCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6404DB921FBCFFE800A1E9D2 /* CreateCourseViewController.swift */; };
 		6404DB951FBD13B300A1E9D2 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6404DB941FBD13B300A1E9D2 /* Course.swift */; };
 		64237C811FC3D7B7001E797A /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64237C801FC3D7B7001E797A /* NoteTableViewCell.swift */; };
@@ -35,7 +38,6 @@
 		64662E591FBC44350035C68C /* AddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64662E581FBC44350035C68C /* AddCourseViewController.swift */; };
 		64CD40521FC53B7D0010CBE4 /* SelectedNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CD40511FC53B7D0010CBE4 /* SelectedNotesViewController.swift */; };
 		785775592CF1563505921EC0 /* Pods_OpenClassUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256232FA9B71169D3B13D6AC /* Pods_OpenClassUITests.framework */; };
-		A852FB8E1FC50ABC002FE536 /* QuestionFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A852FB8D1FC50ABC002FE536 /* QuestionFeed.swift */; };
 		E55846E9D2AC00F8875590F2 /* Pods_OpenClassTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 230334D3D43B62F2CCEAB3B6 /* Pods_OpenClassTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,8 +84,11 @@
 		552D85101FCA077700469DCE /* MainFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTableViewController.swift; sourceTree = "<group>"; };
 		554EDC571FB56B37003370AD /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		555C2A4A1FB1290900E79CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		555CED781FCB62EB00DDEFC5 /* QuestionFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFeedTableViewController.swift; sourceTree = "<group>"; };
 		555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseFeedViewController.swift; sourceTree = "<group>"; };
 		55B0DFE11FB68FDB009EC707 /* CourseFeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseFeedTableViewCell.swift; sourceTree = "<group>"; };
+		55BD5C041FCB6B4000915A58 /* QuestionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionTableViewCell.swift; sourceTree = "<group>"; };
+		55BD5C061FCB70D500915A58 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		5D82D573B907585B8C7222F1 /* Pods-OpenClassTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenClassTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OpenClassTests/Pods-OpenClassTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6404DB921FBCFFE800A1E9D2 /* CreateCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCourseViewController.swift; sourceTree = "<group>"; };
 		6404DB941FBD13B300A1E9D2 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
@@ -96,7 +101,6 @@
 		6463AD251FC69B410034AA1D /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		64662E581FBC44350035C68C /* AddCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
 		64CD40511FC53B7D0010CBE4 /* SelectedNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedNotesViewController.swift; sourceTree = "<group>"; };
-        A852FB8D1FC50ABC002FE536 /* QuestionFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFeed.swift; sourceTree = "<group>"; };
 		B94E53EE1DA56A3EAB0DC212 /* Pods-OpenClassUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenClassUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenClassUITests/Pods-OpenClassUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D93FFBAC3618BB9CF18CD28A /* Pods-OpenClassTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenClassTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenClassTests/Pods-OpenClassTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,7 +171,6 @@
 				55B0DFE51FB69F0E009EC707 /* Extensions */,
 				555FF48C1FB14F81002E362D /* Controllers */,
 				550769791FA677EB00C8AE78 /* AppDelegate.swift */,
-				A852FB8D1FC50ABC002FE536 /* QuestionFeed.swift */,
 				5507697D1FA677EB00C8AE78 /* Main.storyboard */,
 				550769801FA677EB00C8AE78 /* Assets.xcassets */,
 				550769821FA677EB00C8AE78 /* LaunchScreen.storyboard */,
@@ -209,6 +212,7 @@
 				64237C821FC3DC7B001E797A /* NotesFeedViewController.swift */,
 				64CD40511FC53B7D0010CBE4 /* SelectedNotesViewController.swift */,
 				6463AD211FC66E8B0034AA1D /* CommentsViewController.swift */,
+				555CED781FCB62EB00DDEFC5 /* QuestionFeedTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -224,6 +228,8 @@
 				64337E6D1FC0C4A6006F09A7 /* Notes.swift */,
 				6463AD231FC6715B0034AA1D /* CommentTableViewCell.swift */,
 				6463AD251FC69B410034AA1D /* Comment.swift */,
+				55BD5C041FCB6B4000915A58 /* QuestionTableViewCell.swift */,
+				55BD5C061FCB70D500915A58 /* Question.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -552,15 +558,17 @@
 				644621FB1FC00C1900A909D1 /* NewClassNotesViewController.swift in Sources */,
 				552D85111FCA077700469DCE /* MainFeedTableViewController.swift in Sources */,
 				6463AD261FC69B410034AA1D /* Comment.swift in Sources */,
+				55BD5C051FCB6B4000915A58 /* QuestionTableViewCell.swift in Sources */,
 				555FF48E1FB188CD002E362D /* CourseFeedViewController.swift in Sources */,
 				64337E6E1FC0C4A6006F09A7 /* Notes.swift in Sources */,
 				550769A81FA67A5100C8AE78 /* RegisterViewController.swift in Sources */,
 				5525DE351FBF73AA00A72367 /* ForgotPasswordViewController.swift in Sources */,
 				5507697A1FA677EB00C8AE78 /* AppDelegate.swift in Sources */,
+				555CED791FCB62EB00DDEFC5 /* QuestionFeedTableViewController.swift in Sources */,
+				55BD5C071FCB70D500915A58 /* Question.swift in Sources */,
 				55B0DFE21FB68FDB009EC707 /* CourseFeedTableViewCell.swift in Sources */,
 				6404DB931FBCFFE800A1E9D2 /* CreateCourseViewController.swift in Sources */,
 				64237C831FC3DC7B001E797A /* NotesFeedViewController.swift in Sources */,
-				A852FB8E1FC50ABC002FE536 /* QuestionFeed.swift in Sources */,
 				554EDC581FB56B37003370AD /* GradientView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

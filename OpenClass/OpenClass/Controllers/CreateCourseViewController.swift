@@ -25,6 +25,9 @@ class CreateCourseViewController: UIViewController
     {
         super.viewDidLoad()
 
+        // Hide keyboard when tapped with in the view
+        self.hideKeyboardWhenTappedAround()
+        
         CourseNameText.text?.removeAll()
         CourseDescriptionText.text?.removeAll()
         ProfessorText.text?.removeAll()

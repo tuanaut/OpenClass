@@ -146,6 +146,8 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
         
         performSegue(withIdentifier: "GoToSelectedNotes", sender: self)
         
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
 }

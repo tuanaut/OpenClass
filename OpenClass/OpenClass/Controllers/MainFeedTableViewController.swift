@@ -28,10 +28,24 @@ class MainFeedTableViewController: UIViewController, UITableViewDataSource, UITa
         tableView.tableFooterView = UIView(frame: CGRect.zero)
 
         navigationController?.isNavigationBarHidden = false
+    
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "GoToNotesFeed")
+        {
+            let viewController = segue.destination as! NotesFeedViewController
+            viewController.passedCourseKey = passedCourseKey
+        }
         
-
+        if(segue.identifier == "GoToQuestionsFeed")
+        {
+            let viewController = segue.destination as! QuestionFeedTableViewController
+            viewController.passedCourseKey = passedCourseKey
+        }
     }
 
+    //================== TableView cell functions ==================
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
@@ -77,18 +91,13 @@ class MainFeedTableViewController: UIViewController, UITableViewDataSource, UITa
         
         if(indexPath.row == 0){
             performSegue(withIdentifier: "GoToNotesFeed", sender: self)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
         else if(indexPath.row == 1){
             performSegue(withIdentifier: "GoToQuestionsFeed", sender: self)
+            tableView.deselectRow(at: indexPath, animated: true)
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "GoToNotesFeed"){
-            let viewController = segue.destination as! NotesFeedViewController
-            viewController.passedCourseKey = passedCourseKey
-            
-        }
-    }
+    //======================================================
     
 }

@@ -24,6 +24,9 @@ class AddCourseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Hide keyboard when tapped with in the view
+        self.hideKeyboardWhenTappedAround()
+        
         CourseNumTextField.text?.removeAll()
         ProfessorNameTextField.text?.removeAll()
         CourseKeyTextField.text?.removeAll()

@@ -41,6 +41,10 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Hide keyboard when tapped with in the view
+        self.hideKeyboardWhenTappedAround()
+        
         navigationController?.isNavigationBarHidden = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(PostNotes))
     }
