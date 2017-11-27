@@ -2,7 +2,7 @@
 //  Course.swift
 //  OpenClass
 //
-//  Created by Vivian Chau on 11/15/17.
+//  Created by Tuan Chau on 11/15/17.
 //  Copyright © 2017 CS472. All rights reserved.
 //
 
@@ -17,6 +17,14 @@ class Course {
     let ProfessorLastName: String
     let CourseKey: String
  
+    
+    init(){
+        self.CourseName = ""
+        self.CourseDescription = ""
+        self.ProfessorLastName = ""
+        self.CourseKey = ""
+        
+    }
     
     init(CourseName: String, CourseDescription: String, ProfessorLastName: String, CourseKey: String) {
         
