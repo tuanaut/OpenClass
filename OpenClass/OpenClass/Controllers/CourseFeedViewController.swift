@@ -51,6 +51,15 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         navigationController?.isNavigationBarHidden = false
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if(segue.identifier == "GoToMainFeed"){
+            
+            let viewController = segue.destination as! MainFeedTableViewController
+            viewController.passedCourseKey = valueToPass
+            
+        }
+    }
+    
     @objc func AddCourse() {
     
         let uid = Auth.auth().currentUser?.uid
@@ -113,6 +122,19 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
             tableView.deleteRows(at: [indexPath], with: .automatic)
             tableView.endUpdates()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let indexPath = tableView.indexPathForSelectedRow!
+        let row:Course = coursesArray[indexPath.row]
+        
+        valueToPass = row.CourseKey
+        print("valueToPass")
+        print(valueToPass)
+        performSegue(withIdentifier: "GoToMainFeed", sender: self)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -193,26 +215,6 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
                 self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Create", style: .plain, target: self, action: #selector(self.AddCourse))
             }
         })
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let indexPath = tableView.indexPathForSelectedRow!
-        let row:Course = coursesArray[indexPath.row]
-       
-        valueToPass = row.CourseKey
-        print("valueToPass")
-        print(valueToPass)
-        performSegue(withIdentifier: "GoToMainFeed", sender: self)
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "GoToMainFeed"){
-            
-            let viewController = segue.destination as! MainFeedTableViewController
-            viewController.passedCourseKey = valueToPass
-            
-        }
     }
     
 }
