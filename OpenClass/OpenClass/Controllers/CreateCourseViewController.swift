@@ -60,7 +60,7 @@ class CreateCourseViewController: UIViewController
             else
             {
                 // Display alert with confirmation.
-                let myAlert = UIAlertController(title:"Alert", message: "Course Was Created!", preferredStyle: UIAlertControllerStyle.alert);
+                let myAlert = UIAlertController(title:"Alert", message: "Course Was Created! \n The course key is: \(thisCourse.CourseKey)", preferredStyle: UIAlertControllerStyle.alert);
                 
                 let okAction = UIAlertAction(title:"Ok", style: UIAlertActionStyle.default, handler: {action in self.dismiss(animated: true, completion: nil)});
                 
