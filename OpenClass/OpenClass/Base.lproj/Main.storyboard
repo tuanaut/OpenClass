@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -251,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wDU-47-YKv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3281" y="-1315"/>
+            <point key="canvasLocation" x="3018.4000000000001" y="-1313.793103448276"/>
         </scene>
         <!--Notes Feed-->
         <scene sceneID="r42-Wf-nh1">
@@ -513,7 +512,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hf7-en-NJh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3281" y="-548"/>
+            <point key="canvasLocation" x="4173.6000000000004" y="178.56071964017991"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="E4V-cU-BpO">
@@ -1314,9 +1313,21 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="CreateCourse:" destination="ZA8-ty-M36" eventType="touchUpInside" id="TJB-4g-YsM"/>
+                                    <action selector="CreateTheCourse:" destination="ZA8-ty-M36" eventType="touchUpInside" id="jlL-3I-2t5"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Professor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofq-AB-fET">
+                                <rect key="frame" x="16" y="361" width="104" height="26"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Professor's Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IS6-PH-FHR">
+                                <rect key="frame" x="16" y="395" width="343" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.80392156859999997" green="0.14698566399999999" blue="0.15634806700000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1325,12 +1336,17 @@
                             <constraint firstItem="dyW-b5-3xG" firstAttribute="width" secondItem="8VD-Hu-rQ4" secondAttribute="width" id="B0h-IK-Xy6"/>
                             <constraint firstItem="HHk-yU-C6X" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="DYk-wJ-CsM"/>
                             <constraint firstItem="MAX-mS-lu1" firstAttribute="bottom" secondItem="dyW-b5-3xG" secondAttribute="bottom" constant="50" id="Hwv-in-QiE"/>
+                            <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="IS6-PH-FHR" secondAttribute="trailing" constant="16" id="Job-iP-eEp"/>
+                            <constraint firstItem="Ofq-AB-fET" firstAttribute="top" secondItem="eit-Mp-XaT" secondAttribute="bottom" constant="21" id="LWG-OB-8GG"/>
                             <constraint firstItem="amQ-ef-Gsd" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="P6t-sH-IEl"/>
                             <constraint firstItem="4B0-sF-CDc" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="Qvx-3g-jE3"/>
                             <constraint firstItem="Cbd-pM-JaS" firstAttribute="centerX" secondItem="piJ-Bq-caf" secondAttribute="centerX" id="RDR-zp-Ufm"/>
+                            <constraint firstItem="Ofq-AB-fET" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="SlT-dC-37a"/>
+                            <constraint firstItem="IS6-PH-FHR" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="16" id="VN4-WD-v83"/>
                             <constraint firstItem="MAX-mS-lu1" firstAttribute="trailing" secondItem="4B0-sF-CDc" secondAttribute="trailing" constant="16" id="VPq-YP-5rK"/>
                             <constraint firstItem="HHk-yU-C6X" firstAttribute="top" secondItem="4B0-sF-CDc" secondAttribute="bottom" constant="22" id="Wd7-We-91R"/>
                             <constraint firstItem="amQ-ef-Gsd" firstAttribute="top" secondItem="Cbd-pM-JaS" secondAttribute="bottom" constant="82" id="Wfe-Dl-fvP"/>
+                            <constraint firstItem="IS6-PH-FHR" firstAttribute="top" secondItem="Ofq-AB-fET" secondAttribute="bottom" constant="8" id="aWx-Xa-iKv"/>
                             <constraint firstItem="8VD-Hu-rQ4" firstAttribute="leading" secondItem="MAX-mS-lu1" secondAttribute="leading" constant="18" id="aep-Wx-hgh"/>
                             <constraint firstItem="Cbd-pM-JaS" firstAttribute="top" secondItem="MAX-mS-lu1" secondAttribute="top" constant="53" id="bSN-cz-p2m"/>
                             <constraint firstItem="dyW-b5-3xG" firstAttribute="leading" secondItem="8VD-Hu-rQ4" secondAttribute="trailing" constant="41" id="fBc-OP-hhl"/>
@@ -1352,6 +1368,7 @@
                     <connections>
                         <outlet property="CourseDescriptionText" destination="eit-Mp-XaT" id="pql-DV-xrq"/>
                         <outlet property="CourseNameText" destination="4B0-sF-CDc" id="A59-Pg-KIh"/>
+                        <outlet property="ProfessorText" destination="IS6-PH-FHR" id="Kdy-zg-CEZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eto-Di-yCb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1366,8 +1383,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zep-Gg-4r8">
+                                <rect key="frame" x="16" y="127" width="168.5" height="25.5"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Course Number" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fwp-Qk-LNk">
+                                <rect key="frame" x="16" y="161" width="348" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Professor's Last Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hI6-g8-WlI">
+                                <rect key="frame" x="16" y="255" width="348" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Professor" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T4w-KJ-dww">
+                                <rect key="frame" x="16" y="221" width="104" height="25.5"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Course Key" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5rW-b4-dxw">
-                                <rect key="frame" x="16" y="240" width="122.5" height="25.5"/>
+                                <rect key="frame" x="16" y="315" width="122.5" height="25.5"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="22"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -1399,7 +1440,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="EnrollStudentInCourse:" destination="LHp-JH-a0B" eventType="touchUpInside" id="a90-Dx-Bjh"/>
+                                    <action selector="addtheCourse:" destination="LHp-JH-a0B" eventType="touchUpInside" id="vC4-lw-TXD"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Course" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hf1-Qx-Z6B">
@@ -1413,7 +1454,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Course Key" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cT4-w0-EPp">
-                                <rect key="frame" x="16" y="270" width="348" height="30"/>
+                                <rect key="frame" x="16" y="345" width="348" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -1422,16 +1463,26 @@
                         <color key="backgroundColor" red="0.80392156859999997" green="0.14698566399999999" blue="0.15634806700000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="b8O-fy-Y0X" firstAttribute="bottom" secondItem="C0i-JE-x7A" secondAttribute="bottom" constant="57" id="0tH-ZC-Tif"/>
+                            <constraint firstItem="fwp-Qk-LNk" firstAttribute="top" secondItem="zep-Gg-4r8" secondAttribute="bottom" constant="8.5" id="2ux-pz-ntw"/>
                             <constraint firstItem="5rW-b4-dxw" firstAttribute="leading" secondItem="b8O-fy-Y0X" secondAttribute="leading" constant="16" id="3Wq-X6-9Es"/>
+                            <constraint firstItem="b8O-fy-Y0X" firstAttribute="trailing" secondItem="hI6-g8-WlI" secondAttribute="trailing" constant="11" id="9bW-nK-C1o"/>
+                            <constraint firstItem="T4w-KJ-dww" firstAttribute="top" secondItem="fwp-Qk-LNk" secondAttribute="bottom" constant="30" id="C9v-nc-81F"/>
                             <constraint firstItem="b8O-fy-Y0X" firstAttribute="trailing" secondItem="cT4-w0-EPp" secondAttribute="trailing" constant="11" id="G4m-gy-DWl"/>
+                            <constraint firstItem="b8O-fy-Y0X" firstAttribute="trailing" secondItem="fwp-Qk-LNk" secondAttribute="trailing" constant="11" id="HAz-Dn-to7"/>
                             <constraint firstItem="8m9-ro-yJG" firstAttribute="width" secondItem="C0i-JE-x7A" secondAttribute="width" id="IgP-mB-HFi"/>
+                            <constraint firstItem="fwp-Qk-LNk" firstAttribute="leading" secondItem="b8O-fy-Y0X" secondAttribute="leading" constant="16" id="Kgd-1m-WV0"/>
                             <constraint firstItem="cT4-w0-EPp" firstAttribute="leading" secondItem="b8O-fy-Y0X" secondAttribute="leading" constant="16" id="Ngi-zI-I9o"/>
+                            <constraint firstItem="zep-Gg-4r8" firstAttribute="leading" secondItem="b8O-fy-Y0X" secondAttribute="leading" constant="16" id="Syw-b7-hlc"/>
+                            <constraint firstItem="hI6-g8-WlI" firstAttribute="top" secondItem="T4w-KJ-dww" secondAttribute="bottom" constant="8.5" id="XNQ-g8-uYV"/>
                             <constraint firstItem="b8O-fy-Y0X" firstAttribute="trailing" secondItem="8m9-ro-yJG" secondAttribute="trailing" constant="16" id="XRf-i4-hBc"/>
                             <constraint firstItem="b8O-fy-Y0X" firstAttribute="bottom" secondItem="8m9-ro-yJG" secondAttribute="bottom" constant="57" id="aD7-Fh-Vpb"/>
                             <constraint firstItem="Hf1-Qx-Z6B" firstAttribute="top" secondItem="b8O-fy-Y0X" secondAttribute="top" constant="27" id="brP-Vu-j9w"/>
                             <constraint firstItem="Hf1-Qx-Z6B" firstAttribute="centerX" secondItem="VQF-ZY-Fv1" secondAttribute="centerX" id="grd-3s-Wkv"/>
-                            <constraint firstItem="b8O-fy-Y0X" firstAttribute="top" secondItem="cT4-w0-EPp" secondAttribute="top" constant="-250" id="jQH-eE-nnv"/>
+                            <constraint firstItem="zep-Gg-4r8" firstAttribute="top" secondItem="Hf1-Qx-Z6B" secondAttribute="bottom" constant="31" id="h8f-FZ-FeJ"/>
+                            <constraint firstItem="5rW-b4-dxw" firstAttribute="top" secondItem="hI6-g8-WlI" secondAttribute="bottom" constant="30" id="jQH-eE-nnv"/>
+                            <constraint firstItem="hI6-g8-WlI" firstAttribute="leading" secondItem="b8O-fy-Y0X" secondAttribute="leading" constant="16" id="pLE-nE-SZK"/>
                             <constraint firstItem="8m9-ro-yJG" firstAttribute="leading" secondItem="C0i-JE-x7A" secondAttribute="trailing" constant="43" id="q3w-4T-Lt3"/>
+                            <constraint firstItem="T4w-KJ-dww" firstAttribute="leading" secondItem="b8O-fy-Y0X" secondAttribute="leading" constant="16" id="sXG-qF-lgR"/>
                             <constraint firstItem="cT4-w0-EPp" firstAttribute="top" secondItem="5rW-b4-dxw" secondAttribute="bottom" constant="4.5" id="xPF-Xm-VqU"/>
                             <constraint firstItem="C0i-JE-x7A" firstAttribute="leading" secondItem="b8O-fy-Y0X" secondAttribute="leading" constant="16" id="yiN-Hr-EAH"/>
                         </constraints>
@@ -1447,11 +1498,13 @@
                     </view>
                     <connections>
                         <outlet property="CourseKeyTextField" destination="cT4-w0-EPp" id="WQQ-Ax-LDn"/>
+                        <outlet property="CourseNumTextField" destination="fwp-Qk-LNk" id="jz7-Ve-Rfk"/>
+                        <outlet property="ProfessorNameTextField" destination="hI6-g8-WlI" id="PI7-7P-8jI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L0y-DI-3Ig" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2231" y="-563"/>
+            <point key="canvasLocation" x="2300" y="-563"/>
         </scene>
         <!--Selected Notes View Controller-->
         <scene sceneID="kXL-QK-FNb">

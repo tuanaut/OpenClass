@@ -11,15 +11,14 @@ import Firebase
 import FirebaseDatabase
 import FirebaseStorage
 
-class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
-{
+class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+
     @IBOutlet weak var tableView: UITableView!
     var passedCourseKey: String!
     var NotesArray = [Notes]()
     var valueToPass: String!
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
      
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "New Notes", style: .plain, target: self, action: #selector(AddNotes))
@@ -36,10 +35,10 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
         // Hide excess cells in table view
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         //automaticallyAdjustsScrollViewInsets = true
+        
     }
     
-    override func viewWillAppear(_ animated: Bool)
-    {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         // Reset course array to empty every you go back to this view controller and reload table view
@@ -53,21 +52,20 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.reloadData()
         print("After")
         print(NotesArray.count)
+        
     }
     
-    override func didReceiveMemoryWarning()
-    {
+    override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    @objc func AddNotes()
-    {
+    @objc func AddNotes() {
+        
         self.performSegue(withIdentifier: "GoToAddNewNotes", sender: self)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
-    {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return NotesArray.count
     }
     
@@ -75,29 +73,27 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
         return 1
     }*/
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
-    {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-    {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if(segue.identifier == "GoToAddNewNotes")
-        {
+        if(segue.identifier == "GoToAddNewNotes"){
             let viewController = segue.destination as! NewClassNotesViewController
             viewController.passedkey = passedCourseKey
+            
         }
-        else if(segue.identifier == "GoToSelectedNotes")
-        {
+        else if(segue.identifier == "GoToSelectedNotes"){
             let viewController = segue.destination as! SelectedNotesViewController
             viewController.passedNotesID = valueToPass
+            
         }
     }
     
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
-    {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotesCell", for: indexPath) as! NoteTableViewCell
         cell.subjectLabel.text = NotesArray[indexPath.row].notesSubject
         cell.usernameLabel.text = NotesArray[indexPath.row].username
@@ -106,9 +102,10 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     
-    private func fetchNotesForCourse()
-    {
+    private func fetchNotesForCourse(){
+        
         let ref = Database.database().reference()
+        
         
         let query = ref.child("notes").queryOrdered(byChild: "CourseKey").queryEqual(toValue: passedCourseKey)
         print("The current key is")
@@ -119,8 +116,7 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
             
                     print("All notes")
                     print(notes)
-                    for note in notes.children
-                    {
+                    for note in notes.children {
                         let newNote = Notes(snapshot: note as! DataSnapshot)
                         self.NotesArray.append(newNote)
                         
@@ -132,13 +128,12 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
             
                 print("Real Array Count:")
                 print(self.NotesArray.count)
-        });
+                })
         print("Outside closure")
         print(NotesArray.count)
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath)
-    {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if (editingStyle == .delete)
         {
             NotesArray.remove(at: indexPath.row)
@@ -149,8 +144,7 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
-    {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let indexPath = tableView.indexPathForSelectedRow!
         let row:Notes = NotesArray[indexPath.row]
         
@@ -161,5 +155,5 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
+    
 }
-
