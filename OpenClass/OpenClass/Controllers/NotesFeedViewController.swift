@@ -28,7 +28,13 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
         navigationController?.isNavigationBarHidden = false
         tableView.estimatedRowHeight = 117
         tableView.rowHeight = 117
-        automaticallyAdjustsScrollViewInsets = true
+        
+        // Expand row height based on amount of text
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        // Hide excess cells in table view
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        //automaticallyAdjustsScrollViewInsets = true
         
     }
     
