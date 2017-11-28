@@ -39,6 +39,11 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         tableView.estimatedRowHeight = 124
         tableView.rowHeight = 124
+        // Expand row height based on amount of text
+        tableView.rowHeight = UITableViewAutomaticDimension
+        
+        // Hide excess cells in table view
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
         
     }
 
@@ -62,9 +67,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         return 1
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
+  
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -85,11 +88,35 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func commentButton(_ sender: Any) {
         
         if(comment.text?.isEmpty)!{
-            displayMyAlertMessage(userMessage: "Please enter a comment")
+            return
         }
         else{
             let values = ["Commenter": passedUsername, "Comment": comment.text, "id": passedNotesID ]
-            databaseRef.child("comments").childByAutoId().setValue(values)
+            databaseRef.child("comments").childByAutoId().setValue(values, withCompletionBlock: {(error, ref) in
+                if(error == nil) {
+                    
+                    let comment = Comment(commentPosted: self.comment.text!, username: self.passedUsername, notesID: self.passedNotesID)
+                    
+                  
+                    self.commentsArray.append(comment)
+                    self.tableView.reloadData()
+                    
+                    // Scroll down automatically when posting a new question
+                    let indexPath = IndexPath(row: self.commentsArray.count - 1, section: 0)
+                    self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.middle, animated: true)
+                    
+                    // Remove the text in textfield after posting
+                    self.comment.text?.removeAll()
+                    
+                    
+                }
+                else
+                {
+                    self.displayMyAlertMessage(userMessage: (error?.localizedDescription)!)
+                }
+                
+            })
+            
         }
     }
     
