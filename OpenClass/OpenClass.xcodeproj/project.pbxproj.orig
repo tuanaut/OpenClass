@@ -570,10 +570,13 @@
 				550769A81FA67A5100C8AE78 /* RegisterViewController.swift in Sources */,
 				5525DE351FBF73AA00A72367 /* ForgotPasswordViewController.swift in Sources */,
 				5507697A1FA677EB00C8AE78 /* AppDelegate.swift in Sources */,
+<<<<<<< HEAD
 				55458F9F1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift in Sources */,
 				55604AA51FBAE9640087584F /* AnswersViewController.swift in Sources */,
+=======
 				555CED791FCB62EB00DDEFC5 /* QuestionFeedTableViewController.swift in Sources */,
 				55BD5C071FCB70D500915A58 /* Question.swift in Sources */,
+>>>>>>> a8469e239460448abb9db59e86ebcd10c3fabc69
 				55B0DFE21FB68FDB009EC707 /* CourseFeedTableViewCell.swift in Sources */,
 				6404DB931FBCFFE800A1E9D2 /* CreateCourseViewController.swift in Sources */,
 				64237C831FC3DC7B001E797A /* NotesFeedViewController.swift in Sources */,
