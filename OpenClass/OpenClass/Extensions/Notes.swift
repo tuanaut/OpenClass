@@ -10,10 +10,8 @@ import Foundation
 import Firebase
 import FirebaseDatabase
 
-struct Notes {
-    
-    
-    
+struct Notes
+{
     var notesSubject: String
     var notesDescription: String
     var notesImageURL: String
@@ -21,21 +19,18 @@ struct Notes {
     var username: String
     var key: String // course key
 
-
-
-    init(notesSubject: String, notesDescription: String, notesImageURL: String, firstName: String, lastName: String, notesID: String, key: String){
-   
-    self.notesSubject = notesSubject
-    self.notesDescription = notesDescription
-    self.notesImageURL = notesImageURL
-    self.username = firstName + " " + lastName
-    self.notesID = notesID
-    self.key = key
-   
+    init(notesSubject: String, notesDescription: String, notesImageURL: String, firstName: String, lastName: String, notesID: String, key: String)
+    {
+        self.notesSubject = notesSubject;
+        self.notesDescription = notesDescription;
+        self.notesImageURL = notesImageURL;
+        self.username = firstName + " " + lastName;
+        self.notesID = notesID;
+        self.key = key;
     }
     
-   init(snapshot: DataSnapshot){
-    
+   init(snapshot: DataSnapshot)
+   {
         let snapshotvalue = snapshot.value as? NSDictionary
         self.notesSubject = snapshotvalue!["NotesSubject"] as! String
         self.notesDescription = snapshotvalue!["NotesDescription"] as! String
@@ -45,3 +40,4 @@ struct Notes {
         self.key = snapshotvalue!["CourseKey"] as! String
     }
 }
+

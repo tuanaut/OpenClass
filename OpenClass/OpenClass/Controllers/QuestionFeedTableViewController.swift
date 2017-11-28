@@ -9,8 +9,8 @@
 import UIKit
 import Firebase
 
-class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
+class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var QuestionTextField: UITextField!
     @IBOutlet weak var MessageInputView: UIView!
@@ -26,7 +26,8 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
     var borderBottomConstraint: NSLayoutConstraint?
     var tableViewConstraint: NSLayoutConstraint?
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         tableView.delegate = self
@@ -61,11 +62,24 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
         // Set up keyboard dismissing listener
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillHide, object: nil)
         
-        getUserName()
-        
+        let currentUser = User.GetCurrentUser();
+        currentUser.GetFirstName(completionHandler: {(success) -> Void in
+            if (success)
+            {
+                self.FirstName = currentUser.GetFirstNameWithoutDatabaseAccess();
+            }
+        });
+
+        currentUser.GetLastName(completionHandler: {(success) -> Void in
+            if (success)
+            {
+                self.LastName = currentUser.GetLastNameWithoutDatabaseAccess();
+            }
+        });
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(true)
         
         // Reset course array to empty every you go back to this view controller and reload table view
@@ -77,8 +91,8 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
         navigationController?.isNavigationBarHidden = false
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
 //        if(segue.identifier == "GoToAddNewNotes"){
 //            let viewController = segue.destination as! NewClassNotesViewController
 //            viewController.passedkey = passedCourseKey
@@ -92,20 +106,23 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
     }
     
     //================== TableView cell functions ==================
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return QuestionsArray.count
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int
+    {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
         return false
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+    {
         let indexPath = tableView.indexPathForSelectedRow!
         let row:Question = QuestionsArray[indexPath.row]
         
@@ -118,8 +135,8 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
         //performSegue(withIdentifier: "GoToSelectedNotes", sender: self)
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionCell", for: indexPath) as! QuestionTableViewCell
         cell.NameLabel.text = QuestionsArray[indexPath.row].Name
         cell.DateLabel.text = QuestionsArray[indexPath.row].Date
@@ -129,7 +146,8 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
     //======================================================
 
     // Submits the users question into the database and displays it
-    @IBAction func PostButton(_ sender: Any) {
+    @IBAction func PostButton(_ sender: Any)
+    {
         if (QuestionTextField.text!.isEmpty)
         {
             return;
@@ -155,8 +173,8 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
             let values = ["Name": FirstName + " " + LastName, "Date": currDate + " " + currTime, "Question": QuestionTextField.text!, "CourseKey": passedCourseKey, "Uid": UserID]
             
             questionRef.setValue(values, withCompletionBlock: {(error, ref) in
-                if(error == nil) {
-                    
+                if(error == nil)
+                {
                     let question = Question(FirstName: self.FirstName, LastName: self.LastName, Date: currDate, Time: currTime, Question: self.QuestionTextField.text!, Key: self.passedCourseKey, Uid: self.UserID)
                     
                     //self.QuestionsArray.insert(question, at: 0)
@@ -169,15 +187,12 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
                     
                     // Remove the text in textfield after posting
                     self.QuestionTextField.text?.removeAll()
-                    
-                    
                 }
                 else
                 {
                     self.displayMyAlertMessage(userMessage: (error?.localizedDescription)!)
                 }
-                
-            })
+            });
         }
     }
     
@@ -198,11 +213,11 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
             tableViewConstraint?.constant = isKeyboardShowing ? -keyboardFrame.height + (-51) : -51
             
             // Smooth transition of textfield going up and down
-            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
-                
-                self.view.layoutIfNeeded()
-            }, completion: {(completed) in
-            })
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations:
+                {
+                    self.view.layoutIfNeeded();
+                }, completion: {(completed) in
+            });
         }
     }
     
@@ -214,28 +229,14 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
         query.observeSingleEvent(of: .value, with: {(questions)
             in
 
-            for question in questions.children {
+            for question in questions.children
+            {
                 let newQuestion = Question(snapshot: question as! DataSnapshot)
                 self.QuestionsArray.append(newQuestion)
                 print(question)
             }
             self.tableView.reloadData()
-        })
-
-    }
-    
-    // Gets the name of current user
-    private func getUserName()
-    {
-        
-        Database.database().reference().child("users").child(UserID!).observeSingleEvent(of: .value, with: {(DataSnapshot)
-            in
-    
-            let dictionary = DataSnapshot.value as? [String: AnyObject]
-            self.FirstName = (dictionary!["firstname"] as? String)!
-            self.LastName = (dictionary!["lastname"] as? String)!
-            
-        })
+        });
     }
     
     func displayMyAlertMessage(userMessage: String)
@@ -248,3 +249,4 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
         self.present(myAlert, animated: true, completion: nil);
     }
 }
+
