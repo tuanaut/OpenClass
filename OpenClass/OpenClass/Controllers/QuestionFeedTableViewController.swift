@@ -84,11 +84,14 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
 //            viewController.passedkey = passedCourseKey
 //
 //        }
-//        else if(segue.identifier == "GoToSelectedNotes"){
-//            let viewController = segue.destination as! SelectedNotesViewController
-//            viewController.passedNotesID = valueToPass
+        if(segue.identifier == "GoToSelectedAnswers"){
+            let viewController = segue.destination as! AnswersViewController
+            viewController.passedUserID = UserID
+            viewController.passedFirstName = FirstName
+            //viewController.passedLastName = LastName
+            //viewController.passedCurrentQuestion = CurrentQuestion
 //
-//        }
+        }
     }
     
     //================== TableView cell functions ==================
@@ -115,7 +118,7 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
         // Unhighlight the selected row after all procedures has been done
         tableView.deselectRow(at: indexPath, animated: true)
         
-        //performSegue(withIdentifier: "GoToSelectedNotes", sender: self)
+        performSegue(withIdentifier: "GoToSelectedAnswers", sender: self)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

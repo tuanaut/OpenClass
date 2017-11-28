@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -493,11 +494,12 @@
                         <outlet property="MessageInputView" destination="jMX-Yk-1eb" id="Vln-ak-rMD"/>
                         <outlet property="QuestionTextField" destination="h0c-0s-q6h" id="obD-MD-MlB"/>
                         <outlet property="tableView" destination="pne-CT-e2Z" id="g1l-tD-Zwc"/>
+                        <segue destination="nO6-df-N1C" kind="show" identifier="GoToSelectAnswers" id="YHd-PW-QdS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hf7-en-NJh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4173.6000000000004" y="178.56071964017991"/>
+            <point key="canvasLocation" x="3018" y="-199"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="E4V-cU-BpO">
@@ -1128,7 +1130,7 @@
         <!--Answers View Controller Scene-->
         <scene sceneID="2mi-6i-EfC">
             <objects>
-                <viewController title="Answers View Controller Scene" id="nO6-df-N1C" customClass="AnswersViewController" customModule="OpenClass" sceneMemberID="viewController">
+                <viewController title="Answers View Controller Scene" id="nO6-df-N1C" customClass="AnswersViewController" customModule="OpenClass" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zNT-bu-s3c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1223,7 +1225,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vmS-ra-MhF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2500" y="-1311.0944527736133"/>
+            <point key="canvasLocation" x="3873" y="-199"/>
         </scene>
         <!--Create Course Page View Controller-->
         <scene sceneID="HwI-hX-vL3">

@@ -15,6 +15,11 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var commentAddButton: UIButton!
     
     // Fake info for testing, actual data will be from server.
+    var passedUserID : String!
+    var passedQuestion: String!
+    var passedFirstName : String!
+    var PassedLastName : String!
+    
     let currentUser = "Oscar"
     var recentComment = ""
     var listOfComments = ["Yes","Alright, Thanks!"]
