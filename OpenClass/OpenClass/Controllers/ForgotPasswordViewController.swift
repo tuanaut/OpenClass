@@ -46,6 +46,9 @@ class ForgotPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Hide keyboard when tapped with in the view
+        self.hideKeyboardWhenTappedAround()
+        
         navigationController?.isNavigationBarHidden = true
     }
     
