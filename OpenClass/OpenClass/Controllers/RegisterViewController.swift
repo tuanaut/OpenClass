@@ -10,16 +10,17 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 
-class RegisterViewController: UIViewController {
-    @IBOutlet weak var firstnameTextField: UITextField!
-    @IBOutlet weak var lastnameTextField: UITextField!
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var confirmPasswordTextField: UITextField!
-    @IBOutlet weak var accountTypeSegmentControl: UISegmentedControl!
-    @IBOutlet weak var ScrollView: UIScrollView!
+class RegisterViewController: UIViewController
+{
+    @IBOutlet weak var firstnameTextField: UITextField!;
+    @IBOutlet weak var lastnameTextField: UITextField!;
+    @IBOutlet weak var emailTextField: UITextField!;
+    @IBOutlet weak var passwordTextField: UITextField!;
+    @IBOutlet weak var confirmPasswordTextField: UITextField!;
+    @IBOutlet weak var accountTypeSegmentControl: UISegmentedControl!;
+    @IBOutlet weak var ScrollView: UIScrollView!;
     
-    var ScrollViewConstraint: NSLayoutConstraint?
+    var ScrollViewConstraint: NSLayoutConstraint?;
 
     @IBAction func cancelCreateLogin(_ sender: Any)
     {
@@ -28,154 +29,54 @@ class RegisterViewController: UIViewController {
     
     @IBAction func submitCreateLogin(_ sender: Any)
     {
-//        let userAccountType = String(accountTypeSegmentControl.selectedSegmentIndex)
-//        guard let userFirst = firstnameTextField.text,
-//              let userLast = lastnameTextField.text,
-//              let userEmail = emailTextField.text,
-//              let userPassword = passwordTextField.text,
-//              let userConfirmPass = confirmPasswordTextField.text
-//            else
-//            {
-//                displayMyAlertMessage(userMessage: "Form is not valid!")
-//
-//                return;
-//            }
-        
-        // Store user data into an object
-        let thisUser = User(firstName: firstnameTextField.text!, lastName: lastnameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!, confirmPassword: confirmPasswordTextField.text!, accountType: String(accountTypeSegmentControl.selectedSegmentIndex))
-        
         // Check for empty fields
-        if ((thisUser.firstname.isEmpty) || (thisUser.lastname.isEmpty) || (thisUser.email.isEmpty) || (thisUser.password.isEmpty) || (thisUser.confirmPassword.isEmpty))
+        if ((firstnameTextField.text!.isEmpty) || (lastnameTextField.text!.isEmpty) || (emailTextField.text!.isEmpty) || (passwordTextField.text!.isEmpty) || (confirmPasswordTextField.text?.isEmpty)!)
         {
-            
             // Display alert message
-            displayMyAlertMessage(userMessage: "All fields are required");
+            displayMyAlertMessage(userMessage: "All fields must be filled out to create an account");
             return;
         }
         
         // Check if passwords match
-        if (thisUser.password != thisUser.confirmPassword)
+        if (passwordTextField.text! != confirmPasswordTextField.text!)
         {
             displayMyAlertMessage(userMessage: "Passwords do not match");
             return;
         }
         
+        // Store user data into an object
+        let loginUser = User(firstName: firstnameTextField.text!, lastName: lastnameTextField.text!, email: emailTextField.text!, password: passwordTextField.text!, accountType: String(accountTypeSegmentControl.selectedSegmentIndex));
+        
         // Authenticate and Store data
-        Auth.auth().createUser(withEmail: thisUser.email, password: thisUser.password, completion: {(user, error) in
-            if (error != nil)
-            {
-                self.displayMyAlertMessage(userMessage: (error?.localizedDescription)! )
-                return
-            }
-            
-            guard let uid = user?.uid else { return}
-            
-            // Successfully authenticated user
-            let ref = Database.database().reference(fromURL: "https://openclass-d7aa6.firebaseio.com/")
-            let userref = ref.child("users").child(uid)
-            
-            //let studentsReference = ref.child("users").child("students").child(uid)
-            //let professorsReference = ref.child("users").child("professors").child(uid)
-            let values = ["firstname": thisUser.firstname, "lastname": thisUser.lastname, "email": thisUser.email, "accounttype": thisUser.accountType]
-            
-            // Store in students table
-            /*if (self.accountTypeSegmentControl.selectedSegmentIndex == 0)
-            {
-                studentsReference.updateChildValues(values, withCompletionBlock: {(err, ref) in
-                    if (err != nil)
-                    {
-                        self.displayMyAlertMessage(userMessage: (err?.localizedDescription)! )
-                        return
-                    }
-                    else
-                    {
-                        // Display alert with confirmation.
-                        let myAlert = UIAlertController(title:"Alert", message: "Registration is successful!", preferredStyle: UIAlertControllerStyle.alert);
-                        
-                        let okAction = UIAlertAction(title:"Ok", style: UIAlertActionStyle.default, handler: {action in self.dismiss(animated: true, completion: nil)});
-                        
-                        myAlert.addAction(okAction);
-                        self.present(myAlert, animated: true, completion: nil);
-                
-                        print("Saved user successfully into Firebase database")
-                    }
-                })
-            // Store in professors table
-            }
-            else if (self.accountTypeSegmentControl.selectedSegmentIndex == 1)
-            {
-                professorsReference.updateChildValues(values, withCompletionBlock: {(err, ref) in
-                    if (err != nil)
-                    {
-                        self.displayMyAlertMessage(userMessage: (err?.localizedDescription)! )
-                        return
-                    }
-                    else
-                    {
-                        // Display alert with confirmation.
-                        let myAlert = UIAlertController(title:"Alert", message: "Registration is successful!", preferredStyle: UIAlertControllerStyle.alert);
-                        
-                        let okAction = UIAlertAction(title:"Ok", style: UIAlertActionStyle.default, handler: {action in self.dismiss(animated: true, completion: nil)});
-                        
-                        myAlert.addAction(okAction);
-                        self.present(myAlert, animated: true, completion: nil);
-                    
-                        print("Saved user successfully into Firebase database")
-                    }
-                })
-            }*/
-            
-            // Store user data in database
-            userref.updateChildValues(values, withCompletionBlock: {(err, ref) in
-                if (err != nil)
-                {
-                    self.displayMyAlertMessage(userMessage: (err?.localizedDescription)! )
-                    return
-                }
-                else
-                {
-                    // Display alert with confirmation.
-                    let myAlert = UIAlertController(title:"Alert", message: "Registration is successful!", preferredStyle: UIAlertControllerStyle.alert);
-                    
-                    let okAction = UIAlertAction(title:"Ok", style: UIAlertActionStyle.default, handler: {action in self.dismiss(animated: true, completion: nil)});
-                    
-                    myAlert.addAction(okAction);
-                    self.present(myAlert, animated: true, completion: nil);
-                    
-                    print("Saved user successfully into Firebase database")
-                }
-            })
-       })
-        
-        
+        loginUser.WriteAccount(controller: self);
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidLoad()
+    {
+        super.viewDidLoad();
 
         // Initial UI setup
         //view.backgroundColor = UIColor(r: 205, g: 35, b: 35)
-        navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true;
         
         // Dismiss keyboard when touching anywhere within the view
-        self.hideKeyboardWhenTappedAround()
+        self.hideKeyboardWhenTappedAround();
         
         // Set up keyboard showing listener
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillShow, object: nil);
         
         // Set up keyboard dismissing listener
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillHide, object: nil);
     }
 
     override func viewWillDisappear(_ animated: Bool)
     {
-        super.viewWillDisappear(animated)
-       
+        super.viewWillDisappear(animated);
     }
     
     override func didReceiveMemoryWarning()
     {
-        super.didReceiveMemoryWarning()
+        super.didReceiveMemoryWarning();
         // Dispose of any resources that can be recreated.
     }
     
@@ -212,22 +113,23 @@ class RegisterViewController: UIViewController {
         if let userInfo = notification.userInfo
         {
             // Get the x, y, width, height of keyboard
-            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue;
             
             // Determine if keyboard is showing or not
-            let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
+            let isKeyboardShowing = (notification.name == NSNotification.Name.UIKeyboardWillShow);
             
             // Adjust the constraints if keyboard is showing or dismissing
-            var contentInset:UIEdgeInsets = self.ScrollView.contentInset
-            contentInset.bottom = keyboardFrame.height
-            ScrollView.contentInset = isKeyboardShowing ? contentInset : UIEdgeInsets.zero
+            var contentInset:UIEdgeInsets = self.ScrollView.contentInset;
+            contentInset.bottom = keyboardFrame.height;
+            ScrollView.contentInset = isKeyboardShowing ? contentInset : UIEdgeInsets.zero;
                         
             // Smooth transition of textfield going up and down
             UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: {
                 
-                self.view.layoutIfNeeded()
-            }, completion: {(completed) in
-            })
+                self.view.layoutIfNeeded();
+                
+                }, completion: {(completed) in
+            });
         }
     }
     
@@ -240,9 +142,6 @@ class RegisterViewController: UIViewController {
         myAlert.addAction(okAction);
         
         self.present(myAlert, animated: true, completion: nil);
-    }    
-    
+    }
 }
-
-
 
