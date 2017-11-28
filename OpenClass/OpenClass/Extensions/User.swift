@@ -193,11 +193,15 @@ class User
     class func GetCurrentUser() -> User
     {
         let currUser = User();
-        currUser.AccountID = (Auth.auth().currentUser?.uid)!;
         
-        if (!currUser.AccountID.isEmpty)
+        if (Auth.auth().currentUser?.uid != nil)
         {
-            currUser.ReadAvailableData();
+            currUser.AccountID = (Auth.auth().currentUser?.uid)!;
+            
+            if (!currUser.AccountID.isEmpty)
+            {
+                currUser.ReadAvailableData();
+            }
         }
         
         return currUser;
