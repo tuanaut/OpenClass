@@ -41,6 +41,7 @@ class LoginViewController: UIViewController {
         {
             performSegue(withIdentifier: "LoggedIn", sender: self)
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -86,5 +87,6 @@ class LoginViewController: UIViewController {
             self.performSegue(withIdentifier: "LoggedIn", sender: self)
         })
     }
+
 }
 
