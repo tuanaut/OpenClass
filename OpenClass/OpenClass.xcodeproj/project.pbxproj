@@ -17,9 +17,9 @@
 		5507699A1FA677EC00C8AE78 /* OpenClassUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550769991FA677EC00C8AE78 /* OpenClassUITests.swift */; };
 		550769A81FA67A5100C8AE78 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550769A71FA67A5100C8AE78 /* RegisterViewController.swift */; };
 		550D9B371FBA83CB00C0B131 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D9B361FBA83CB00C0B131 /* User.swift */; };
-		55458F9F1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55458F9E1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift */; };
 		5525DE351FBF73AA00A72367 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5525DE341FBF73AA00A72367 /* ForgotPasswordViewController.swift */; };
 		552D85111FCA077700469DCE /* MainFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552D85101FCA077700469DCE /* MainFeedTableViewController.swift */; };
+		55458F9F1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55458F9E1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift */; };
 		554EDC581FB56B37003370AD /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554EDC571FB56B37003370AD /* GradientView.swift */; };
 		555C2A4B1FB1290900E79CF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 555C2A4A1FB1290900E79CF8 /* GoogleService-Info.plist */; };
 		555CED791FCB62EB00DDEFC5 /* QuestionFeedTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555CED781FCB62EB00DDEFC5 /* QuestionFeedTableViewController.swift */; };
@@ -82,9 +82,9 @@
 		5507699B1FA677EC00C8AE78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		550769A71FA67A5100C8AE78 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		550D9B361FBA83CB00C0B131 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		55458F9E1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersViewControllerTableViewCell.swift; sourceTree = "<group>"; };
 		5525DE341FBF73AA00A72367 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		552D85101FCA077700469DCE /* MainFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedTableViewController.swift; sourceTree = "<group>"; };
+		55458F9E1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswersViewControllerTableViewCell.swift; sourceTree = "<group>"; };
 		554EDC571FB56B37003370AD /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		555C2A4A1FB1290900E79CF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		555CED781FCB62EB00DDEFC5 /* QuestionFeedTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionFeedTableViewController.swift; sourceTree = "<group>"; };
@@ -745,6 +745,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 62B3MY4EF4;
 				INFOPLIST_FILE = OpenClass/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -761,6 +762,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 62B3MY4EF4;
 				INFOPLIST_FILE = OpenClass/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

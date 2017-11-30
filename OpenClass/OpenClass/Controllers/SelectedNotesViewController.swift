@@ -13,11 +13,12 @@ import FirebaseDatabase
 
 class SelectedNotesViewController: UIViewController
 {
+    
+   
+    
     var passedNotesID: String!
     var passedUsername: String!
-   // @IBOutlet weak var notesDescriptionText: UITextView!
-    // @IBOutlet weak var notesDescriptionText: UITextField!
-    //@IBOutlet weak var notesSubjectText: UITextField!
+  
     @IBOutlet weak var notesSubjectText: UILabel!
     @IBOutlet weak var notesDescriptionText: UILabel!
     @IBOutlet weak var notesImage: UIImageView!
@@ -39,6 +40,7 @@ class SelectedNotesViewController: UIViewController
         print(passedNotesID)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Comments", style: .plain, target: self, action: #selector(self.gotoCommentsSection))
         // Do any additional setup after loading the view.
+        
     }
     
     override func viewWillAppear(_ animated: Bool)
@@ -55,6 +57,10 @@ class SelectedNotesViewController: UIViewController
     
     private func fetchInfo()
     {
+       
+          
+        
+        
         let query = databaseRef.child("notes").queryOrdered(byChild: "NotesID").queryEqual(toValue: passedNotesID)
         query.observeSingleEvent(of: .value, with: {(notes) in
             var currentNotes: Notes
@@ -70,6 +76,8 @@ class SelectedNotesViewController: UIViewController
                     if error == nil
                     {
                         self.notesImage.image = UIImage(data: data!)
+                        
+                        
                     }
                     else
                     {

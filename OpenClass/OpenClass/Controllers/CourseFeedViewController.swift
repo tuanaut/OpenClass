@@ -20,7 +20,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
         tableView.delegate = self;
         tableView.dataSource = self;
         
