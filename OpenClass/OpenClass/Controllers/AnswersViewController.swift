@@ -8,8 +8,8 @@
 
 import UIKit
 
-class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
+class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+{    
     @IBOutlet var commentTableView: UITableView!
     @IBOutlet weak var commentTextBox: UITextField!
     @IBOutlet weak var commentAddButton: UIButton!
@@ -27,7 +27,6 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
         listOfComments.append(recentComment)
         listOfUsers.append(currentUser)
         self.commentTableView.reloadData()
-        
     }
     
     // Starting amount of table cells.
@@ -52,29 +51,16 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
         return(cell)
     }
     
-
     override func viewDidLoad()
     {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
     
     override func didReceiveMemoryWarning()
     {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
+

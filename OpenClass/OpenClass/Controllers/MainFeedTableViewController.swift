@@ -28,7 +28,6 @@ class MainFeedTableViewController: UIViewController, UITableViewDataSource, UITa
         tableView.tableFooterView = UIView(frame: CGRect.zero)
 
         navigationController?.isNavigationBarHidden = false
-    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -98,6 +97,5 @@ class MainFeedTableViewController: UIViewController, UITableViewDataSource, UITa
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
-    //======================================================
-    
 }
+

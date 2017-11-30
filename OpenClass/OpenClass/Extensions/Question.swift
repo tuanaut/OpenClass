@@ -9,17 +9,16 @@
 import Foundation
 import Firebase
 
-class Question {
-    
+class Question
+{
     let Name: String
     let Date: String
     let Question: String
     let Key: String
     let Uid: String
     
-    
-    init(FirstName: String, LastName: String, Date: String, Time: String, Question: String, Key: String, Uid: String) {
-        
+    init(FirstName: String, LastName: String, Date: String, Time: String, Question: String, Key: String, Uid: String)
+    {
         self.Key = Key
         self.Uid = Uid
         self.Name = FirstName + " " + LastName
@@ -27,8 +26,8 @@ class Question {
         self.Question = Question
     }
     
-    
-    init(snapshot: DataSnapshot){
+    init(snapshot: DataSnapshot)
+    {
         let snapshotvalue = snapshot.value as? NSDictionary
         self.Name = snapshotvalue!["Name"] as! String
         self.Date = snapshotvalue!["Date"] as! String
@@ -37,3 +36,4 @@ class Question {
         self.Uid = snapshotvalue!["Uid"] as! String
     }
 }
+
