@@ -9,8 +9,8 @@
 import Foundation
 import Firebase
 
-class Question {
-    
+class Question
+{
     let Name: String
     let Date: String
     let Question: String
@@ -29,8 +29,8 @@ class Question {
         self.AnswersID = AnswersID
     }
     
-    
-    init(snapshot: DataSnapshot){
+    init(snapshot: DataSnapshot)
+    {
         let snapshotvalue = snapshot.value as? NSDictionary
         self.Name = snapshotvalue!["Name"] as! String
         self.Date = snapshotvalue!["Date"] as! String
@@ -40,3 +40,4 @@ class Question {
         self.AnswersID = snapshotvalue!["AnswersID"] as! String
     }
 }
+

@@ -9,16 +9,17 @@
 import UIKit
 import Firebase
 
-class ForgotPasswordViewController: UIViewController {
-
+class ForgotPasswordViewController: UIViewController
+{
     @IBOutlet weak var emailTextField: UITextField!
     
-    @IBAction func cancelButton(_ sender: Any) {
-        
+    @IBAction func cancelButton(_ sender: Any)
+    {
         self.dismiss(animated: true, completion: nil);
     }
     
-    @IBAction func submitButton(_ sender: Any) {
+    @IBAction func submitButton(_ sender: Any)
+    {
         let userEmail = emailTextField.text
         
         Auth.auth().sendPasswordReset(withEmail: userEmail!, completion: {(error)
@@ -40,10 +41,11 @@ class ForgotPasswordViewController: UIViewController {
                 
                 print("Sent password reset to email successfully.")
             }
-        })
+        });
     }
     
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
         // Hide keyboard when tapped with in the view
@@ -62,5 +64,5 @@ class ForgotPasswordViewController: UIViewController {
         
         self.present(myAlert, animated: true, completion: nil);
     }
-
 }
+

@@ -11,23 +11,26 @@ import FirebaseStorage
 import FirebaseDatabase
 import Firebase
 
-class CommentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
-
+class CommentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
+{
     var commentsArray = [Comment]()
     var passedUsername: String!
     var passedNotesID: String!
-    var databaseRef: DatabaseReference! {
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var comment: UITextField!
+    
+    var databaseRef: DatabaseReference!
+    {
         return Database.database().reference()
     }
     
-    var storageRef: Storage!{
+    var storageRef: Storage!
+    {
         return Storage.storage()
     }
     
-    @IBOutlet weak var tableView: UITableView!
-    
-    @IBOutlet weak var comment: UITextField!
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
         
         tableView.delegate = self
@@ -39,10 +42,15 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         tableView.estimatedRowHeight = 124
         tableView.rowHeight = 124
+        // Expand row height based on amount of text
+        tableView.rowHeight = UITableViewAutomaticDimension
         
+        // Hide excess cells in table view
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(true)
         
         // Reset course array to empty every you go back to this view controller and reload table view
@@ -54,19 +62,18 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         navigationController?.isNavigationBarHidden = false
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
         return commentsArray.count
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int
+    {
         return 1
     }
     
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
         cell.commentLabel.text = commentsArray[indexPath.row].commentPosted
@@ -75,25 +82,46 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         return cell
     }
     
-    override func didReceiveMemoryWarning() {
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    
-    @IBAction func commentButton(_ sender: Any) {
-        
-        if(comment.text?.isEmpty)!{
-            displayMyAlertMessage(userMessage: "Please enter a comment")
+    @IBAction func commentButton(_ sender: Any)
+    {
+        if(comment.text?.isEmpty)!
+        {
+            return
         }
-        else{
+        else
+        {
             let values = ["Commenter": passedUsername, "Comment": comment.text, "id": passedNotesID ]
-            databaseRef.child("comments").childByAutoId().setValue(values)
+            databaseRef.child("comments").childByAutoId().setValue(values, withCompletionBlock: {(error, ref) in
+                if(error == nil)
+                {
+                    let comment = Comment(commentPosted: self.comment.text!, username: self.passedUsername, notesID: self.passedNotesID)
+                  
+                    self.commentsArray.append(comment)
+                    self.tableView.reloadData()
+                    
+                    // Scroll down automatically when posting a new question
+                    let indexPath = IndexPath(row: self.commentsArray.count - 1, section: 0)
+                    self.tableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.middle, animated: true)
+                    
+                    // Remove the text in textfield after posting
+                    self.comment.text?.removeAll()
+                }
+                else
+                {
+                    self.displayMyAlertMessage(userMessage: (error?.localizedDescription)!)
+                }
+            });
         }
     }
     
-    private func fetchComments(){
+    private func fetchComments()
+    {
         print("notes id here")
         print(passedNotesID)
         let ref = databaseRef.child("comments").queryOrdered(byChild: "id").queryEqual(toValue: passedNotesID)
@@ -102,19 +130,16 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
             in
             print("parent")
             print(snapshot)
-            for childSnapshot in snapshot.children {
+            for childSnapshot in snapshot.children
+            {
                 print(childSnapshot)
                 print("This is child snapshot")
                 let newComment = Comment(snapshot: childSnapshot as! DataSnapshot)
                 self.commentsArray.append(newComment)
-                
             }
             self.tableView.reloadData()
-            
-        })
-        
+        });
     }
-
     
     func displayMyAlertMessage(userMessage: String)
     {
@@ -126,5 +151,5 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         self.present(myAlert, animated: true, completion: nil);
     }
-
 }
+
