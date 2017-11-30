@@ -106,15 +106,12 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
         imageRef.putData(imageData!, metadata: metaData, completion: {(newMetaData, error) in
             if (error == nil)
             {
-                let uid = Auth.auth().currentUser?.uid
-                Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: {(DataSnapshot)
-                    in
+                let currentUser = User.GetCurrentUser();
+                currentUser.ReadAvailableData(completionHandler: {(success) -> Void in
+                    let firstName = currentUser.GetFirstNameWithoutDatabaseAccess();
+                    let lastName = currentUser.GetLastNameWithoutDatabaseAccess();
                     
-                    let dictionary = DataSnapshot.value as? [String: AnyObject]
-                    let firstname: String = (dictionary!["firstname"] as? String)!
-                    let lastname: String = (dictionary!["lastname"] as? String)!
-                
-                    let newNotes = Notes(notesSubject: self.NotesSubjectText.text!, notesDescription: self.NotesDescriptionText.text!, notesImageURL: String(describing: newMetaData!.downloadURL()!), firstName: firstname, lastName: lastname, notesID: notesID, key: self.passedkey)
+                    let newNotes = Notes(notesSubject: self.NotesSubjectText.text!, notesDescription: self.NotesDescriptionText.text!, notesImageURL: String(describing: newMetaData!.downloadURL()!), firstName: firstName, lastName: lastName, notesID: notesID, key: self.passedkey)
                     
                     
                     if(newNotes.notesSubject.isEmpty || newNotes.notesID.isEmpty || newNotes.notesDescription.isEmpty || newNotes.notesImageURL.isEmpty || newNotes.username.isEmpty || newNotes.key.isEmpty)
@@ -124,7 +121,7 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
                     else
                     {
                         let notesRef = Database.database().reference().child("notes").childByAutoId()
-                    
+                        
                         let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL, "Username": newNotes.username, "NotesID": newNotes.notesID, "CourseKey": newNotes.key]
                         notesRef.setValue(values, withCompletionBlock: {(error, ref) in
                             if(error == nil)
@@ -142,7 +139,7 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
             }
             else
             {
-                print("There was an error")
+                print("An error occured while retrieving the ")
                 print(error!.localizedDescription)
             }
         });

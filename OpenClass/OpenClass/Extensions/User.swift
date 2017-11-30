@@ -330,6 +330,28 @@ class User
         }
     } // ReadAvailableData()
     
+    func ReadAvailableData(completionHandler: @escaping CompletionHandler) -> Void
+    {
+        if (!AccountID.isEmpty)
+        {
+            self.UserExists(completionHandler: {(exists) -> Void in
+                if (exists)
+                {
+                    Database.database().reference().child(self.User_Root).child(self.AccountID).observeSingleEvent(of: .value, with: {(DataSnapshot) in
+                        let dictionary = DataSnapshot.value as? [String: AnyObject];
+                        self.LastName = (dictionary![self.LastNameChild] as? String)!;
+                        self.FirstName = (dictionary![self.FirstNameChild] as? String)!;
+                        self.Email = (dictionary![self.EmailChild] as? String)!;
+                        self.AccountType = (dictionary![self.AccountTypeChild] as? String)!;
+                        
+                        let success = true;
+                        completionHandler(success);
+                    });
+                }
+            });
+        }
+    } // ReadAvailableData()
+    
     func GetEnrolledCourses(controller:CourseFeedViewController) -> Void
     {
         if (!AccountID.isEmpty)
