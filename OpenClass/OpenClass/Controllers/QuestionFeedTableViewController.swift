@@ -101,7 +101,8 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
             viewController.passedLastName = LastName
             viewController.passedCurrentQuestion = currQuestion
             viewController.passedAnswerID = passAnswersID
-//
+            viewController.passedCourseKey = passedCourseKey
+
         }
     }
     
@@ -171,12 +172,15 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
             let seconds = calendar.component(.second, from: date)
             let currTime = "\(hour):\(minutes):\(seconds)"
             
-            let values = ["Name": FirstName + " " + LastName, "Date": currDate + " " + currTime, "Question": QuestionTextField.text!, "CourseKey": passedCourseKey, "Uid": UserID, "AnswersID": answersID]
+            //let values = ["Name": FirstName + " " + LastName, "Date": currDate + " " + currTime, "Question": QuestionTextField.text!, "CourseKey": passedCourseKey, "Uid": UserID, "AnswersID": answersID]
+            let values = ["Name": FirstName + " " + LastName, "Date": currDate + " " + currTime, "Question": QuestionTextField.text!, "SubmitterUid": UserID, "AnswersID": answersID]
             
             questionRef.setValue(values, withCompletionBlock: {(error, ref) in
-                if(error == nil) {
+                if(error == nil)
+                {
+                    let question = Question(FirstName: self.FirstName, LastName: self.LastName, Date: currDate, Time: currTime, Question: self.QuestionTextField.text!, SubmitterUid: self.UserID, AnswersID: answersID)
                     
-                    let question = Question(FirstName: self.FirstName, LastName: self.LastName, Date: currDate, Time: currTime, Question: self.QuestionTextField.text!, Key: self.passedCourseKey, Uid: self.UserID, AnswersID: answersID)
+                   //let question = Question(FirstName: self.FirstName, LastName: self.LastName, Date: currDate, Time: currTime, Question: self.QuestionTextField.text!, Key: self.passedCourseKey, Uid: self.UserID, AnswersID: answersID)
                     
                     //self.QuestionsArray.insert(question, at: 0)
                     self.QuestionsArray.append(question)
@@ -194,7 +198,7 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
                     self.displayMyAlertMessage(userMessage: (error?.localizedDescription)!)
                 }
                 
-            })
+                })
             
         }
     }

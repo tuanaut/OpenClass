@@ -2,7 +2,7 @@
 //  AnswersViewController.swift
 //  OpenClass
 //
-//  Created by oscar on 11/14/17.
+//  Created by Oscar on 11/14/17.
 //  Copyright © 2017 CS472. All rights reserved.
 //
 
@@ -13,6 +13,7 @@ import Firebase
 
 class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var passedCourseKey : String!
     var passedUserID : String!
     var passedQuestion: String!
     var passedFirstName : String!
@@ -27,9 +28,7 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var commentTextBox: UITextField!
     @IBOutlet weak var commentAddButton: UIButton!
     
-   
 
-    
     // Button to add comment to Question.
     @IBAction func commentAddButton(sender: UIButton)
     {
@@ -40,13 +39,9 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
         {
             //Fetch Data
             let values = ["Commenter": passedFirstName, "Comment": commentTextBox.text, "id": passedAnswerID]
-            databaseRef.child("comments").childByAutoId().setValue(values,withCompletionBlock: {(error,ref) in
+            databaseRef.child("responses").child(passedCourseKey).child("answers").childByAutoId().setValue(values,withCompletionBlock: {(error,ref) in
                 if (error == nil)
                 {
-                    print("Three things to pass")
-                    print(self.commentTextBox.text!)
-                    print(self.passedFirstName)
-                    print(self.passedAnswerID)
                     let answer = Comment(commentPosted: self.commentTextBox.text!, username: self.passedFirstName, notesID: self.passedAnswerID)
                     self.answerArray.append(answer)
                     self.commentTableView.reloadData()
@@ -115,7 +110,7 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     private func fetchAnswers()
     {
-        let ref = databaseRef.child("comments").queryOrdered(byChild: "id").queryEqual(toValue: passedAnswerID)
+        let ref = databaseRef.child("responses").child(passedCourseKey).child("answers").queryOrdered(byChild: "id").queryEqual(toValue: passedAnswerID)
         ref.observeSingleEvent(of: .value, with: { (snapshot)
             in
             for childSnapshot in snapshot.children {
