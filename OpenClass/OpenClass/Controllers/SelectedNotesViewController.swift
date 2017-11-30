@@ -14,7 +14,7 @@ import FirebaseDatabase
 class SelectedNotesViewController: UIViewController
 {
     var passedNotesID: String!
-    var passedUsername: String!
+    
    // @IBOutlet weak var notesDescriptionText: UITextView!
     // @IBOutlet weak var notesDescriptionText: UITextField!
     //@IBOutlet weak var notesSubjectText: UITextField!
@@ -63,7 +63,7 @@ class SelectedNotesViewController: UIViewController
             for note in notes.children
             {
                  currentNotes = Notes(snapshot: note as! DataSnapshot)
-                self.passedUsername = currentNotes.username
+                
                 self.notesSubjectText.text = currentNotes.notesSubject
                 self.notesDescriptionText.text = currentNotes.notesDescription
                 self.storageRef.reference(forURL: currentNotes.notesImageURL).getData(maxSize: 10 * 1024 * 1024, completion: { (data, error) in
@@ -113,7 +113,7 @@ class SelectedNotesViewController: UIViewController
         {
             let viewController = segue.destination as! CommentsViewController
             viewController.passedNotesID = passedNotesID
-            viewController.passedUsername = passedUsername
+            
         }
     }
 }

@@ -14,7 +14,7 @@ import Firebase
 class CommentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     var commentsArray = [Comment]()
-    var passedUsername: String!
+    var userName:String!
     var passedNotesID: String!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var comment: UITextField!
@@ -32,6 +32,20 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        let currentUser = User.GetCurrentUser();
+        currentUser.GetFirstName(completionHandler: {(success) -> Void in
+            if (success)
+            {
+                self.userName = currentUser.GetFirstNameWithoutDatabaseAccess() + " ";
+            }
+        });
+        
+        currentUser.GetLastName(completionHandler: {(success) -> Void in
+            if (success)
+            {
+                self.userName = self.userName + currentUser.GetLastNameWithoutDatabaseAccess();
+            }
+        });
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -77,7 +91,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
         cell.commentLabel.text = commentsArray[indexPath.row].commentPosted
-        cell.usernameLabel.text = passedUsername
+        cell.usernameLabel.text = commentsArray[indexPath.row].username
       
         return cell
     }
@@ -96,11 +110,11 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         else
         {
-            let values = ["Commenter": passedUsername, "Comment": comment.text, "id": passedNotesID ]
+            let values = ["Commenter": userName, "Comment": comment.text, "id": passedNotesID ]
             databaseRef.child("comments").childByAutoId().setValue(values, withCompletionBlock: {(error, ref) in
                 if(error == nil)
                 {
-                    let comment = Comment(commentPosted: self.comment.text!, username: self.passedUsername, notesID: self.passedNotesID)
+                    let comment = Comment(commentPosted: self.comment.text!, username: self.userName, notesID: self.passedNotesID)
                   
                     self.commentsArray.append(comment)
                     self.tableView.reloadData()
