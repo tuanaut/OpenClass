@@ -18,6 +18,7 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var passedFirstName : String!
     var passedLastName : String!
     var passedAnswerID: String!
+    var passedCurrentQuestion: String!
     var answerArray = [Comment] ()
     var databaseRef = Database.database().reference()
     
@@ -42,9 +43,15 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
             databaseRef.child("comments").childByAutoId().setValue(values,withCompletionBlock: {(error,ref) in
                 if (error == nil)
                 {
+                    print("Three things to pass")
+                    print(self.commentTextBox.text!)
+                    print(self.passedFirstName)
+                    print(self.passedAnswerID)
                     let answer = Comment(commentPosted: self.commentTextBox.text!, username: self.passedFirstName, notesID: self.passedAnswerID)
                     self.answerArray.append(answer)
                     self.commentTableView.reloadData()
+                    self.commentTableView.rowHeight = UITableViewAutomaticDimension
+                    
                     
                     let indexPath = IndexPath(row: self.answerArray.count - 1, section: 0)
                     self.commentTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.middle, animated: true)
@@ -76,8 +83,8 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCellPrototype", for: indexPath) as! AnswersViewControllerTableViewCell
-        cell.commentUserName.text = answerArray[indexPath.row].commentPosted
-        cell.commentResponse.text = passedFirstName
+        cell.commentResponse.text = answerArray[indexPath.row].commentPosted
+        cell.commentUserName.text = answerArray[indexPath.row].username + " says: "
        
         return(cell)
     }
@@ -116,6 +123,8 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
                 let newAnswer = Comment(snapshot: childSnapshot as! DataSnapshot)
                 self.answerArray.append(newAnswer)
             }
+            self.commentTableView.rowHeight = UITableViewAutomaticDimension
+            
             self.commentTableView.reloadData()
             
         })
@@ -127,6 +136,7 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
 
     
     /*

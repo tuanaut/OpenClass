@@ -19,7 +19,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        //handleLogout()
         tableView.delegate = self
         tableView.dataSource = self
         

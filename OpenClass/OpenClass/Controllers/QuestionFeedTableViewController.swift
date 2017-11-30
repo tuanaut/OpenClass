@@ -22,6 +22,7 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
     var LastName: String!
     var currQuestion: String!
     var UserID: String! = Auth.auth().currentUser?.uid
+    var passAnswersID: String!
     var bottomConstraint: NSLayoutConstraint?
     var borderBottomConstraint: NSLayoutConstraint?
     var tableViewConstraint: NSLayoutConstraint?
@@ -79,17 +80,13 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-//        if(segue.identifier == "GoToAddNewNotes"){
-//            let viewController = segue.destination as! NewClassNotesViewController
-//            viewController.passedkey = passedCourseKey
-//
-//        }
         if(segue.identifier == "GoToSelectedAnswers"){
             let viewController = segue.destination as! AnswersViewController
             viewController.passedUserID = UserID
             viewController.passedFirstName = FirstName
-            //viewController.passedLastName = LastName
-            //viewController.passedCurrentQuestion = CurrentQuestion
+            viewController.passedLastName = LastName
+            viewController.passedCurrentQuestion = currQuestion
+            viewController.passedAnswerID = passAnswersID
 //
         }
     }
@@ -113,6 +110,7 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
         let row:Question = QuestionsArray[indexPath.row]
         
         currQuestion = row.Question
+        passAnswersID = row.AnswersID
         QuestionTextField.endEditing(true)
         
         // Unhighlight the selected row after all procedures has been done
@@ -140,7 +138,7 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
         else
         {
             let questionRef = Database.database().reference().child("questions").child(passedCourseKey).childByAutoId()
-            
+            let answersID = NSUUID().uuidString
             let date = Date()
             let calendar = Calendar.current
             let formatter = DateFormatter()
@@ -155,12 +153,12 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
             let seconds = calendar.component(.second, from: date)
             let currTime = "\(hour):\(minutes):\(seconds)"
             
-            let values = ["Name": FirstName + " " + LastName, "Date": currDate + " " + currTime, "Question": QuestionTextField.text!, "CourseKey": passedCourseKey, "Uid": UserID]
+            let values = ["Name": FirstName + " " + LastName, "Date": currDate + " " + currTime, "Question": QuestionTextField.text!, "CourseKey": passedCourseKey, "Uid": UserID, "AnswersID": answersID]
             
             questionRef.setValue(values, withCompletionBlock: {(error, ref) in
                 if(error == nil) {
                     
-                    let question = Question(FirstName: self.FirstName, LastName: self.LastName, Date: currDate, Time: currTime, Question: self.QuestionTextField.text!, Key: self.passedCourseKey, Uid: self.UserID)
+                    let question = Question(FirstName: self.FirstName, LastName: self.LastName, Date: currDate, Time: currTime, Question: self.QuestionTextField.text!, Key: self.passedCourseKey, Uid: self.UserID, AnswersID: answersID)
                     
                     //self.QuestionsArray.insert(question, at: 0)
                     self.QuestionsArray.append(question)
@@ -181,6 +179,7 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
                 }
                 
             })
+            
         }
     }
     
