@@ -73,7 +73,7 @@ class SelectedNotesViewController: UIViewController
             for note in notes.children
             {
                  currentNotes = Notes(snapshot: note as! DataSnapshot)
-                self.passedUsername = currentNotes.username
+                
                 self.notesSubjectText.text = currentNotes.notesSubject
                 self.notesDescriptionText.text = currentNotes.notesDescription
                 self.storageRef.reference(forURL: currentNotes.notesImageURL).getData(maxSize: 10 * 1024 * 1024, completion: { (data, error) in
@@ -125,7 +125,7 @@ class SelectedNotesViewController: UIViewController
         {
             let viewController = segue.destination as! CommentsViewController
             viewController.passedNotesID = passedNotesID
-            viewController.passedUsername = passedUsername
+
             viewController.passedCourseKey = passedCourseKey
         }
     }
