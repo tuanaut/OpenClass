@@ -92,6 +92,7 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
         {
             let viewController = segue.destination as! SelectedNotesViewController
             viewController.passedNotesID = valueToPass
+            viewController.passedCourseKey = passedCourseKey
         }
     }
     

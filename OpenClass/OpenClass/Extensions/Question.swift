@@ -14,13 +14,11 @@ class Question
     let Name: String
     let Date: String
     let Question: String
-    let Key: String
-    let Uid: String
+    let SubmitterUid: String
     
-    init(FirstName: String, LastName: String, Date: String, Time: String, Question: String, Key: String, Uid: String)
+    init(FirstName: String, LastName: String, Date: String, Time: String, Question: String, SubmitterUid: String)
     {
-        self.Key = Key
-        self.Uid = Uid
+        self.SubmitterUid = SubmitterUid
         self.Name = FirstName + " " + LastName
         self.Date = Date + " " + Time
         self.Question = Question
@@ -32,8 +30,7 @@ class Question
         self.Name = snapshotvalue!["Name"] as! String
         self.Date = snapshotvalue!["Date"] as! String
         self.Question = snapshotvalue!["Question"] as! String
-        self.Key = snapshotvalue!["CourseKey"] as! String
-        self.Uid = snapshotvalue!["Uid"] as! String
+        self.SubmitterUid = snapshotvalue!["SubmitterUid"] as! String
     }
 }
 
