@@ -18,7 +18,11 @@ class SelectedNotesViewController: UIViewController
     
     var passedNotesID: String!
     var passedUsername: String!
-  
+    var passedCourseKey: String!
+   // @IBOutlet weak var notesDescriptionText: UITextView!
+    // @IBOutlet weak var notesDescriptionText: UITextField!
+    //@IBOutlet weak var notesSubjectText: UITextField!
+
     @IBOutlet weak var notesSubjectText: UILabel!
     @IBOutlet weak var notesDescriptionText: UILabel!
     @IBOutlet weak var notesImage: UIImageView!
@@ -122,6 +126,7 @@ class SelectedNotesViewController: UIViewController
             let viewController = segue.destination as! CommentsViewController
             viewController.passedNotesID = passedNotesID
             viewController.passedUsername = passedUsername
+            viewController.passedCourseKey = passedCourseKey
         }
     }
 }

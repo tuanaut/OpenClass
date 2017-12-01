@@ -170,12 +170,12 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
             let seconds = calendar.component(.second, from: date)
             let currTime = "\(hour):\(minutes):\(seconds)"
             
-            let values = ["Name": FirstName + " " + LastName, "Date": currDate + " " + currTime, "Question": QuestionTextField.text!, "CourseKey": passedCourseKey, "Uid": UserID]
+            let values = ["Name": FirstName + " " + LastName, "Date": currDate + " " + currTime, "Question": QuestionTextField.text!, "SubmitterUid": UserID]
             
             questionRef.setValue(values, withCompletionBlock: {(error, ref) in
                 if(error == nil)
                 {
-                    let question = Question(FirstName: self.FirstName, LastName: self.LastName, Date: currDate, Time: currTime, Question: self.QuestionTextField.text!, Key: self.passedCourseKey, Uid: self.UserID)
+                    let question = Question(FirstName: self.FirstName, LastName: self.LastName, Date: currDate, Time: currTime, Question: self.QuestionTextField.text!, SubmitterUid: self.UserID)
                     
                     //self.QuestionsArray.insert(question, at: 0)
                     self.QuestionsArray.append(question)
