@@ -123,9 +123,9 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
                     
                     
                   
-                        let notesRef = Database.database().reference().child("notes").childByAutoId()
+                        let notesRef = Database.database().reference().child("notes").child(self.passedkey).childByAutoId()
                         
-                        let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL, "Username": newNotes.username, "NotesID": newNotes.notesID, "CourseKey": newNotes.key]
+                        let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL, "Username": newNotes.username, "NotesID": newNotes.notesID]
                         notesRef.setValue(values, withCompletionBlock: {(error, ref) in
                             if(error == nil)
                             {

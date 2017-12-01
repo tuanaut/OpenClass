@@ -65,7 +65,7 @@ class SelectedNotesViewController: UIViewController
           
         
         
-        let query = databaseRef.child("notes").queryOrdered(byChild: "NotesID").queryEqual(toValue: passedNotesID)
+        let query = databaseRef.child("notes").child(passedCourseKey).queryOrdered(byChild: "NotesID").queryEqual(toValue: passedNotesID)
         query.observeSingleEvent(of: .value, with: {(notes) in
             var currentNotes: Notes
             print("snapshots of notes")
