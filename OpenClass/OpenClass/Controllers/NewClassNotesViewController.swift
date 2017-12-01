@@ -95,6 +95,14 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
     {
         let notesID = NSUUID().uuidString
         let imageName = NSUUID().uuidString
+    
+        if(NotesImage.image == nil || (NotesSubjectText.text?.isEmpty)! || (NotesDescriptionText.text?.isEmpty)!)
+        {
+            displayMyAlertMessage(userMessage: "All fields are required", correct: false)
+            return
+        }
+        
+        else{
         let imageData = UIImageJPEGRepresentation(NotesImage.image!, 0.8)
         let metaData = StorageMetadata()
         metaData.contentType = "image/jpeg"
@@ -114,45 +122,53 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
                     let newNotes = Notes(notesSubject: self.NotesSubjectText.text!, notesDescription: self.NotesDescriptionText.text!, notesImageURL: String(describing: newMetaData!.downloadURL()!), firstName: firstName, lastName: lastName, notesID: notesID, key: self.passedkey)
                     
                     
-                    if(newNotes.notesSubject.isEmpty || newNotes.notesID.isEmpty || newNotes.notesDescription.isEmpty || newNotes.notesImageURL.isEmpty || newNotes.username.isEmpty || newNotes.key.isEmpty)
-                    {
-                        self.displayMyAlertMessage(userMessage: "All fields are required")
-                    }
-                    else
-                    {
+                  
                         let notesRef = Database.database().reference().child("notes").childByAutoId()
                         
                         let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL, "Username": newNotes.username, "NotesID": newNotes.notesID, "CourseKey": newNotes.key]
                         notesRef.setValue(values, withCompletionBlock: {(error, ref) in
                             if(error == nil)
                             {
-                                self.displayMyAlertMessage(userMessage: "Notes have been posted!")
+                                self.displayMyAlertMessage(userMessage: "Notes have been posted!", correct: true)
                                 //self.navigationController?.popToRootViewController(animated: true)
                             }
                             else
                             {
-                                self.displayMyAlertMessage(userMessage: "Error: Notes not posted.")
+                                self.displayMyAlertMessage(userMessage: "Error: Notes were not posted.", correct: false)
                             }
                         });
-                    }
+                    
                 });
+            
             }
             else
             {
-                print("An error occured while retrieving the ")
+                print("An error occured while retrieving")
                 print(error!.localizedDescription)
             }
         });
+        }
     }
     
-    func displayMyAlertMessage(userMessage: String)
+    func displayMyAlertMessage(userMessage: String, correct: Bool)
     {
         let myAlert = UIAlertController(title:"Alert", message: userMessage, preferredStyle: UIAlertControllerStyle.alert);
         
+        if(correct){
+            let okAction = UIAlertAction(title:"OK", style: .default, handler:  { action in self.navigationController?.popViewController(animated: true)})
+            myAlert.addAction(okAction)
+            
+        }
+        else{
             let okAction = UIAlertAction(title:"Ok", style: UIAlertActionStyle.default, handler: {action in self.dismiss(animated: true, completion: nil)});
             myAlert.addAction(okAction)
+            
+        }
+        
+        
         
         self.present(myAlert, animated: true, completion: nil);
     }
 }
+
 

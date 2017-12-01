@@ -111,8 +111,10 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         else
         {
+
             let values = ["Commenter": self.userName, "Comment": comment.text, "id": passedNotesID ]
             databaseRef.child("responses").child(passedCourseKey).child("comments").childByAutoId().setValue(values, withCompletionBlock: {(error, ref) in
+
 
                 if(error == nil)
                 {

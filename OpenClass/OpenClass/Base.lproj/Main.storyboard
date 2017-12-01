@@ -1505,6 +1505,7 @@
                                     <constraint firstItem="KlC-Wc-2Mf" firstAttribute="leading" secondItem="DgM-KK-V60" secondAttribute="leading" id="A4B-Kz-ffH"/>
                                     <constraint firstItem="DgM-KK-V60" firstAttribute="top" secondItem="KlC-Wc-2Mf" secondAttribute="bottom" constant="8" symbolic="YES" id="Cnc-ej-Oo1"/>
                                     <constraint firstItem="DgM-KK-V60" firstAttribute="leading" secondItem="8bk-ly-SYo" secondAttribute="leading" id="DoL-QR-PmX"/>
+                                    <constraint firstAttribute="trailing" secondItem="8bk-ly-SYo" secondAttribute="trailing" constant="20" id="IDl-hF-E4U"/>
                                     <constraint firstItem="96u-dL-Bdv" firstAttribute="trailing" secondItem="DgM-KK-V60" secondAttribute="trailing" id="LTv-cf-NIH"/>
                                     <constraint firstItem="DZK-Ev-9ax" firstAttribute="top" secondItem="bZm-FH-gM9" secondAttribute="top" constant="24" id="Ngi-1C-AVG"/>
                                     <constraint firstItem="96u-dL-Bdv" firstAttribute="centerX" secondItem="bZm-FH-gM9" secondAttribute="centerX" id="S4X-mw-6Gy"/>
@@ -1514,6 +1515,7 @@
                                     <constraint firstAttribute="bottom" secondItem="8bk-ly-SYo" secondAttribute="bottom" constant="16" id="kZk-w0-vSD"/>
                                     <constraint firstItem="KlC-Wc-2Mf" firstAttribute="top" secondItem="96u-dL-Bdv" secondAttribute="bottom" constant="17" id="lKO-73-b27"/>
                                     <constraint firstItem="DZK-Ev-9ax" firstAttribute="leading" secondItem="96u-dL-Bdv" secondAttribute="leading" id="q9e-Jz-Fkn"/>
+                                    <constraint firstItem="8bk-ly-SYo" firstAttribute="leading" secondItem="bZm-FH-gM9" secondAttribute="leading" constant="20" id="qwt-F4-cso"/>
                                     <constraint firstItem="DZK-Ev-9ax" firstAttribute="leading" secondItem="bZm-FH-gM9" secondAttribute="leading" constant="20" id="sOf-1A-UDM"/>
                                     <constraint firstItem="DgM-KK-V60" firstAttribute="trailing" secondItem="8bk-ly-SYo" secondAttribute="trailing" id="tky-Ci-4bq"/>
                                 </constraints>
