@@ -1543,6 +1543,7 @@
                         <outlet property="notesImage" destination="8bk-ly-SYo" id="ahC-VS-j0U"/>
                         <outlet property="notesSubjectText" destination="96u-dL-Bdv" id="s57-cN-WGz"/>
                         <segue destination="Oyp-6a-DQD" kind="show" identifier="GoToComments" id="9jL-Lt-vsI"/>
+                        <segue destination="D5E-6g-6nR" kind="show" identifier="GoToFullScreenPhoto" id="oN3-cr-mv3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xD3-j1-hCQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1553,6 +1554,35 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="4941.6000000000004" y="-769.56521739130437"/>
+        </scene>
+        <!--Full Screen Photo View Controller-->
+        <scene sceneID="F7s-7B-Ag7">
+            <objects>
+                <viewController id="D5E-6g-6nR" customClass="FullScreenPhotoViewController" customModule="OpenClass" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qKI-ak-s2H">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="696-wQ-pXk">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="696-wQ-pXk" firstAttribute="trailing" secondItem="CAl-TB-i4g" secondAttribute="trailing" id="19V-Dc-xeW"/>
+                            <constraint firstItem="696-wQ-pXk" firstAttribute="top" secondItem="CAl-TB-i4g" secondAttribute="top" id="Gcs-g3-qmg"/>
+                            <constraint firstItem="696-wQ-pXk" firstAttribute="leading" secondItem="CAl-TB-i4g" secondAttribute="leading" id="ddT-Cl-qEO"/>
+                            <constraint firstItem="696-wQ-pXk" firstAttribute="bottom" secondItem="CAl-TB-i4g" secondAttribute="bottom" id="muj-hH-5lA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="CAl-TB-i4g"/>
+                    </view>
+                    <connections>
+                        <outlet property="fullscreenphoto" destination="696-wQ-pXk" id="w75-Gk-j75"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5YB-bM-6iu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5813.6000000000004" y="-1521.5892053973014"/>
         </scene>
         <!--Comments View Controller-->
         <scene sceneID="S5M-KO-cWz">
