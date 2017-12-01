@@ -16,6 +16,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     var commentsArray = [Comment]()
     var userName:String!
     var passedNotesID: String!
+    var passedCourseKey: String!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var comment: UITextField!
     
@@ -110,8 +111,9 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         else
         {
-            let values = ["Commenter": userName, "Comment": comment.text, "id": passedNotesID ]
-            databaseRef.child("comments").childByAutoId().setValue(values, withCompletionBlock: {(error, ref) in
+            let values = ["Commenter": self.userName, "Comment": comment.text, "id": passedNotesID ]
+            databaseRef.child("responses").child(passedCourseKey).child("comments").childByAutoId().setValue(values, withCompletionBlock: {(error, ref) in
+
                 if(error == nil)
                 {
                     let comment = Comment(commentPosted: self.comment.text!, username: self.userName, notesID: self.passedNotesID)
@@ -138,7 +140,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     {
         print("notes id here")
         print(passedNotesID)
-        let ref = databaseRef.child("comments").queryOrdered(byChild: "id").queryEqual(toValue: passedNotesID)
+        let ref = databaseRef.child("responses").child(passedCourseKey).child("comments").queryOrdered(byChild: "id").queryEqual(toValue: passedNotesID)
         
         ref.observeSingleEvent(of: .value, with: {(snapshot)
             in

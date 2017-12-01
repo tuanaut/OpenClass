@@ -14,7 +14,8 @@ import FirebaseDatabase
 class SelectedNotesViewController: UIViewController
 {
     var passedNotesID: String!
-    
+    var passedUsername: String!
+    var passedCourseKey: String!
    // @IBOutlet weak var notesDescriptionText: UITextView!
     // @IBOutlet weak var notesDescriptionText: UITextField!
     //@IBOutlet weak var notesSubjectText: UITextField!
@@ -113,7 +114,7 @@ class SelectedNotesViewController: UIViewController
         {
             let viewController = segue.destination as! CommentsViewController
             viewController.passedNotesID = passedNotesID
-            
+            viewController.passedCourseKey = passedCourseKey
         }
     }
 }
