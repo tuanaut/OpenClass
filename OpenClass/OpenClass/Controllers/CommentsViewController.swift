@@ -125,7 +125,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     {
         print("notes id here")
         print(passedNotesID)
-        let ref = databaseRef.child("comments").queryOrdered(byChild: "id").queryEqual(toValue: passedNotesID)
+        let ref = databaseRef.child("responses").child(passedCourseKey).child("comments").queryOrdered(byChild: "id").queryEqual(toValue: passedNotesID)
         
         ref.observeSingleEvent(of: .value, with: {(snapshot)
             in
