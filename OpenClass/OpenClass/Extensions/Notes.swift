@@ -17,7 +17,7 @@ struct Notes
     var notesImageURL: String
     var notesID: String!
     var username: String
-    var key: String // course key
+    
 
     init(notesSubject: String, notesDescription: String, notesImageURL: String, firstName: String, lastName: String, notesID: String, key: String)
     {
@@ -26,7 +26,7 @@ struct Notes
         self.notesImageURL = notesImageURL;
         self.username = firstName + " " + lastName;
         self.notesID = notesID;
-        self.key = key;
+        
     }
     
    init(snapshot: DataSnapshot)
@@ -37,7 +37,7 @@ struct Notes
         self.notesImageURL = snapshotvalue!["NotesImageURL"] as! String
         self.username = snapshotvalue!["Username"] as! String
         self.notesID = snapshotvalue!["NotesID"] as! String
-        self.key = snapshotvalue!["CourseKey"] as! String
+    
     }
 }
 

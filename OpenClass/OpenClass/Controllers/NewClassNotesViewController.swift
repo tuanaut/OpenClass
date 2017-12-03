@@ -72,7 +72,7 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
         actionSheet.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: {(action:UIAlertAction) in
                 imagePickerController.sourceType = .photoLibrary
                 self.present(imagePickerController, animated: true, completion:nil)
-            imagePickerController.allowsEditing = true
+            imagePickerController.allowsEditing = false
             }))
         
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
@@ -131,9 +131,9 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
                     
                     
                   
-                        let notesRef = Database.database().reference().child("notes").childByAutoId()
+                        let notesRef = Database.database().reference().child("notes").child(self.passedkey).childByAutoId()
                         
-                        let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL, "Username": newNotes.username, "NotesID": newNotes.notesID, "CourseKey": newNotes.key]
+                        let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL, "Username": newNotes.username, "NotesID": newNotes.notesID]
                         notesRef.setValue(values, withCompletionBlock: {(error, ref) in
                             if(error == nil)
                             {
