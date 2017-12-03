@@ -15,7 +15,7 @@ class SelectedNotesViewController: UIViewController
 {
     
    
-    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var passedNotesID: String!
     var passedUsername: String!
     var passedCourseKey: String!
@@ -26,6 +26,8 @@ class SelectedNotesViewController: UIViewController
     @IBOutlet weak var notesSubjectText: UILabel!
     @IBOutlet weak var notesDescriptionText: UILabel!
     @IBOutlet weak var notesImage: UIImageView!
+    
+    
     
     var databaseRef: DatabaseReference!
     {
@@ -43,6 +45,8 @@ class SelectedNotesViewController: UIViewController
         print("this is passed notes id")
         print(passedNotesID)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Comments", style: .plain, target: self, action: #selector(self.gotoCommentsSection))
+       fetchInfo()
+        
         // Do any additional setup after loading the view.
         
     }
@@ -50,7 +54,7 @@ class SelectedNotesViewController: UIViewController
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
-        fetchInfo()
+        //fetchInfo()
     }
 
     override func didReceiveMemoryWarning()
@@ -61,8 +65,12 @@ class SelectedNotesViewController: UIViewController
     
     private func fetchInfo()
     {
-       
-          
+        activityIndicator.center = self.notesImage.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         
         let query = databaseRef.child("notes").queryOrdered(byChild: "NotesID").queryEqual(toValue: passedNotesID)
@@ -80,12 +88,15 @@ class SelectedNotesViewController: UIViewController
                     if error == nil
                     {
                         self.notesImage.image = UIImage(data: data!)
-                        
-                        
+                        self.activityIndicator.stopAnimating()
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                     else
                     {
                         print(error!.localizedDescription)
+                        self.activityIndicator.stopAnimating()
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        
                     }
                 });
             }
@@ -94,6 +105,10 @@ class SelectedNotesViewController: UIViewController
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer)
     {
+        if(notesImage.image == nil){
+            
+            notesImage.isUserInteractionEnabled = false
+        }
         let imageView = sender.view as! UIImageView
         let newImageView = UIImageView(image: imageView.image)
         newImageView.frame = UIScreen.main.bounds
