@@ -105,9 +105,11 @@ class SelectedNotesViewController: UIViewController
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer)
     {
-   
-        performSegue(withIdentifier: "GoToFullScreenPhoto", sender: self)
         
+        if(notesImage.image != nil){
+        
+            performSegue(withIdentifier: "GoToFullScreenPhoto", sender: self)
+        }
 
     }
     
