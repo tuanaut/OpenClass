@@ -13,6 +13,8 @@ import FirebaseAuth
 
 class NewClassNotesViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate
 {
+    
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     @IBOutlet weak var NotesSubjectText: UITextField!
     var passedkey: String!
     @IBOutlet weak var NotesDescriptionText: UITextField!
@@ -95,7 +97,10 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
     {
         let notesID = NSUUID().uuidString
         let imageName = NSUUID().uuidString
-    
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.white
+        view.addSubview(activityIndicator)
         if(NotesImage.image == nil || (NotesSubjectText.text?.isEmpty)! || (NotesDescriptionText.text?.isEmpty)!)
         {
             displayMyAlertMessage(userMessage: "All fields are required", correct: false)
@@ -109,7 +114,10 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
         //let uid = Auth.auth().currentUser?.uid
         
         let imagePath = "notesImage\(imageName)/notesPic.jpg"
-        
+        activityIndicator.startAnimating()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        self.view.alpha = 0.75
+        UIApplication.shared.beginIgnoringInteractionEvents()
         let imageRef = storageRef.reference().child(imagePath)
         imageRef.putData(imageData!, metadata: metaData, completion: {(newMetaData, error) in
             if (error == nil)
@@ -130,11 +138,20 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
                             if(error == nil)
                             {
                                 self.displayMyAlertMessage(userMessage: "Notes have been posted!", correct: true)
+                                self.activityIndicator.stopAnimating()
+                                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                                self.view.alpha = 1.0
+                                UIApplication.shared.endIgnoringInteractionEvents()
                                 //self.navigationController?.popToRootViewController(animated: true)
                             }
                             else
                             {
                                 self.displayMyAlertMessage(userMessage: "Error: Notes were not posted.", correct: false)
+                                self.activityIndicator.stopAnimating()
+                                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                                self.view.alpha = 1.0
+                                UIApplication.shared.endIgnoringInteractionEvents()
+                                
                             }
                         });
                     
