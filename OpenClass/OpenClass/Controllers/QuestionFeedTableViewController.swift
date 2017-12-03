@@ -25,6 +25,7 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
     var bottomConstraint: NSLayoutConstraint?
     var borderBottomConstraint: NSLayoutConstraint?
     var tableViewConstraint: NSLayoutConstraint?
+    var refreshControl: UIRefreshControl = UIRefreshControl()
     
     override func viewDidLoad()
     {
@@ -61,6 +62,12 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
         
         // Set up keyboard dismissing listener
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        
+        // Set up the refresh control
+        refreshControl.addTarget(self, action: #selector(refreshData), for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor.orange
+        refreshControl.backgroundColor = UIColor.darkGray
+        tableView.addSubview(refreshControl)
         
         let currentUser = User.GetCurrentUser();
         currentUser.GetFirstName(completionHandler: {(success) -> Void in
@@ -237,6 +244,28 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
             }
             self.tableView.reloadData()
         });
+    }
+    
+    @objc func refreshData() {
+        // Uncomment it and refresh to test
+        //QuestionsArray.append(Question(FirstName: "Jack", LastName: "Hills", Date: "Today", Time: "Now", Question: "Is this working?", SubmitterUid: "xxxxxxxxxxx"));
+        tableView.reloadData();
+        refreshControl.endRefreshing();
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y;
+        
+        if (offset < -232)
+        {
+            self.refreshControl.attributedTitle = NSAttributedString(string: "You Can Let Go Now!", attributes: [NSAttributedStringKey.foregroundColor: self.refreshControl.tintColor, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20)]);
+        }
+        else
+        {
+            self.refreshControl.attributedTitle = NSAttributedString(string: "Reloading the Questions...", attributes: [NSAttributedStringKey.foregroundColor: self.refreshControl.tintColor, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20)]);
+        }
+        
+        refreshControl.backgroundColor = UIColor.darkGray;
     }
     
     func displayMyAlertMessage(userMessage: String)
