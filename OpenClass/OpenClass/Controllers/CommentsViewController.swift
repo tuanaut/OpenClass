@@ -243,6 +243,8 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // Uncomment this and refresh to test it
         //commentsArray.append(Comment(commentPosted: "Hello", username: "Bob", date: "Today", time: "Now", notesID: "xxxxxxx"))
+        commentsArray.removeAll();
+        fetchComments();
         tableView.reloadData();
         refreshControl.endRefreshing();
     }

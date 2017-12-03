@@ -249,6 +249,8 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
     @objc func refreshData() {
         // Uncomment it and refresh to test
         //QuestionsArray.append(Question(FirstName: "Jack", LastName: "Hills", Date: "Today", Time: "Now", Question: "Is this working?", SubmitterUid: "xxxxxxxxxxx"));
+        QuestionsArray.removeAll();
+        fetchQuestions();
         tableView.reloadData();
         refreshControl.endRefreshing();
     }
