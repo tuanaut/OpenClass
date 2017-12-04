@@ -140,14 +140,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         let indexPath = tableView.indexPathForSelectedRow!;
         let row:Course = coursesArray[indexPath.row];
         
-        if (accountType == "0")
-        {
-            valueToPass = nil;
-        }
-        if (accountType == "1")
-        {
-            valueToPass = row.GetKey();
-        }
+        valueToPass = row.GetKey();
         print("valueToPass");
         print(valueToPass);
         performSegue(withIdentifier: "GoToMainFeed", sender: self);

@@ -111,7 +111,7 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
     private func fetchNotesForCourse()
     {
         let ref = Database.database().reference()
-        
+        print(passedCourseKey);
         let query = ref.child("notes").child(passedCourseKey).queryOrderedByKey()
         print("The current key is")
         print(passedCourseKey)
