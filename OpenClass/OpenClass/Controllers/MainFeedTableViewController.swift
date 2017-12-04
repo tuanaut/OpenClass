@@ -28,9 +28,19 @@ class MainFeedTableViewController: UIViewController, UITableViewDataSource, UITa
         // Hide excess cells in table view
         tableView.tableFooterView = UIView(frame: CGRect.zero)
 
+        // Set up navigation bar
         navigationController?.isNavigationBarHidden = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Key: \((passedCourseKey)!)", style: .done, target: nil, action: nil)
-        navigationItem.rightBarButtonItem?.isEnabled = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Courses"), style: .plain, target: self, action: #selector(GoBack))
+        if (passedCourseKey != nil)
+        {
+            navigationItem.prompt = "Key: \((passedCourseKey)!)"
+        }
+        
+    }
+    
+    @objc func GoBack()
+    {
+        _ = navigationController?.popViewController(animated: true);
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

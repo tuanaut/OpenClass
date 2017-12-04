@@ -48,6 +48,7 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
         self.hideKeyboardWhenTappedAround()
         
         navigationController?.isNavigationBarHidden = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Notes Feed"), style: .plain, target: self, action: #selector(GoBack))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(PostNotes))
     }
 
@@ -93,6 +94,11 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
         picker.dismiss(animated: true, completion: nil)
     }
     
+    @objc func GoBack()
+    {
+        _ = navigationController?.popViewController(animated: true);
+    }
+    
     @objc func PostNotes()
     {
         let notesID = NSUUID().uuidString
@@ -112,6 +118,20 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
         let metaData = StorageMetadata()
         metaData.contentType = "image/jpeg"
         //let uid = Auth.auth().currentUser?.uid
+            
+        let date = Date()
+        let calendar = Calendar.current
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        
+        // Get current date
+        let currDate = formatter.string(from: date)
+        
+        // Get current time
+        let hour = calendar.component(.hour, from: date)
+        let minutes = calendar.component(.minute, from: date)
+        let seconds = calendar.component(.second, from: date)
+        let currTime = "\(hour):\(minutes):\(seconds)"
         
         let imagePath = "notesImage\(imageName)/notesPic.jpg"
         activityIndicator.startAnimating()
@@ -127,13 +147,13 @@ class NewClassNotesViewController: UIViewController, UINavigationControllerDeleg
                     let firstName = currentUser.GetFirstNameWithoutDatabaseAccess();
                     let lastName = currentUser.GetLastNameWithoutDatabaseAccess();
                     
-                    let newNotes = Notes(notesSubject: self.NotesSubjectText.text!, notesDescription: self.NotesDescriptionText.text!, notesImageURL: String(describing: newMetaData!.downloadURL()!), firstName: firstName, lastName: lastName, notesID: notesID, key: self.passedkey)
+                    let newNotes = Notes(notesSubject: self.NotesSubjectText.text!, notesDescription: self.NotesDescriptionText.text!, notesImageURL: String(describing: newMetaData!.downloadURL()!), firstName: firstName, lastName: lastName, date: currDate, time: currTime, notesID: notesID, key: self.passedkey)
                     
                     
                   
                         let notesRef = Database.database().reference().child("notes").child(self.passedkey).childByAutoId()
                         
-                        let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL, "Username": newNotes.username, "NotesID": newNotes.notesID]
+                    let values = ["NotesSubject": newNotes.notesSubject, "NotesDescription": newNotes.notesDescription, "NotesImageURL": newNotes.notesImageURL, "Username": newNotes.username, "Date": currDate + " " + currTime, "NotesID": newNotes.notesID]
                         notesRef.setValue(values, withCompletionBlock: {(error, ref) in
                             if(error == nil)
                             {

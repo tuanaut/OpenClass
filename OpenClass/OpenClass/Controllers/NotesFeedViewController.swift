@@ -22,13 +22,14 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
     {
         super.viewDidLoad()
      
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "New Notes", style: .plain, target: self, action: #selector(AddNotes))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Main Menu"), style: .plain, target: self, action: #selector(GoBack))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "New Notes"), style: .plain, target: self, action: #selector(AddNotes))
         
        tableView.delegate = self 
         tableView.dataSource = self
         navigationController?.isNavigationBarHidden = false
-        tableView.estimatedRowHeight = 117
-        tableView.rowHeight = 117
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = 80
         
         // Expand row height based on amount of text
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -55,10 +56,9 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
         print(NotesArray.count)
     }
     
-    override func didReceiveMemoryWarning()
+    @objc func GoBack()
     {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        _ = navigationController?.popViewController(animated: true);
     }
     
     @objc func AddNotes()
@@ -102,6 +102,7 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: "NotesCell", for: indexPath) as! NoteTableViewCell
         cell.subjectLabel.text = NotesArray[indexPath.row].notesSubject
         cell.usernameLabel.text = NotesArray[indexPath.row].username
+        cell.dateLabel.text = NotesArray[indexPath.row].date
        
         return cell
     }
@@ -110,7 +111,7 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
     private func fetchNotesForCourse()
     {
         let ref = Database.database().reference()
-        
+        print(passedCourseKey);
         let query = ref.child("notes").child(passedCourseKey).queryOrderedByKey()
         print("The current key is")
         print(passedCourseKey)

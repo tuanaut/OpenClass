@@ -63,8 +63,9 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         // Hide keyboard when tapped with in the view
         self.hideKeyboardWhenTappedAround()
         
-        tableView.estimatedRowHeight = 124
-        tableView.rowHeight = 124
+        tableView.estimatedRowHeight = 80
+        tableView.rowHeight = 80
+        
         // Expand row height based on amount of text
         tableView.rowHeight = UITableViewAutomaticDimension
         

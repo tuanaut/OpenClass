@@ -13,6 +13,7 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
 {
     @IBOutlet weak var tableView: UITableView!;
     
+    var accountType = "";
     var valueToPass: String!;
     var userCourses: [String] = [];
     var coursesArray = [Course]();
@@ -36,7 +37,8 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
         
         // Set navigation bar
         navigationController?.isNavigationBarHidden = false;
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout));
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Logout"), style: .plain, target: self, action: #selector(handleLogout))
+        //navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Logout", style: .plain, target: self, action: #selector(handleLogout));
         getRightNavigationButton();
     }
     
@@ -181,14 +183,14 @@ class CourseFeedViewController: UIViewController, UITableViewDataSource, UITable
     func getRightNavigationButton()
     {
         let currentUser = User.GetCurrentUser();
-        var accountType = "";
+        //var accountType = "";
         
         currentUser.GetAccountType(completionHandler: {(success) -> Void in
             if (success)
             {
-                accountType = currentUser.GetAccountTypeWithoutDatabaseAccess();
+                self.accountType = currentUser.GetAccountTypeWithoutDatabaseAccess();
                 
-                if (accountType == "0")
+                if (self.accountType == "0")
                 {
                     self.title = "Enrolled Courses";
                     self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Enroll", style: .plain, target: self, action: #selector(self.AddCourse));
