@@ -14,11 +14,19 @@ import Firebase
 class CommentsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     var commentsArray = [Comment]()
-    var passedUsername: String!
+    var userName:String!
     var passedNotesID: String!
     var passedCourseKey: String!
+    var currComment: String!
+    var bottomConstraint: NSLayoutConstraint?
+    var borderBottomConstraint: NSLayoutConstraint?
+    var tableViewConstraint: NSLayoutConstraint?
+    var refreshControl: UIRefreshControl = UIRefreshControl()
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var comment: UITextField!
+    @IBOutlet weak var MessageInputView: UIView!
+    @IBOutlet weak var borderView: UIView!
     
     var databaseRef: DatabaseReference!
     {
@@ -33,6 +41,20 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        let currentUser = User.GetCurrentUser();
+        currentUser.GetFirstName(completionHandler: {(success) -> Void in
+            if (success)
+            {
+                self.userName = currentUser.GetFirstNameWithoutDatabaseAccess() + " ";
+            }
+        });
+        
+        currentUser.GetLastName(completionHandler: {(success) -> Void in
+            if (success)
+            {
+                self.userName = self.userName + currentUser.GetLastNameWithoutDatabaseAccess();
+            }
+        });
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -48,6 +70,28 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         // Hide excess cells in table view
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+        
+        // Set up constraints for when keyboard shows
+        bottomConstraint = NSLayoutConstraint(item: MessageInputView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        view.addConstraint(bottomConstraint!)
+        
+        borderBottomConstraint = NSLayoutConstraint(item: borderView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -50)
+        view.addConstraint(borderBottomConstraint!)
+        
+        tableViewConstraint = NSLayoutConstraint(item: tableView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -51)
+        view.addConstraint(tableViewConstraint!)
+        
+        // Set up keyboard showing listener
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        
+        // Set up keyboard dismissing listener
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        
+        // Set up the refresh control
+        refreshControl.addTarget(self, action: #selector(refreshData), for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor.orange
+        refreshControl.backgroundColor = UIColor.darkGray
+        tableView.addSubview(refreshControl)
     }
 
     override func viewWillAppear(_ animated: Bool)
@@ -73,20 +117,31 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         return 1
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let indexPath = tableView.indexPathForSelectedRow!
+        let row:Comment = commentsArray[indexPath.row]
+        
+        currComment = row.commentPosted
+        comment.endEditing(true)
+        
+        // Unhighlight the selected row after all procedures has been done
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CommentCell", for: indexPath) as! CommentTableViewCell
         cell.commentLabel.text = commentsArray[indexPath.row].commentPosted
-        cell.usernameLabel.text = passedUsername
+        cell.usernameLabel.text = commentsArray[indexPath.row].username
+        cell.dateLabel.text = commentsArray[indexPath.row].date
       
         return cell
-    }
-    
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func commentButton(_ sender: Any)
@@ -97,11 +152,28 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
         }
         else
         {
-            let values = ["Commenter": passedUsername, "Comment": comment.text, "id": passedNotesID ]
+
+            let date = Date()
+            let calendar = Calendar.current
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM/dd/yyyy"
+            
+            // Get current date
+            let currDate = formatter.string(from: date)
+            
+            // Get current time
+            let hour = calendar.component(.hour, from: date)
+            let minutes = calendar.component(.minute, from: date)
+            let seconds = calendar.component(.second, from: date)
+            let currTime = "\(hour):\(minutes):\(seconds)"
+            
+            let values = ["Commenter": self.userName, "Comment": comment.text!, "Date": currDate + " " + currTime, "id": passedNotesID]
             databaseRef.child("responses").child(passedCourseKey).child("comments").childByAutoId().setValue(values, withCompletionBlock: {(error, ref) in
+
+
                 if(error == nil)
                 {
-                    let comment = Comment(commentPosted: self.comment.text!, username: self.passedUsername, notesID: self.passedNotesID)
+                    let comment = Comment(commentPosted: self.comment.text!, username: self.userName, date: currDate, time: currTime, notesID: self.passedNotesID)
                   
                     self.commentsArray.append(comment)
                     self.tableView.reloadData()
@@ -125,7 +197,7 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
     {
         print("notes id here")
         print(passedNotesID)
-        let ref = databaseRef.child("comments").queryOrdered(byChild: "id").queryEqual(toValue: passedNotesID)
+        let ref = databaseRef.child("responses").child(passedCourseKey).child("comments").queryOrdered(byChild: "id").queryEqual(toValue: passedNotesID)
         
         ref.observeSingleEvent(of: .value, with: {(snapshot)
             in
@@ -140,6 +212,56 @@ class CommentsViewController: UIViewController, UITableViewDataSource, UITableVi
             }
             self.tableView.reloadData()
         });
+    }
+    
+    // Handles how the textfields should appear when keyboard is showing
+    @objc func handleKeyboardNotification(notification: NSNotification)
+    {
+        if let userInfo = notification.userInfo
+        {
+            // Get the x, y, width, height of keyboard
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            
+            // Determine if keyboard is showing or not
+            let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
+            
+            // Adjust the constraints if keyboard is showing or dismissing
+            bottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame.height : 0
+            borderBottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame.height + (-50) : -50
+            tableViewConstraint?.constant = isKeyboardShowing ? -keyboardFrame.height + (-51) : -51
+            
+            // Smooth transition of textfield going up and down
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations:
+                {
+                    self.view.layoutIfNeeded();
+            }, completion: {(completed) in
+            });
+        }
+    }
+    
+    @objc func refreshData() {
+        
+        // Uncomment this and refresh to test it
+        //commentsArray.append(Comment(commentPosted: "Hello", username: "Bob", date: "Today", time: "Now", notesID: "xxxxxxx"))
+        commentsArray.removeAll();
+        fetchComments();
+        tableView.reloadData();
+        refreshControl.endRefreshing();
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y;
+        
+        if (offset < -232)
+        {
+            self.refreshControl.attributedTitle = NSAttributedString(string: "You Can Let Go Now!", attributes: [NSAttributedStringKey.foregroundColor: self.refreshControl.tintColor, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20)]);
+        }
+        else
+        {
+            self.refreshControl.attributedTitle = NSAttributedString(string: "Reloading the Comments...", attributes: [NSAttributedStringKey.foregroundColor: self.refreshControl.tintColor, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20)]);
+        }
+        
+        refreshControl.backgroundColor = UIColor.darkGray;
     }
     
     func displayMyAlertMessage(userMessage: String)

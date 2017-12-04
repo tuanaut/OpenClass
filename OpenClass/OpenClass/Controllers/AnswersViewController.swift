@@ -16,8 +16,8 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var passedCourseKey : String!
     var passedUserID : String!
     var passedQuestion: String!
-    var passedFirstName : String!
-    var passedLastName : String!
+    var passedFullName : String!
+    //var passedLastName : String!
     var passedAnswerID: String!
     var passedCurrentQuestion: String!
     var answerArray = [Comment] ()
@@ -37,12 +37,26 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
             return
         }else
         {
+            let date = Date()
+            let calendar = Calendar.current
+            let formatter = DateFormatter()
+            formatter.dateFormat = "MM/dd/yyyy"
+            
+            let currDate = formatter.string(from: date)
+            
+            let hour = calendar.component(.hour, from: date)
+            let minutes = calendar.component(.minute, from: date)
+            let seconds = calendar.component(.second, from: date)
+            let currTime = "\(hour):\(minutes):\(seconds)"
+            let actualDate = currDate + " " + currTime
+            
             //Fetch Data
-            let values = ["Commenter": passedFirstName, "Comment": commentTextBox.text, "id": passedAnswerID]
+            let values = ["Comment": commentTextBox.text!, "Commenter": passedFullName, "Date": actualDate, "id": passedAnswerID]
+            
             databaseRef.child("responses").child(passedCourseKey).child("answers").childByAutoId().setValue(values,withCompletionBlock: {(error,ref) in
                 if (error == nil)
                 {
-                    let answer = Comment(commentPosted: self.commentTextBox.text!, username: self.passedFirstName, notesID: self.passedAnswerID)
+                    let answer = Comment(commentPosted: self.commentTextBox.text!, username: self.passedFullName, date: currDate, time: currTime, notesID: self.passedAnswerID)
                     self.answerArray.append(answer)
                     self.commentTableView.reloadData()
                     self.commentTableView.rowHeight = UITableViewAutomaticDimension

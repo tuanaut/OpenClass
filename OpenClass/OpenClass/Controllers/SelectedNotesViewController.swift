@@ -13,15 +13,21 @@ import FirebaseDatabase
 
 class SelectedNotesViewController: UIViewController
 {
+    
+   
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var passedNotesID: String!
     var passedUsername: String!
     var passedCourseKey: String!
    // @IBOutlet weak var notesDescriptionText: UITextView!
     // @IBOutlet weak var notesDescriptionText: UITextField!
     //@IBOutlet weak var notesSubjectText: UITextField!
+
     @IBOutlet weak var notesSubjectText: UILabel!
     @IBOutlet weak var notesDescriptionText: UILabel!
     @IBOutlet weak var notesImage: UIImageView!
+    
+    
     
     var databaseRef: DatabaseReference!
     {
@@ -39,13 +45,16 @@ class SelectedNotesViewController: UIViewController
         print("this is passed notes id")
         print(passedNotesID)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Comments", style: .plain, target: self, action: #selector(self.gotoCommentsSection))
+       fetchInfo()
+        
         // Do any additional setup after loading the view.
+        
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
         super.viewWillAppear(true)
-        fetchInfo()
+        //fetchInfo()
     }
 
     override func didReceiveMemoryWarning()
@@ -56,7 +65,15 @@ class SelectedNotesViewController: UIViewController
     
     private func fetchInfo()
     {
-        let query = databaseRef.child("notes").queryOrdered(byChild: "NotesID").queryEqual(toValue: passedNotesID)
+        activityIndicator.center = self.notesImage.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        
+        let query = databaseRef.child("notes").child(passedCourseKey).queryOrdered(byChild: "NotesID").queryEqual(toValue: passedNotesID)
         query.observeSingleEvent(of: .value, with: {(notes) in
             var currentNotes: Notes
             print("snapshots of notes")
@@ -64,17 +81,22 @@ class SelectedNotesViewController: UIViewController
             for note in notes.children
             {
                  currentNotes = Notes(snapshot: note as! DataSnapshot)
-                self.passedUsername = currentNotes.username
+                
                 self.notesSubjectText.text = currentNotes.notesSubject
                 self.notesDescriptionText.text = currentNotes.notesDescription
                 self.storageRef.reference(forURL: currentNotes.notesImageURL).getData(maxSize: 10 * 1024 * 1024, completion: { (data, error) in
                     if error == nil
                     {
                         self.notesImage.image = UIImage(data: data!)
+                        self.activityIndicator.stopAnimating()
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
                     else
                     {
                         print(error!.localizedDescription)
+                        self.activityIndicator.stopAnimating()
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        
                     }
                 });
             }
@@ -83,25 +105,14 @@ class SelectedNotesViewController: UIViewController
     
     @IBAction func imageTapped(_ sender: UITapGestureRecognizer)
     {
-        let imageView = sender.view as! UIImageView
-        let newImageView = UIImageView(image: imageView.image)
-        newImageView.frame = UIScreen.main.bounds
-        newImageView.backgroundColor = .black
-        newImageView.contentMode = .scaleAspectFit
-        newImageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
-        newImageView.addGestureRecognizer(tap)
-        self.view.addSubview(newImageView)
-        self.navigationController?.isNavigationBarHidden = true
-        self.tabBarController?.tabBar.isHidden = true
+        
+        if(notesImage.image != nil){
+        
+            performSegue(withIdentifier: "GoToFullScreenPhoto", sender: self)
+        }
+
     }
     
-    @objc func dismissFullscreenImage(_ sender: UITapGestureRecognizer)
-    {
-        self.navigationController?.isNavigationBarHidden = false
-        self.tabBarController?.tabBar.isHidden = false
-        sender.view?.removeFromSuperview()
-    }
     
     @objc func gotoCommentsSection()
     {
@@ -114,8 +125,14 @@ class SelectedNotesViewController: UIViewController
         {
             let viewController = segue.destination as! CommentsViewController
             viewController.passedNotesID = passedNotesID
-            viewController.passedUsername = passedUsername
+
             viewController.passedCourseKey = passedCourseKey
+        }
+        else if(segue.identifier == "GoToFullScreenPhoto")
+        {
+            let viewController = segue.destination as! FullScreenPhotoViewController
+            viewController.passedimage = self.notesImage.image
+            
         }
     }
 }
