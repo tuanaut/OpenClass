@@ -44,7 +44,9 @@ class SelectedNotesViewController: UIViewController
         super.viewDidLoad()
         print("this is passed notes id")
         print(passedNotesID)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Comments", style: .plain, target: self, action: #selector(self.gotoCommentsSection))
+        
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Notes Feed"), style: .plain, target: self, action: #selector(GoBack))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Comments"), style: .plain, target: self, action: #selector(self.gotoCommentsSection))
        fetchInfo()
         
         // Do any additional setup after loading the view.
@@ -84,6 +86,8 @@ class SelectedNotesViewController: UIViewController
                 
                 self.notesSubjectText.text = currentNotes.notesSubject
                 self.notesDescriptionText.text = currentNotes.notesDescription
+                self.navigationItem.title = self.notesSubjectText.text!
+                
                 self.storageRef.reference(forURL: currentNotes.notesImageURL).getData(maxSize: 10 * 1024 * 1024, completion: { (data, error) in
                     if error == nil
                     {
@@ -113,6 +117,10 @@ class SelectedNotesViewController: UIViewController
 
     }
     
+    @objc func GoBack()
+    {
+        _ = navigationController?.popViewController(animated: true);
+    }
     
     @objc func gotoCommentsSection()
     {

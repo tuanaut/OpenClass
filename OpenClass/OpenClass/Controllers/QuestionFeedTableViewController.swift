@@ -46,6 +46,7 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
         
         // Set navigation bar
         navigationController?.isNavigationBarHidden = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Main Menu"), style: .plain, target: self, action: #selector(GoBack))
         
         // Set up constraints for when keyboard shows
         bottomConstraint = NSLayoutConstraint(item: MessageInputView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
@@ -201,6 +202,12 @@ class QuestionFeedTableViewController: UIViewController, UITableViewDataSource, 
                 }
             });
         }
+    }
+    
+    // Go back to previous viewcontroller
+    @objc func GoBack()
+    {
+        _ = navigationController?.popViewController(animated: true);
     }
     
     // Handles how the textfields should appear when keyboard is showing
