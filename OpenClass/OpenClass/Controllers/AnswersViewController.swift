@@ -22,12 +22,11 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var passedCurrentQuestion: String!
     var answerArray = [Comment] ()
     var databaseRef = Database.database().reference()
-    
+    var refreshControl: UIRefreshControl = UIRefreshControl()
     
     @IBOutlet var commentTableView: UITableView!
     @IBOutlet weak var commentTextBox: UITextField!
     @IBOutlet weak var commentAddButton: UIButton!
-    
 
     // Button to add comment to Question.
     @IBAction func commentAddButton(sender: UIButton)
@@ -93,7 +92,8 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "commentCellPrototype", for: indexPath) as! AnswersViewControllerTableViewCell
         cell.commentResponse.text = answerArray[indexPath.row].commentPosted
-        cell.commentUserName.text = answerArray[indexPath.row].username + " says: "
+        cell.commentUserName.text = answerArray[indexPath.row].username
+        cell.commentDate.text = answerArray[indexPath.row].date
        
         return(cell)
     }
@@ -108,6 +108,14 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
         commentTableView.rowHeight = UITableViewAutomaticDimension
         // Do not show empty cells
         commentTableView.tableFooterView = UIView(frame: CGRect.zero)
+        
+        // Add refresh
+        refreshControl.addTarget(self, action: #selector(refreshData), for: UIControlEvents.valueChanged)
+        refreshControl.tintColor = UIColor.orange
+        refreshControl.backgroundColor = UIColor.darkGray
+        commentTableView.addSubview(refreshControl)
+        
+        
     
     }
 
@@ -138,6 +146,31 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
         })
     }
     
+    
+    // Refresh Function
+    @objc func refreshData() {
+        
+        answerArray.removeAll();
+        fetchAnswers();
+        commentTableView.reloadData();
+        refreshControl.endRefreshing();
+    }
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y;
+        
+        if (offset < -232)
+        {
+            self.refreshControl.attributedTitle = NSAttributedString(string: "You Can Let Go Now!", attributes: [NSAttributedStringKey.foregroundColor: self.refreshControl.tintColor, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20)]);
+        }
+        else
+        {
+            self.refreshControl.attributedTitle = NSAttributedString(string: "Reloading the Answers...", attributes: [NSAttributedStringKey.foregroundColor: self.refreshControl.tintColor, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20)]);
+        }
+        
+        refreshControl.backgroundColor = UIColor.darkGray;
+    }
     
     override func didReceiveMemoryWarning()
     {

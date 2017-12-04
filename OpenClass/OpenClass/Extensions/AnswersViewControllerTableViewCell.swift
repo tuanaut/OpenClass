@@ -13,6 +13,7 @@ class AnswersViewControllerTableViewCell: UITableViewCell
     @IBOutlet weak var commentCellView: UIView!
     @IBOutlet weak var commentUserName: UILabel!
     @IBOutlet weak var commentResponse: UILabel!
+    @IBOutlet weak var commentDate: UILabel!
     
     override func awakeFromNib()
     {
