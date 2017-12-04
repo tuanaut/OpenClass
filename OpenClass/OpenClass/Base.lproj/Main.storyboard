@@ -1291,7 +1291,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vmS-ra-MhF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6721.739130434783" y="-771.19565217391312"/>
+            <point key="canvasLocation" x="4174" y="-549"/>
         </scene>
         <!--Create Course Page View Controller-->
         <scene sceneID="HwI-hX-vL3">
