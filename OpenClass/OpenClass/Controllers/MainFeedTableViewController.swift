@@ -20,6 +20,7 @@ class MainFeedTableViewController: UIViewController, UITableViewDataSource, UITa
         tableView.delegate = self
         tableView.dataSource = self
         
+        
         // Default row height
         tableView.estimatedRowHeight = 80
         tableView.rowHeight = 80
@@ -28,6 +29,8 @@ class MainFeedTableViewController: UIViewController, UITableViewDataSource, UITa
         tableView.tableFooterView = UIView(frame: CGRect.zero)
 
         navigationController?.isNavigationBarHidden = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Key: \((passedCourseKey)!)", style: .done, target: nil, action: nil)
+        navigationItem.rightBarButtonItem?.isEnabled = false
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

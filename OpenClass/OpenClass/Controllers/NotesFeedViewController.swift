@@ -92,6 +92,7 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
         {
             let viewController = segue.destination as! SelectedNotesViewController
             viewController.passedNotesID = valueToPass
+            viewController.passedCourseKey = passedCourseKey
         }
     }
     
@@ -110,7 +111,7 @@ class NotesFeedViewController: UIViewController, UITableViewDataSource, UITableV
     {
         let ref = Database.database().reference()
         
-        let query = ref.child("notes").queryOrdered(byChild: "CourseKey").queryEqual(toValue: passedCourseKey)
+        let query = ref.child("notes").child(passedCourseKey).queryOrderedByKey()
         print("The current key is")
         print(passedCourseKey)
         
