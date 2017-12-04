@@ -2,7 +2,7 @@
 //  FullScreenPhotoViewController.swift
 //  OpenClass
 //
-//  Created by Vivian Chau on 12/1/17.
+//  Created by Tuan Chau on 12/1/17.
 //  Copyright © 2017 CS472. All rights reserved.
 //
 

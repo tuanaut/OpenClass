@@ -2,7 +2,7 @@
 //  SelectedNotesViewController.swift
 //  OpenClass
 //
-//  Created by Vivian Chau on 11/21/17.
+//  Created by Tuan Chau on 11/21/17.
 //  Copyright © 2017 CS472. All rights reserved.
 //
 
@@ -67,7 +67,7 @@ class SelectedNotesViewController: UIViewController
     
     private func fetchInfo()
     {
-        activityIndicator.center = self.notesImage.center
+        activityIndicator.center = CGPoint(x: self.notesImage.frame.maxX/2, y: self.notesImage.frame.minY + self.notesImage.frame.maxX/2);
         activityIndicator.hidesWhenStopped = true
         activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         view.addSubview(activityIndicator)

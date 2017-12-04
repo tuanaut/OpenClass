@@ -2,7 +2,7 @@
 //  Course.swift
 //  OpenClass
 //
-//  Created by Vivian Chau on 11/15/17.
+//  Created by Tuan Chau on 11/15/17.
 //  Copyright © 2017 CS472. All rights reserved.
 //
 
