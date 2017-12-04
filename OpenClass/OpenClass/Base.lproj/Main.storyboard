@@ -1634,7 +1634,7 @@
         <!--Students-->
         <scene sceneID="HJn-Oc-6Eg">
             <objects>
-                <viewController title="Students" id="27o-RX-eXf" customClass="CourseFeedViewController" customModule="OpenClass" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Students" id="27o-RX-eXf" customClass="StudentListViewController" customModule="OpenClass" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iGB-O6-b45" customClass="GradientView" customModule="OpenClass" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1644,7 +1644,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CourseCell" rowHeight="80" id="7ut-p9-hgS" customClass="CourseFeedTableViewCell" customModule="OpenClass" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="StudentCell" rowHeight="80" id="7ut-p9-hgS" userLabel="StudentCell" customClass="StudentTableCell" customModule="OpenClass" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7ut-p9-hgS" id="Cy0-Jf-Lzd">
@@ -1681,11 +1681,15 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="CourseNameLabel" destination="HYW-4w-AR1" id="1Id-XM-4jd"/>
-                                            <outlet property="CourseNumberLabel" destination="RhJ-us-KYb" id="9pE-Xt-8AW"/>
+                                            <outlet property="enrollmentDateLabel" destination="HYW-4w-AR1" id="Nri-Ya-YeF"/>
+                                            <outlet property="nameLabel" destination="RhJ-us-KYb" id="JFI-4S-jeu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="27o-RX-eXf" id="auP-Tf-07e"/>
+                                    <outlet property="delegate" destination="27o-RX-eXf" id="KzB-Nx-HDi"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.80392156859999997" green="0.13725490200000001" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1707,7 +1711,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Nf2-UO-yUI"/>
                     <connections>
-                        <outlet property="tableView" destination="YSq-B8-2xY" id="3sR-af-mwp"/>
+                        <outlet property="tableView" destination="YSq-B8-2xY" id="Xfd-OY-c41"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nEH-3a-743" userLabel="First Responder" sceneMemberID="firstResponder"/>

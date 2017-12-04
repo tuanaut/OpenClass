@@ -18,6 +18,7 @@ class User
     private var AccountType:    String;
     private var AccountID:      String;
     private var EnrolledCourses:[String];
+    private var EnrollmentDates:[String];
     
     public typealias CompletionHandler = (_ success:Bool) -> Void;
     
@@ -39,6 +40,7 @@ class User
         self.AccountType = accountType
         self.AccountID = ""
         EnrolledCourses = [String]();
+        EnrollmentDates = [String]();
     } // init
     
     init(snapshot: DataSnapshot)
@@ -47,11 +49,25 @@ class User
         self.FirstName = snapshotvalue![FirstNameChild] as! String
         self.LastName = snapshotvalue![LastNameChild] as! String
         self.Email = snapshotvalue![EmailChild] as! String
-        self.Password = snapshotvalue!["password"] as! String
+        self.Password = ""
         self.AccountType = snapshotvalue![AccountTypeChild] as! String
         self.AccountID = snapshotvalue!["accountID"] as! String
         EnrolledCourses = [String]();
+        EnrollmentDates = [String]();
     } // init
+    
+    init(accountID: String)
+    {
+        FirstName = "";
+        LastName = "";
+        Email = "";
+        Password = "";
+        AccountType = "";
+        AccountID = accountID;
+        EnrolledCourses = [String]();
+        EnrollmentDates = [String]();
+        self.ReadAvailableData();
+    }
     
     init()
     {
@@ -62,6 +78,7 @@ class User
         AccountType = "";
         AccountID = "";
         EnrolledCourses = [String]();
+        EnrollmentDates = [String]();
     } // init
     
     func WriteAccount(controller:RegisterViewController) -> Bool
@@ -154,11 +171,15 @@ class User
         let firebase = Database.database().reference(fromURL: FirebaseURL);
         let childRef = firebase.child(User_Root).child(AccountID).child(EnrolledChild);
         
-        childRef.updateChildValues([enrolledCourse:""], withCompletionBlock: {(err, ref) in
+        childRef.updateChildValues([enrolledCourse:String(describing: Date())], withCompletionBlock: {(err, ref) in
             if (err != nil)
             {
                 controller.displayMyAlertMessage(userMessage: (err?.localizedDescription)!);
             }
+            
+            let enroller = Course(courseKey: enrolledCourse);
+            enroller.UpdateEnrolled(student: self.AccountID);
+            
             return;
         });
     } // UpdateEnrolled
@@ -168,11 +189,15 @@ class User
         let firebase = Database.database().reference(fromURL: FirebaseURL);
         let childRef = firebase.child(User_Root).child(AccountID).child(EnrolledChild);
         
-        childRef.updateChildValues([enrolledCourse:""], withCompletionBlock: {(err, ref) in
+        childRef.updateChildValues([enrolledCourse:String(describing: Date())], withCompletionBlock: {(err, ref) in
             if (err != nil)
             {
                 controller.displayMyAlertMessage(userMessage: (err?.localizedDescription)!, correct: false);
             }
+            
+            let enroller = Course(courseKey: enrolledCourse);
+            enroller.UpdateEnrolled(student: self.AccountID);
+            
             return;
         });
     } // UpdateEnrolled
@@ -326,12 +351,32 @@ class User
         }
     } // ReadAvailableData()
     
+    func ReadAvailableData(completionHandler: @escaping CompletionHandler) -> Void
+    {
+        if (!AccountID.isEmpty)
+        {
+            self.UserExists(completionHandler: {(exists) -> Void in
+                if (exists)
+                {
+                    Database.database().reference().child(self.User_Root).child(self.AccountID).observeSingleEvent(of: .value, with: {(DataSnapshot) in
+                        let dictionary = DataSnapshot.value as? [String: AnyObject];
+                        self.LastName = (dictionary![self.LastNameChild] as? String)!;
+                        self.FirstName = (dictionary![self.FirstNameChild] as? String)!;
+                        self.Email = (dictionary![self.EmailChild] as? String)!;
+                        self.AccountType = (dictionary![self.AccountTypeChild] as? String)!;
+                        
+                        completionHandler(true);
+                    });
+                }
+            });
+        }
+    } // ReadAvailableData()
+    
     func GetEnrolledCourses(controller:CourseFeedViewController) -> Void
     {
         if (!AccountID.isEmpty)
         {
             self.UserExists(completionHandler: {(exists) -> Void in
-                print ("User's existence has been established. Continuing...");
                 if (exists)
                 {
                     Database.database().reference().child(self.User_Root).child(self.AccountID).child(self.EnrolledChild).observeSingleEvent(of:
@@ -347,6 +392,7 @@ class User
                                     courseArrayCount += 1;
                                     let snap = child as! DataSnapshot;
                                     self.EnrolledCourses.append(snap.key);
+                                    self.EnrollmentDates.append(String(describing: snap.value));
                                     let newCourse = Course(courseKey: snap.key);
                                     controller.coursesArray.append(newCourse);
                                 }
@@ -381,6 +427,7 @@ class User
                                     courseArrayCount += 1;
                                     let snap = child as! DataSnapshot;
                                     self.EnrolledCourses.append(snap.key);
+                                    self.EnrollmentDates.append(String(describing: snap.value));
                                 }
                             }
                             
@@ -395,5 +442,18 @@ class User
     {
         return self.EnrolledCourses;
     } // GetEnrolledCourseWithoutDatabaseAccess
+    
+    func GetEnrollmentDateWithoutDatabaseAccess(courseKey: String) -> String
+    {
+        var result = "";
+        
+        if (self.EnrolledCourses.contains(courseKey))
+        {
+            let index = self.EnrolledCourses.index(of: courseKey);
+            result = self.EnrollmentDates[index!];
+        }
+        
+        return result;
+    } // GetEnrollmentDateWithoutDatabaseAccess
 }
 

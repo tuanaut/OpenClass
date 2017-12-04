@@ -11,48 +11,105 @@ import UIKit
 
 class StudentListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0;
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell();
-    }
-    
     @IBOutlet weak var tableView: UITableView!;
-    var passedCourseKey: String!;
+    var currentCourse: Course!;
+    var enrolledStudentCache = [User]();
+    var enrollmentDateCache = [String]();
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
+    {
+        return enrolledStudentCache.count;
+    } // tableView
+    
+    func numberOfSections(in tableView: UITableView) -> Int
+    {
+        return 1;
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+    {
+        return false;
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
+    {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "StudentCell", for: indexPath) as! StudentTableCell;
+        
+        print("currUser = ");
+        let fullName = self.enrolledStudentCache[indexPath.row].GetFirstNameWithoutDatabaseAccess() + " " + self.enrolledStudentCache[indexPath.row].GetLastNameWithoutDatabaseAccess();
+        print(fullName);
+        
+        cell.nameLabel.text = fullName;
+        
+        if (self.currentCourse.GetCreatorWithoutDatabaseAccess() != self.enrolledStudentCache[indexPath.row].GetAccountID())
+        {
+            // Item is student
+            cell.enrollmentDateLabel.text = "Enrolled: " + self.currentCourse.GetEnrollmentDateWithoutDatabaseAccess(studentID: self.enrolledStudentCache[indexPath.row].GetAccountID());
+        }
+        else
+        {
+            // Item is creator of the course
+            cell.enrollmentDateLabel.text = "Created Course: " + self.currentCourse.GetEnrollmentDateWithoutDatabaseAccess(studentID: self.enrolledStudentCache[indexPath.row].GetAccountID());
+        }
+        
+        return cell
+    } // tableView
+    
+    override func viewDidLoad()
+    {
+        super.viewDidLoad();
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+        tableView.delegate = self;
+        tableView.dataSource = self;
+        
+        navigationController?.isNavigationBarHidden = false;
+        tableView.estimatedRowHeight = 100;
+        tableView.rowHeight = 100;
+        
+        // Hide excess cells in table view
+        tableView.tableFooterView = UIView(frame: CGRect.zero);
+    } // viewDidLoad
+
+    override func didReceiveMemoryWarning()
+    {
+        super.didReceiveMemoryWarning();
         // Dispose of any resources that can be recreated.
-    }
+    } // didReceiveMemoryWarning
     
     override func viewWillAppear(_ animated: Bool)
     {
-        super.viewWillAppear(true)
+        super.viewWillAppear(true);
         
-        // Reset course array to empty every you go back to this view controller and reload table view
-        tableView.reloadData()
+        enrolledStudentCache.removeAll();
+        tableView.reloadData();
         
-        navigationController?.isNavigationBarHidden = false
-
-        tableView.reloadData()
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+        if (currentCourse != nil)
+        {
+            currentCourse.ReadAvailableData(completionHandler: {(success) -> Void in
+                if (success)
+                {
+                    self.currentCourse.GetEnrolledStudents(completionHandler: {(success2) -> Void in
+                        if (success2)
+                        {
+                            let enrolledStudentIDs = self.currentCourse.GetEnrolledStudentsWithoutDatabaseAccess();
+                            
+                            for studentID in enrolledStudentIDs
+                            {
+                                let nStudent = User(accountID: studentID);
+                                nStudent.ReadAvailableData(completionHandler: {(success) -> Void in
+                                    if (success)
+                                    {
+                                        self.enrolledStudentCache.append(nStudent);
+                                        self.tableView.reloadData();
+                                    }
+                                });
+                            }
+                        }
+                        
+                        self.navigationController?.isNavigationBarHidden = false;
+                    });
+                }
+            });
+        }
+    } // viewWillAppear
 }

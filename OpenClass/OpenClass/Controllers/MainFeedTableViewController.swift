@@ -46,7 +46,7 @@ class MainFeedTableViewController: UIViewController, UITableViewDataSource, UITa
         if (segue.identifier == "GoToStudentList")
         {
             let viewController = segue.destination as! StudentListViewController;
-            viewController.passedCourseKey = passedCourseKey;
+            viewController.currentCourse = Course(courseKey: passedCourseKey);
         }
     }
 
