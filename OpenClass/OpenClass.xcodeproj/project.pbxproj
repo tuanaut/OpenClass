@@ -40,6 +40,8 @@
 		6463AD261FC69B410034AA1D /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6463AD251FC69B410034AA1D /* Comment.swift */; };
 		64662E591FBC44350035C68C /* AddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64662E581FBC44350035C68C /* AddCourseViewController.swift */; };
 		64CD40521FC53B7D0010CBE4 /* SelectedNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CD40511FC53B7D0010CBE4 /* SelectedNotesViewController.swift */; };
+		6B14C34F1FD3438E002E2EC3 /* StudentTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B14C34E1FD3438E002E2EC3 /* StudentTableCell.swift */; };
+		6BE310631FCF62640044249D /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BE310621FCF62640044249D /* StudentListViewController.swift */; };
 		785775592CF1563505921EC0 /* Pods_OpenClassUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256232FA9B71169D3B13D6AC /* Pods_OpenClassUITests.framework */; };
 		E55846E9D2AC00F8875590F2 /* Pods_OpenClassTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 230334D3D43B62F2CCEAB3B6 /* Pods_OpenClassTests.framework */; };
 /* End PBXBuildFile section */
@@ -107,6 +109,8 @@
 		6463AD251FC69B410034AA1D /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		64662E581FBC44350035C68C /* AddCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
 		64CD40511FC53B7D0010CBE4 /* SelectedNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedNotesViewController.swift; sourceTree = "<group>"; };
+		6B14C34E1FD3438E002E2EC3 /* StudentTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentTableCell.swift; sourceTree = "<group>"; };
+		6BE310621FCF62640044249D /* StudentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
 		B94E53EE1DA56A3EAB0DC212 /* Pods-OpenClassUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenClassUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenClassUITests/Pods-OpenClassUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D93FFBAC3618BB9CF18CD28A /* Pods-OpenClassTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OpenClassTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-OpenClassTests/Pods-OpenClassTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -207,19 +211,20 @@
 		555FF48C1FB14F81002E362D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5507697B1FA677EB00C8AE78 /* LoginViewController.swift */,
-				552D85101FCA077700469DCE /* MainFeedTableViewController.swift */,
-				550769A71FA67A5100C8AE78 /* RegisterViewController.swift */,
-				555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */,
-				55604AA41FBAE9640087584F /* AnswersViewController.swift */,
 				64662E581FBC44350035C68C /* AddCourseViewController.swift */,
+				55604AA41FBAE9640087584F /* AnswersViewController.swift */,
+				6463AD211FC66E8B0034AA1D /* CommentsViewController.swift */,
+				555FF48D1FB188CD002E362D /* CourseFeedViewController.swift */,
 				6404DB921FBCFFE800A1E9D2 /* CreateCourseViewController.swift */,
 				5525DE341FBF73AA00A72367 /* ForgotPasswordViewController.swift */,
+				5507697B1FA677EB00C8AE78 /* LoginViewController.swift */,
+				552D85101FCA077700469DCE /* MainFeedTableViewController.swift */,
 				644621F91FC0095B00A909D1 /* NewClassNotesViewController.swift */,
 				64237C821FC3DC7B001E797A /* NotesFeedViewController.swift */,
-				64CD40511FC53B7D0010CBE4 /* SelectedNotesViewController.swift */,
-				6463AD211FC66E8B0034AA1D /* CommentsViewController.swift */,
 				555CED781FCB62EB00DDEFC5 /* QuestionFeedTableViewController.swift */,
+				550769A71FA67A5100C8AE78 /* RegisterViewController.swift */,
+				64CD40511FC53B7D0010CBE4 /* SelectedNotesViewController.swift */,
+				6BE310621FCF62640044249D /* StudentListViewController.swift */,
 				644241C71FD1742800232165 /* FullScreenPhotoViewController.swift */,
 			);
 			path = Controllers;
@@ -228,17 +233,18 @@
 		55B0DFE51FB69F0E009EC707 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				554EDC571FB56B37003370AD /* GradientView.swift */,
-				55B0DFE11FB68FDB009EC707 /* CourseFeedTableViewCell.swift */,
-				550D9B361FBA83CB00C0B131 /* User.swift */,
 				55458F9E1FBC2A41006C5D1C /* AnswersViewControllerTableViewCell.swift */,
-				6404DB941FBD13B300A1E9D2 /* Course.swift */,
-				64237C801FC3D7B7001E797A /* NoteTableViewCell.swift */,
-				64337E6D1FC0C4A6006F09A7 /* Notes.swift */,
-				6463AD231FC6715B0034AA1D /* CommentTableViewCell.swift */,
 				6463AD251FC69B410034AA1D /* Comment.swift */,
-				55BD5C041FCB6B4000915A58 /* QuestionTableViewCell.swift */,
+				6463AD231FC6715B0034AA1D /* CommentTableViewCell.swift */,
+				6404DB941FBD13B300A1E9D2 /* Course.swift */,
+				55B0DFE11FB68FDB009EC707 /* CourseFeedTableViewCell.swift */,
+				554EDC571FB56B37003370AD /* GradientView.swift */,
+				64337E6D1FC0C4A6006F09A7 /* Notes.swift */,
+				64237C801FC3D7B7001E797A /* NoteTableViewCell.swift */,
 				55BD5C061FCB70D500915A58 /* Question.swift */,
+				55BD5C041FCB6B4000915A58 /* QuestionTableViewCell.swift */,
+				550D9B361FBA83CB00C0B131 /* User.swift */,
+				6B14C34E1FD3438E002E2EC3 /* StudentTableCell.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -557,6 +563,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				550D9B371FBA83CB00C0B131 /* User.swift in Sources */,
+				6B14C34F1FD3438E002E2EC3 /* StudentTableCell.swift in Sources */,
 				64237C811FC3D7B7001E797A /* NoteTableViewCell.swift in Sources */,
 				6404DB951FBD13B300A1E9D2 /* Course.swift in Sources */,
 				64CD40521FC53B7D0010CBE4 /* SelectedNotesViewController.swift in Sources */,
@@ -569,6 +576,7 @@
 				552D85111FCA077700469DCE /* MainFeedTableViewController.swift in Sources */,
 				6463AD261FC69B410034AA1D /* Comment.swift in Sources */,
 				55BD5C051FCB6B4000915A58 /* QuestionTableViewCell.swift in Sources */,
+				6BE310631FCF62640044249D /* StudentListViewController.swift in Sources */,
 				555FF48E1FB188CD002E362D /* CourseFeedViewController.swift in Sources */,
 				64337E6E1FC0C4A6006F09A7 /* Notes.swift in Sources */,
 				550769A81FA67A5100C8AE78 /* RegisterViewController.swift in Sources */,
