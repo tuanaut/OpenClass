@@ -11,7 +11,7 @@ import Firebase
 import FirebaseStorage
 import FirebaseDatabase
 
-class SelectedNotesViewController: UIViewController
+class SelectedNotesViewController: UIViewController, UIScrollViewDelegate
 {
     
    
@@ -26,6 +26,8 @@ class SelectedNotesViewController: UIViewController
     @IBOutlet weak var notesSubjectText: UILabel!
     @IBOutlet weak var notesDescriptionText: UILabel!
     @IBOutlet weak var notesImage: UIImageView!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
     
     
     
@@ -51,6 +53,14 @@ class SelectedNotesViewController: UIViewController
         
         // Do any additional setup after loading the view.
         
+        //scrollView.minimumZoomScale = 1.0
+        //scrollView.maximumZoomScale = 6.0
+        
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        
+        return notesImage
     }
     
     override func viewWillAppear(_ animated: Bool)

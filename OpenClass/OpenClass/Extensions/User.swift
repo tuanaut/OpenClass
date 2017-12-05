@@ -237,6 +237,7 @@ class User
         if (AccountType.isEmpty)
         {
             // Attempt to retrieve Account Type from DB
+            
             if (!AccountID.isEmpty)
             {
                 Database.database().reference().child(User_Root).child(AccountID).observeSingleEvent(of: .value, with: {(DataSnapshot) in
