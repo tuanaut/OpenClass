@@ -1207,13 +1207,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Enter Answer" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="qa6-kW-uWz" userLabel="inputTextField">
-                                <rect key="frame" x="0.0" y="686" width="351" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Question goes here?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YbJ-8W-rfc" userLabel="questionLabel">
                                 <rect key="frame" x="29" y="20" width="310" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1221,10 +1214,11 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rSU-bT-d4A">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rSU-bT-d4A">
                                 <rect key="frame" x="0.0" y="64" width="414" height="622"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -1235,14 +1229,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="76.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCu-zF-NxY">
-                                                    <rect key="frame" x="141" y="0.0" width="85.333333333333314" height="20"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nCu-zF-NxY">
+                                                    <rect key="frame" x="141" y="0.0" width="210" height="20"/>
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbr-UP-dC5">
-                                                    <rect key="frame" x="15" y="27.999999999999996" width="399" height="48.666666666666657"/>
+                                                    <rect key="frame" x="15" y="28" width="399" height="49"/>
                                                     <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -1291,32 +1285,54 @@
                                     <outlet property="delegate" destination="nO6-df-N1C" id="aAa-4R-7jW"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQu-B2-beo" userLabel="submitButton">
-                                <rect key="frame" x="351" y="686" width="67" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1f2-uX-diU">
+                                <rect key="frame" x="0.0" y="686" width="414" height="50"/>
+                                <subviews>
+                                    <textField opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Answer" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="qa6-kW-uWz" userLabel="inputTextField">
+                                        <rect key="frame" x="8" y="0.0" width="331" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="NdX-ba-yz3"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eQu-B2-beo" userLabel="submitButton">
+                                        <rect key="frame" x="347" y="0.0" width="67" height="50"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="67" id="izn-To-Bvu"/>
+                                        </constraints>
+                                        <state key="normal" title="Post">
+                                            <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="commentAddButtonWithSender:" destination="nO6-df-N1C" eventType="touchUpInside" id="27V-1O-syQ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="67" id="JRG-kE-Sbh"/>
-                                    <constraint firstAttribute="height" constant="50" id="Wsc-Xi-JNn"/>
+                                    <constraint firstItem="qa6-kW-uWz" firstAttribute="top" secondItem="eQu-B2-beo" secondAttribute="top" id="BHD-RB-96T"/>
+                                    <constraint firstAttribute="bottom" secondItem="qa6-kW-uWz" secondAttribute="bottom" id="Fwi-bT-oCh"/>
+                                    <constraint firstItem="qa6-kW-uWz" firstAttribute="leading" secondItem="1f2-uX-diU" secondAttribute="leadingMargin" id="U6r-OI-qkM"/>
+                                    <constraint firstItem="qa6-kW-uWz" firstAttribute="bottom" secondItem="eQu-B2-beo" secondAttribute="bottom" id="VBG-Ap-9zt"/>
+                                    <constraint firstItem="eQu-B2-beo" firstAttribute="leading" secondItem="qa6-kW-uWz" secondAttribute="trailing" constant="8" symbolic="YES" id="lpC-sI-Qqg"/>
+                                    <constraint firstItem="qa6-kW-uWz" firstAttribute="top" secondItem="1f2-uX-diU" secondAttribute="top" id="mql-Xm-WQE"/>
+                                    <constraint firstAttribute="trailing" secondItem="eQu-B2-beo" secondAttribute="trailing" id="mxH-un-KFh"/>
                                 </constraints>
-                                <state key="normal" title="Post">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="commentAddButtonWithSender:" destination="nO6-df-N1C" eventType="touchUpInside" id="27V-1O-syQ"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="rSU-bT-d4A" firstAttribute="leading" secondItem="qa6-kW-uWz" secondAttribute="leading" id="3J2-Pi-GxX"/>
-                            <constraint firstItem="rSU-bT-d4A" firstAttribute="top" secondItem="PEW-Hn-Cfr" secondAttribute="top" id="C3a-rU-JsH"/>
-                            <constraint firstItem="eQu-B2-beo" firstAttribute="bottom" secondItem="qa6-kW-uWz" secondAttribute="bottom" id="MMl-KX-unJ"/>
-                            <constraint firstItem="eQu-B2-beo" firstAttribute="leading" secondItem="qa6-kW-uWz" secondAttribute="trailing" id="QzD-Mv-WPz"/>
-                            <constraint firstAttribute="trailing" secondItem="rSU-bT-d4A" secondAttribute="trailing" id="c0m-KY-iEu"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="eQu-B2-beo" secondAttribute="trailing" constant="-24" id="fKN-Yo-Hta"/>
-                            <constraint firstItem="qa6-kW-uWz" firstAttribute="bottom" secondItem="PEW-Hn-Cfr" secondAttribute="bottom" id="gEb-5W-P4M"/>
-                            <constraint firstItem="eQu-B2-beo" firstAttribute="top" secondItem="rSU-bT-d4A" secondAttribute="bottom" id="t8e-Zc-non"/>
-                            <constraint firstItem="qa6-kW-uWz" firstAttribute="leading" secondItem="PEW-Hn-Cfr" secondAttribute="leading" id="xEr-4E-FxP"/>
-                            <constraint firstItem="eQu-B2-beo" firstAttribute="top" secondItem="qa6-kW-uWz" secondAttribute="top" id="xuD-rJ-UF1"/>
+                            <constraint firstItem="rSU-bT-d4A" firstAttribute="trailing" secondItem="PEW-Hn-Cfr" secondAttribute="trailing" id="7NR-mD-lY1"/>
+                            <constraint firstItem="rSU-bT-d4A" firstAttribute="top" secondItem="PEW-Hn-Cfr" secondAttribute="top" id="8hx-Qv-EPg"/>
+                            <constraint firstItem="1f2-uX-diU" firstAttribute="leading" secondItem="PEW-Hn-Cfr" secondAttribute="leading" id="BXO-z9-bbf"/>
+                            <constraint firstItem="1f2-uX-diU" firstAttribute="bottom" secondItem="PEW-Hn-Cfr" secondAttribute="bottom" id="J49-k7-6KA"/>
+                            <constraint firstItem="rSU-bT-d4A" firstAttribute="leading" secondItem="PEW-Hn-Cfr" secondAttribute="leading" id="Pij-Fr-pbZ"/>
+                            <constraint firstItem="1f2-uX-diU" firstAttribute="top" secondItem="rSU-bT-d4A" secondAttribute="bottom" id="dNP-dJ-3h5"/>
+                            <constraint firstItem="1f2-uX-diU" firstAttribute="top" secondItem="rSU-bT-d4A" secondAttribute="bottom" id="fzH-F2-g0l"/>
+                            <constraint firstItem="1f2-uX-diU" firstAttribute="trailing" secondItem="PEW-Hn-Cfr" secondAttribute="trailing" id="xZq-6j-xsX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PEW-Hn-Cfr"/>
                         <userDefinedRuntimeAttributes>
@@ -1329,6 +1345,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
+                        <outlet property="MessageInputView" destination="1f2-uX-diU" id="LdT-tn-xlH"/>
                         <outlet property="commentAddButton" destination="eQu-B2-beo" id="irE-Sx-FzR"/>
                         <outlet property="commentTableView" destination="rSU-bT-d4A" id="EG9-O3-pAn"/>
                         <outlet property="commentTextBox" destination="qa6-kW-uWz" id="O9F-u9-evA"/>
@@ -1336,7 +1353,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vmS-ra-MhF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4174" y="-549"/>
+            <point key="canvasLocation" x="4173.913043478261" y="-549.45652173913049"/>
         </scene>
         <!--Create Course Page View Controller-->
         <scene sceneID="HwI-hX-vL3">
