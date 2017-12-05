@@ -2,7 +2,7 @@
 //  Course.swift
 //  OpenClass
 //
-//  Created by Vivian Chau on 11/15/17.
+//  Created by Tuan Chau on 11/15/17.
 //  Copyright © 2017 CS472. All rights reserved.
 //
 
@@ -13,21 +13,25 @@ import UIKit
 
 class Course
 {
-    private var Name:         String;
-    private var Description:  String;
-    private var Key:          String;
-    private var Creator:      String;
+    private var Name:               String;
+    private var Description:        String;
+    private var Key:                String;
+    private var Creator:            String;
+    private var EnrolledStudents:   [String];
+    private var EnrollmentDates:    [String];
     
     public typealias CompletionHandler = (_ success:Bool) -> Void;
     
     // Constants
     private let FirebaseURL         = "https://openclass-d7aa6.firebaseio.com/";
     private let Course_Root         = "courses";
+    private let User_Root           = "users";
     private let NameChild           = "name";
     private let DescriptionChild    = "description";
     private let KeyChild            = "key";
     private let CreatorChild        = "creator";
     private let CourseKeyLength     = 5;
+    private let EnrolledChild       = "enrolled";
     
     init (courseKey: String)
     {
@@ -35,6 +39,8 @@ class Course
         self.Name = "";
         self.Description = "";
         self.Creator = "";
+        self.EnrolledStudents = [String]();
+        self.EnrollmentDates = [String]();
         self.ReadAvailableData();
     } // init
     
@@ -44,6 +50,8 @@ class Course
         self.Description = courseDescription;
         self.Key = Course.GenerateCourseKey(length: CourseKeyLength);
         self.Creator = courseCreator;
+        self.EnrolledStudents = [String]();
+        self.EnrollmentDates = [String]();
     } // init
     
     init(snapshot: DataSnapshot)
@@ -53,6 +61,8 @@ class Course
         self.Description = snapshotvalue!["CourseDescription"] as! String
         self.Key = snapshotvalue!["CourseKey"] as! String
         self.Creator = snapshotvalue!["CourseCreator"] as! String
+        self.EnrolledStudents = [String]();
+        self.EnrollmentDates = [String]();
     } // init
     
     init ()
@@ -61,6 +71,8 @@ class Course
         Description = "";
         Key = "";
         Creator = "";
+        self.EnrolledStudents = [String]();
+        self.EnrollmentDates = [String]();
     } // init
     
     func WriteCourse(controller:CreateCourseViewController, completionHandler: @escaping CompletionHandler) -> Void
@@ -192,6 +204,27 @@ class Course
         }
     } // ReadAvailableData
     
+    func ReadAvailableData(completionHandler: @escaping CompletionHandler) -> Void
+    {
+        if (!Key.isEmpty)
+        {
+            self.CourseIsAvailable(completionHandler: {(available) -> Void in
+                if (available)
+                {
+                    Database.database().reference().child(self.Course_Root).child(self.Key).observeSingleEvent(of: .value, with: {(DataSnapshot) in
+                        let dictionary = DataSnapshot.value as? [String: AnyObject];
+                        
+                        self.Name = (dictionary![self.NameChild] as? String)!;
+                        self.Description = (dictionary![self.DescriptionChild] as? String)!;
+                        self.Creator = (dictionary![self.CreatorChild] as? String)!;
+                        
+                        completionHandler(true);
+                    });
+                }
+            });
+        }
+    } // ReadAvailableData
+    
     func CourseIsAvailable(completionHandler: @escaping CompletionHandler) -> Void
     {
         if (!Key.isEmpty)
@@ -208,5 +241,73 @@ class Course
             });
         }
     } // CourseIsAvailable
+    
+    func UpdateEnrolled(student: String)
+    {
+        if (!Key.isEmpty && !student.isEmpty)
+        {
+            let firebase = Database.database().reference(fromURL: FirebaseURL);
+            let childRef = firebase.child(Course_Root).child(Key).child(EnrolledChild);
+            childRef.updateChildValues([student:String(describing: Date())], withCompletionBlock: {(err, ref) in
+                if (err != nil)
+                {
+                    print("err != nil");
+                }
+                else
+                {
+                    print("err == nil");
+                }
+                return;
+            });
+        }
+    }
+    
+    func GetEnrolledStudents(completionHandler: @escaping CompletionHandler) -> Void
+    {
+        if (!Key.isEmpty)
+        {
+            Database.database().reference().child(Course_Root).child(Key).child(EnrolledChild).observeSingleEvent(of: .value, with: {(snapshot) in
+                if (snapshot.exists())
+                {
+                    let result = true;
+                    let array:NSArray = snapshot.children.allObjects as NSArray;
+                    
+                    var enrolledStudentCount = 0;
+                    for student in array
+                    {
+                        enrolledStudentCount += 1;
+                        let snap = student as! DataSnapshot;
+                        self.EnrolledStudents.append(snap.key);
+                        self.EnrollmentDates.append(snap.value as! String);
+                    }
+                    
+                    completionHandler(result);
+                }
+            });
+        }
+    } // GetEnrolledStudents
+    
+    func GetEnrolledStudentsWithoutDatabaseAccess() -> [String]
+    {
+        return self.EnrolledStudents;
+    }
+    
+    func GetEnrollmentDateWithoutDatabaseAccess(studentID: String) -> String
+    {
+        var result = "";
+        
+        if (self.EnrolledStudents.contains(studentID))
+        {
+            let index = self.EnrolledStudents.index(of: studentID);
+            result = self.EnrollmentDates[index!];
+        }
+        
+        return result;
+    } // GetEnrollmentDateWithoutDatabaseAccess
+    
+    func GetCreatorWithoutDatabaseAccess() -> String
+    {
+        return self.Creator;
+    }
 }
 

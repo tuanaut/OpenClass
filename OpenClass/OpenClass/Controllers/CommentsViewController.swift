@@ -2,7 +2,7 @@
 //  CommentsViewController.swift
 //  OpenClass
 //
-//  Created by Vivian Chau on 11/22/17.
+//  Created by Tuan Chau on 11/22/17.
 //  Copyright © 2017 CS472. All rights reserved.
 //
 

@@ -55,6 +55,12 @@ class MainFeedTableViewController: UIViewController, UITableViewDataSource, UITa
             let viewController = segue.destination as! QuestionFeedTableViewController
             viewController.passedCourseKey = passedCourseKey
         }
+        
+        if (segue.identifier == "GoToStudentList")
+        {
+            let viewController = segue.destination as! StudentListViewController;
+            viewController.currentCourse = Course(courseKey: passedCourseKey);
+        }
     }
 
     //================== TableView cell functions ==================
@@ -108,6 +114,11 @@ class MainFeedTableViewController: UIViewController, UITableViewDataSource, UITa
         else if(indexPath.row == 1){
             performSegue(withIdentifier: "GoToQuestionsFeed", sender: self)
             tableView.deselectRow(at: indexPath, animated: true)
+        }
+        else if (indexPath.row == 2)
+        {
+            performSegue(withIdentifier: "GoToStudentList", sender: self);
+            tableView.deselectRow(at: indexPath, animated: true);
         }
     }
 }
