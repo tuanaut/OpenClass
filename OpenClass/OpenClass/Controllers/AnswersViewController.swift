@@ -17,17 +17,19 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var passedUserID : String!
     var passedQuestion: String!
     var passedFullName : String!
-    //var passedLastName : String!
     var passedAnswerID: String!
     var passedCurrentQuestion: String!
     var answerArray = [Comment] ()
     var databaseRef = Database.database().reference()
     var refreshControl: UIRefreshControl = UIRefreshControl()
+    var bottomConstraint: NSLayoutConstraint?
+    var tableViewConstraint: NSLayoutConstraint?
     
     @IBOutlet var commentTableView: UITableView!
     @IBOutlet weak var commentTextBox: UITextField!
     @IBOutlet weak var commentAddButton: UIButton!
-
+    @IBOutlet weak var MessageInputView: UIView!
+    
     // Button to add comment to Question.
     @IBAction func commentAddButton(sender: UIButton)
     {
@@ -115,11 +117,27 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
         refreshControl.backgroundColor = UIColor.darkGray
         commentTableView.addSubview(refreshControl)
         
+        // Change Navigation Icon
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Question Feed"), style: .plain, target: self, action: #selector(GoBack))
+        
+        // Set up constraints for when keyboard shows
+        bottomConstraint = NSLayoutConstraint(item: MessageInputView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        view.addConstraint(bottomConstraint!)
+        
+        tableViewConstraint = NSLayoutConstraint(item: commentTableView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: -51)
+        view.addConstraint(tableViewConstraint!)
+        
+        // Set up keyboard showing listener
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        
+        // Set up keyboard dismissing listener
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: Notification.Name.UIKeyboardWillHide, object: nil)
         
     
     }
 
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool)
+    {
         super.viewWillAppear(true)
         
         answerArray.removeAll()
@@ -130,6 +148,8 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
         navigationController?.isNavigationBarHidden = false
     }
     
+    
+    // Answers from database.
     private func fetchAnswers()
     {
         let ref = databaseRef.child("responses").child(passedCourseKey).child("answers").queryOrdered(byChild: "id").queryEqual(toValue: passedAnswerID)
@@ -148,8 +168,8 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     // Refresh Function
-    @objc func refreshData() {
-        
+    @objc func refreshData()
+    {
         answerArray.removeAll();
         fetchAnswers();
         commentTableView.reloadData();
@@ -157,7 +177,9 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    // Refresh Action Handle
+    func scrollViewDidScroll(_ scrollView: UIScrollView)
+    {
         let offset = scrollView.contentOffset.y;
         
         if (offset < -232)
@@ -171,6 +193,38 @@ class AnswersViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         refreshControl.backgroundColor = UIColor.darkGray;
     }
+    
+    
+    @objc func GoBack()
+    {
+        _ = navigationController?.popViewController(animated: true);
+    }
+    
+    
+    // Handles how the textfields should appear when keyboard is showing
+    @objc func handleKeyboardNotification(notification: NSNotification)
+    {
+        if let userInfo = notification.userInfo
+        {
+            // Get the x, y, width, height of keyboard
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            
+            // Determine if keyboard is showing or not
+            let isKeyboardShowing = notification.name == NSNotification.Name.UIKeyboardWillShow
+            
+            // Adjust the constraints if keyboard is showing or dismissing
+            bottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame.height : 0
+            tableViewConstraint?.constant = isKeyboardShowing ? -keyboardFrame.height + (-51) : -51
+            
+            // Smooth transition of textfield going up and down
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations:
+                {
+                    self.view.layoutIfNeeded();
+            }, completion: {(completed) in
+            });
+        }
+    }
+    
     
     override func didReceiveMemoryWarning()
     {
