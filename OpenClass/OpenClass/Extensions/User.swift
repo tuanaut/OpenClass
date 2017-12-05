@@ -171,7 +171,14 @@ class User
         let firebase = Database.database().reference(fromURL: FirebaseURL);
         let childRef = firebase.child(User_Root).child(AccountID).child(EnrolledChild);
         
-        childRef.updateChildValues([enrolledCourse:String(describing: Date())], withCompletionBlock: {(err, ref) in
+        let date = Date();
+        let formatter = DateFormatter();
+        formatter.dateFormat = "MM/dd/yyyy";
+        
+        // Get current date
+        let currDate = formatter.string(from: date);
+        
+        childRef.updateChildValues([enrolledCourse:currDate], withCompletionBlock: {(err, ref) in
             if (err != nil)
             {
                 controller.displayMyAlertMessage(userMessage: (err?.localizedDescription)!);
@@ -189,7 +196,14 @@ class User
         let firebase = Database.database().reference(fromURL: FirebaseURL);
         let childRef = firebase.child(User_Root).child(AccountID).child(EnrolledChild);
         
-        childRef.updateChildValues([enrolledCourse:String(describing: Date())], withCompletionBlock: {(err, ref) in
+        let date = Date();
+        let formatter = DateFormatter();
+        formatter.dateFormat = "MM/dd/yyyy";
+        
+        // Get current date
+        let currDate = formatter.string(from: date);
+        
+        childRef.updateChildValues([enrolledCourse:currDate], withCompletionBlock: {(err, ref) in
             if (err != nil)
             {
                 controller.displayMyAlertMessage(userMessage: (err?.localizedDescription)!, correct: false);
