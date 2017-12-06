@@ -8,10 +8,12 @@
 
 import UIKit
 
+
 class FullScreenPhotoViewController: UIViewController, UIScrollViewDelegate {
 
     @IBOutlet weak var viewDrag: UIView!
     @IBOutlet weak var viewPinch: UIView!
+
     @IBOutlet weak var fullscreenphoto: UIImageView!
     //@IBOutlet weak var scrollView: UIScrollView!
     var passedimage: UIImage!
@@ -24,6 +26,7 @@ class FullScreenPhotoViewController: UIViewController, UIScrollViewDelegate {
         fullscreenphoto.image = passedimage
         fullscreenphoto.backgroundColor = .black
         fullscreenphoto.clipsToBounds = true
+
         // Do any additional setup after loading the view.
         
         //scrollImg.minimumZoomScale = 1.0
@@ -42,6 +45,20 @@ class FullScreenPhotoViewController: UIViewController, UIScrollViewDelegate {
         self.view.bringSubview(toFront: viewPinch)
         sender.view?.transform = (sender.view?.transform)!.scaledBy(x: sender.scale, y: sender.scale)
         sender.scale = 1.0
+
+               // Do any additional setup after loading the view.
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.hidesBarsOnTap = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.hidesBarsOnTap = false
+
     }
 
     @objc func draggedView(_ sender:UIPanGestureRecognizer){
@@ -56,7 +73,12 @@ class FullScreenPhotoViewController: UIViewController, UIScrollViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
+   /* @IBAction func tappedImage(_ sender: Any) {
+        navigationController?.isNavigationBarHidden = !(navigationController?.isNavigationBarHidden)!
+        
+    }
+    */
     /*
     // MARK: - Navigation
 
