@@ -1685,6 +1685,8 @@
                     </view>
                     <connections>
                         <outlet property="fullscreenphoto" destination="696-wQ-pXk" id="w75-Gk-j75"/>
+                        <outlet property="viewDrag" destination="qKI-ak-s2H" id="T04-Xl-YcW"/>
+                        <outlet property="viewPinch" destination="qKI-ak-s2H" id="oeJ-sw-YSy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5YB-bM-6iu" userLabel="First Responder" sceneMemberID="firstResponder"/>
