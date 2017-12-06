@@ -248,7 +248,15 @@ class Course
         {
             let firebase = Database.database().reference(fromURL: FirebaseURL);
             let childRef = firebase.child(Course_Root).child(Key).child(EnrolledChild);
-            childRef.updateChildValues([student:String(describing: Date())], withCompletionBlock: {(err, ref) in
+            
+            let date = Date();
+            let formatter = DateFormatter();
+            formatter.dateFormat = "MM/dd/yyyy";
+            
+            // Get current date
+            let currDate = formatter.string(from: date);
+            
+            childRef.updateChildValues([student:currDate], withCompletionBlock: {(err, ref) in
                 if (err != nil)
                 {
                     print("err != nil");

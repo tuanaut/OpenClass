@@ -66,9 +66,17 @@ class StudentListViewController: UIViewController, UITableViewDataSource, UITabl
         tableView.estimatedRowHeight = 100;
         tableView.rowHeight = 100;
         
+        // Change Navigation Icon
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "Main Menu"), style: .plain, target: self, action: #selector(GoBack));
+        
         // Hide excess cells in table view
         tableView.tableFooterView = UIView(frame: CGRect.zero);
     } // viewDidLoad
+    
+    @objc func GoBack()
+    {
+        _ = navigationController?.popViewController(animated: true);
+    } // GoBack
 
     override func didReceiveMemoryWarning()
     {
