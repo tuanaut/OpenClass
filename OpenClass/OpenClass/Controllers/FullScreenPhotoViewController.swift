@@ -9,7 +9,8 @@
 import UIKit
 
 class FullScreenPhotoViewController: UIViewController {
-
+    
+    
     @IBOutlet weak var fullscreenphoto: UIImageView!
     
     var passedimage: UIImage!
@@ -18,7 +19,18 @@ class FullScreenPhotoViewController: UIViewController {
         fullscreenphoto.image = passedimage
         fullscreenphoto.backgroundColor = .black
         fullscreenphoto.clipsToBounds = true
-        // Do any additional setup after loading the view.
+               // Do any additional setup after loading the view.
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.hidesBarsOnTap = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.hidesBarsOnTap = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,7 +38,12 @@ class FullScreenPhotoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    
+   /* @IBAction func tappedImage(_ sender: Any) {
+        navigationController?.isNavigationBarHidden = !(navigationController?.isNavigationBarHidden)!
+        
+    }
+    */
     /*
     // MARK: - Navigation
 
